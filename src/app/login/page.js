@@ -24,16 +24,18 @@ export default function LoginPage() {
         logo: '/logo.svg',
         mail: '/mail.svg',
         key: '/key.svg',
-
     };
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     useEffect(() => {
-        validateForm();
+        if (isSubmitted) {
+            validateForm();
+        }
     }, [email, password]);
 
     const validateForm = () => {
@@ -47,18 +49,20 @@ export default function LoginPage() {
         if (!password) {
             validationErrors.password = 'Password is required.';
         } else if (password.length < 6) {
-            validationErrors.password = 'Password must be atleast 6 letters.';
+            validationErrors.password = 'Password must be at least 6 characters.';
         }
-
         setErrors(validationErrors);
         setIsFormValid(Object.keys(validationErrors).length === 0);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setIsSubmitted(true);
+        validateForm();
+
         if (isFormValid) {
-            router.push('/dashboard')
-            console.log('Form Submitted successfully!');
+            router.push('/dashboard');
+            console.log('Form submitted successfully!');
         } else {
             console.log('Form has errors, please correct them.');
         }
@@ -75,7 +79,7 @@ export default function LoginPage() {
             placeholder: 'Enter your email',
             labelClass: 'text-[17px] text-customBlue',
             icon: image.mail,
-            error: errors.email,
+            error: isSubmitted ? errors.email : '',
         },
         {
             label: 'Password',
@@ -87,7 +91,7 @@ export default function LoginPage() {
             placeholder: 'Enter your password',
             labelClass: 'text-[17px] text-customBlue',
             icon: image.key,
-            error: errors.password,
+            error: isSubmitted ? errors.password : '',
         },
     ];
 
@@ -99,8 +103,7 @@ export default function LoginPage() {
 
             <div className="w-full md:w-[50%] flex flex-col items-center">
                 <div className='text-left w-full'>
-                    <img src={image.logo} alt="Car Dealership"
-                        className='w-[140px] h-auto' />
+                    <img src={image.logo} alt="Car Dealership" className='w-[140px] h-auto' />
                 </div>
 
                 <div className="max-w-md w-full py-5 px-4 md:px-0">
@@ -137,9 +140,7 @@ export default function LoginPage() {
                         </div>
                         <button
                             type="submit"
-                            // disabled={!isFormValid}
-                            className={`mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo ${!isFormValid ? 'opacity-50 cursor-not-allowed' : ''
-                                }`}
+                            className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
                         >
                             Sign In
                         </button>
@@ -156,23 +157,18 @@ export default function LoginPage() {
                     </form>
 
                     <div className="mt-6 grid grid-cols-2 gap-3">
-                        {
-                            socials.map((item, index) => {
-                                return (
-                                    <div key={index} className=' text-center border  border-customBg py-2 px-2 rounded-[8px]'>
-                                        <Link href="#">
-                                            <div className='flex items-center justify-center'>
-                                                <img src={item.image} alt="" className='w-[21px] inline-block h-auto' />
-                                                <p className='mx-3 text-customBlue text-[16px] font-medium capitalize '>
-                                                    {item.title}
-                                                </p>
-                                            </div>
-                                        </Link>
+                        {socials.map((item, index) => (
+                            <div key={index} className='text-center border border-customBg py-2 px-2 rounded-[8px]'>
+                                <Link href="#">
+                                    <div className='flex items-center justify-center'>
+                                        <img src={item.image} alt="" className='w-[21px] inline-block h-auto' />
+                                        <p className='mx-3 text-customBlue text-[16px] font-medium capitalize '>
+                                            {item.title}
+                                        </p>
                                     </div>
-                                )
-                            })
-                        }
-
+                                </Link>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

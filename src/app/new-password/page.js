@@ -1,7 +1,7 @@
 "use client";
 import Head from 'next/head';
 import CustomInput from '../components/input';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '../constant';
 
@@ -9,8 +9,8 @@ export default function NewPassword() {
     const router = useRouter();
 
     const handleClick = () => {
-        router.push('/login')
-    }
+        router.push('/login');
+    };
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -21,6 +21,7 @@ export default function NewPassword() {
     const closeModal = () => {
         setIsModalOpen(false);
     };
+
     const inputRefs = useRef([]);
 
     const handleInput = (e, index) => {
@@ -28,9 +29,8 @@ export default function NewPassword() {
             inputRefs.current[index + 1].focus();
         }
     };
+
     const placeholders = ['1', '2', '3', '4', '5', '6'];
-
-
 
     const image = {
         image: '/create.png',
@@ -39,17 +39,17 @@ export default function NewPassword() {
         check: '/check.svg',
         checks: '/checks.svg',
         eyeOff: '/eye-off.svg',
-        cross: '/cross.svg'
+        cross: '/cross.svg',
     };
 
     const message = [
         {
             icon: image.checks,
-            text: 'Password must be between 8 to 32 character.',
+            text: 'Password must be between 8 to 32 characters.',
         },
         {
             icon: image.checks,
-            text: 'Must contain a uppercase character.',
+            text: 'Must contain an uppercase character.',
         },
         {
             icon: image.checks,
@@ -59,16 +59,13 @@ export default function NewPassword() {
             icon: image.check,
             text: 'Must contain one special character.',
         },
-    ]
+    ];
 
     const [password, setPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [errors, setErrors] = useState({});
-    const [isFormValid, setIsFormValid] = useState(false);
-
-    useEffect(() => {
-        validateForm();
-    }, [password, newPassword])
+    const [isFormValid, setIsFormValid] = useState(true);
+    const [formSubmitted, setFormSubmitted] = useState(false); // New state to track submission
 
     const validateForm = () => {
         let validationErrors = {};
@@ -76,29 +73,32 @@ export default function NewPassword() {
         if (!password) {
             validationErrors.password = 'Password is required.';
         } else if (password.length < 6) {
-            validationErrors.password = 'Password must be atleast 6 letters.'
+            validationErrors.password = 'Password must be at least 6 characters.';
         }
+
         if (!newPassword) {
-            validationErrors.newPassword = 'Password is required.';
+            validationErrors.newPassword = 'Confirmation password is required.';
         } else if (newPassword.length < 6) {
-            validationErrors.newPassword = 'Password must be atleast 6 letters.';
+            validationErrors.newPassword = 'Password must be at least 6 characters.';
         }
 
         setErrors(validationErrors);
-        setIsFormValid(Object.keys(validationErrors).length === 0)
-    }
+        return Object.keys(validationErrors).length === 0;
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (isFormValid) {
+        setFormSubmitted(true); // Set to true when form is submitted
+        const isValid = validateForm();
+        setIsFormValid(isValid);
+
+        if (isValid) {
             openModal();
-            console.log('Form submitted successfuly!');
-
+            console.log('Form submitted successfully!');
         } else {
-            console.log(('Form has errors, please correct them.'));
-
+            console.log('Form has errors, please correct them.');
         }
-    }
+    };
 
     const inputFields = [
         {
@@ -112,25 +112,22 @@ export default function NewPassword() {
             labelClass: 'text-[17px] text-customBlue',
             icon: image.key,
             eye: image.eyeOff,
-            error: errors.password,
-
+            error: formSubmitted ? errors.password : '', // Show error only after submission
         },
         {
             label: 'Confirm New Password',
             type: 'password',
-            id: 'typePassword',
-            name: 'typePassword',
+            id: 'confirmPassword',
+            name: 'confirmPassword',
             value: newPassword,
             change: (e) => setNewPassword(e.target.value),
-            placeholder: 'Enter re-type password',
+            placeholder: 'Re-enter your password',
             labelClass: 'text-[17px] text-customBlue',
             icon: image.key,
             eye: image.eyeOff,
-            error: errors.newPassword
+            error: formSubmitted ? errors.newPassword : '', // Show error only after submission
         },
     ];
-
-
 
     return (
         <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
@@ -139,18 +136,16 @@ export default function NewPassword() {
             </Head>
 
             <div className="w-full md:w-[50%] flex flex-col items-center">
-                <div className='text-left w-full'>
-                    <img src={image.logo} alt="Car Dealership"
-                        className='w-[140px] h-auto' />
+                <div className="text-left w-full">
+                    <img src={image.logo} alt="Car Dealership" className="w-[140px] h-auto" />
                 </div>
 
                 <div className="max-w-md w-full py-5 px-4 md:px-0">
                     <h1 className="text-2xl font-semibold mb-2 text-center text-[30px] text-customBlue">
-                        Create new password
+                        Create New Password
                     </h1>
-                    <h6 className="text-2xl font-normal mb-8 text-center text-[14px] leading-normal
-                    text-customBlue">
-                        Enter the email of your account and we will send the email to reset your password.
+                    <h6 className="text-2xl font-normal mb-8 text-center text-[14px] leading-normal text-customBlue">
+                        Enter the email of your account, and we will send an email to reset your password.
                     </h6>
 
                     <form className="space-y-4" onSubmit={(e) => handleSubmit(e)}>
@@ -171,43 +166,34 @@ export default function NewPassword() {
                             />
                         ))}
 
-                        <div className='my-5'>
-                            {
-                                message.map((item, index) => {
-                                    return (
-                                        <div className='flex items-center '>
-                                            <img src={item.icon} alt='' className='w-[15px] h-[15px] object-contain inline-block ' />
-                                            <p className='mx-2 text-[14px] text-customBlue font-normal '>
-                                                {item.text}
-                                            </p>
-                                        </div>
-                                    )
-                                })
-                            }
+                        <div className="my-5">
+                            {message.map((item, index) => (
+                                <div key={index} className="flex items-center">
+                                    <img src={item.icon} alt="" className="w-[15px] h-[15px] object-contain inline-block" />
+                                    <p className="mx-2 text-[14px] text-customBlue font-normal">{item.text}</p>
+                                </div>
+                            ))}
                         </div>
-                        <div className='!mt-7'>
-                            {/* <Button name='Reset Password' onClick={openModal} /> */}
+
+                        <div className="!mt-7">
                             <button
                                 type="submit"
-                                // disabled={!isFormValid}
-                                className={`mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo ${!isFormValid ? 'opacity-50 cursor-not-allowed' : ''
-                                    }`}
+                                className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
                             >
                                 Reset Password
                             </button>
-                            <button className='mt-5 border-customBlue text-customBlue
-                            w-full flex justify-center py-3 px-4 border rounded-[8px] text-sm font-medium '
+                            <button
+                                className="mt-5 border-customBlue text-customBlue w-full flex justify-center py-3 px-4 border rounded-[8px] text-sm font-medium"
                             >
                                 Back
                             </button>
                         </div>
-
                     </form>
                 </div>
             </div>
 
             <div className="w-full md:w-[50%]">
-                <img src={image.image} alt="Car Dealership" className='h-full w-full' />
+                <img src={image.image} alt="Car Dealership" className="h-full w-full" />
             </div>
 
             {isModalOpen && (
@@ -218,17 +204,18 @@ export default function NewPassword() {
                                 <img src={image.cross} alt="Close" className="w-[20px] h-auto cursor-pointer" onClick={closeModal} />
                             </div>
 
-                            <h4 className='text-[26px] text-center font-medium text-customBlue capitalize mt-4'>
+                            <h4 className="text-[26px] text-center font-medium text-customBlue capitalize mt-4">
                                 Enter OTP Code
                             </h4>
-                            <div className=''>
-                                <h6 className='text-[20px] font-semibold capitalize mt-4 text-transparent bg-clip-text bg-gradient-to-r from-customGradiantFrom to-customGradiantTo'>
+                            <div className="">
+                                <h6 className="text-[20px] font-semibold capitalize mt-4 text-transparent bg-clip-text bg-gradient-to-r from-customGradiantFrom to-customGradiantTo">
                                     Check your email
                                 </h6>
-                                <p className='text-customBlue text-[16px] font-normal '>
-                                    We,ve sent a 6-digit confirmation OTP code to <b>username@gmail.com</b>. Make sure you enter correct code.
+                                <p className="text-customBlue text-[16px] font-normal">
+                                    We’ve sent a 6-digit confirmation OTP code to <b>username@gmail.com</b>. Make sure you enter the correct code.
                                 </p>
-                                <div className='text-center md:mt-4'>
+
+                                <div className="text-center md:mt-4">
                                     {Array(6)
                                         .fill("")
                                         .map((_, index) => (
@@ -243,21 +230,21 @@ export default function NewPassword() {
                                             />
                                         ))}
 
-                                    <div className='px-10 mt-4'>
-                                        <Button name='Continue' onClick={handleClick} />
-                                        <p className='text-customText underline text-[16px] font-normal mt-3'>
-                                            Resend Code
+                                    <div className="px-10 mt-4">
+                                        <Button name="Continue" onClick={handleClick} />
+                                        <p className="text-customBlue text-[14px] mt-3 mb-5">
+                                            Didn't receive a code?{' '}
+                                            <a href="#" className="text-customGradiantFrom">
+                                                Resend code
+                                            </a>
                                         </p>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             )}
-
         </div>
     );
 }

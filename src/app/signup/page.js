@@ -1,7 +1,7 @@
 "use client";
 import Head from 'next/head';
 import CustomInput from '../components/input';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, socials } from '../constant';
 import Link from 'next/link';
@@ -15,7 +15,6 @@ export default function Signup() {
     router.push('/login');
   };
 
-
   const image = {
     image: '/signup.png',
     logo: '/logo.svg',
@@ -23,42 +22,34 @@ export default function Signup() {
     key: '/key.svg',
     earth: '/earth.svg',
     phone: '/phone.svg',
-
   };
 
   const [number, setNumber] = useState('');
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
 
-  useEffect(() => {
-    validateForm();
-  }, [number]);
-
   const validateForm = () => {
     let validationErrors = {};
     if (!number) {
-      validationErrors.number = 'Phone is required.'
+      validationErrors.number = 'Phone is required.';
     }
     setErrors(validationErrors);
-    setIsFormValid(Object.keys(validationErrors).length === 0);
-  }
+    return Object.keys(validationErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isFormValid) {
+    if (validateForm()) {
+      setIsFormValid(true);
       router.push('/complete-signup');
-      console.log('Form submitted successfuly!');
-
-    }
-    else {
+      console.log('Form submitted successfully!');
+    } else {
+      setIsFormValid(false);
       console.log('Form has some errors.');
     }
-  }
-
-
+  };
 
   const inputFields = [
-
     {
       type: 'number',
       id: 'tel',
@@ -69,11 +60,8 @@ export default function Signup() {
       value: number,
       change: (e) => setNumber(e.target.value),
       error: errors.number,
-
     },
   ];
-
-
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
@@ -83,8 +71,7 @@ export default function Signup() {
 
       <div className="w-full md:w-[50%] flex flex-col items-center">
         <div className='text-left w-full'>
-          <img src={image.logo} alt="Car Dealership"
-            className='w-[140px] h-auto' />
+          <img src={image.logo} alt="Car Dealership" className='w-[140px] h-auto' />
         </div>
 
         <div className="max-w-md w-full py-5 px-4 md:px-0">
@@ -106,25 +93,21 @@ export default function Signup() {
                 icon={field.icon}
                 value={field.value}
                 onChange={field.change}
-                error={field.error}
+                error={field.error && isFormValid === false ? field.error : null}
               />
             ))}
 
             <div className='!mt-7'>
-              <p className='text-2xl font-normal mb-5 text-[14px] leading-normal
-                    text-customBlue'>
+              <p className='text-2xl font-normal mb-5 text-[14px] leading-normal text-customBlue'>
                 We’ll call or text you to confirm your number. Standard message and data rates apply.
                 <b>Privacy Policy</b>
               </p>
               <button
                 type="submit"
-                // disabled={!isFormValid}
-                className={`mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo ${!isFormValid ? 'opacity-50 cursor-not-allowed' : ''
-                  }`}
+                className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
               >
-                Sign Up
+                Sign up
               </button>
-              {/* <Button name='Sign Up' /> */}
             </div>
 
             <h6 className="text-2xl font-normal mb-8 text-center text-[15px] text-customText">
@@ -133,23 +116,18 @@ export default function Signup() {
           </form>
 
           <div className="mt-6 grid grid-cols-2 gap-3">
-            {
-              socials.map((item, index) => {
-                return (
-                  <div key={index} className=' text-center border  border-customBg py-2 px-2 rounded-[8px]'>
-                    <Link href="#">
-                      <div className='flex items-center justify-center'>
-                        <img src={item.image} alt="" className='w-[21px] inline-block h-auto' />
-                        <p className='mx-3 text-customBlue text-[16px] font-medium capitalize '>
-                          {item.title}
-                        </p>
-                      </div>
-                    </Link>
+            {socials.map((item, index) => (
+              <div key={index} className='text-center border border-customBg py-2 px-2 rounded-[8px]'>
+                <Link href="#">
+                  <div className='flex items-center justify-center'>
+                    <img src={item.image} alt="" className='w-[21px] inline-block h-auto' />
+                    <p className='mx-3 text-customBlue text-[16px] font-medium capitalize'>
+                      {item.title}
+                    </p>
                   </div>
-                )
-              })
-            }
-
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </div>

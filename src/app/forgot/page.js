@@ -3,7 +3,6 @@ import Head from 'next/head';
 import CustomInput from '../components/input';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '../constant';
 
 export default function ForgotPage() {
     const router = useRouter();
@@ -12,39 +11,41 @@ export default function ForgotPage() {
         image: '/login.png',
         logo: '/logo.svg',
         mail: '/mail.svg',
-        key: '/key.svg',
-
     };
 
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
+    const [submitted, setSubmitted] = useState(false); // Track if form has been submitted
 
     useEffect(() => {
-        validateForm();
-    }, [email]);
+        if (submitted) {
+            validateForm();
+        }
+    }, [email, submitted]);
 
     const validateForm = () => {
         let validationErrors = {};
         if (!email) {
-            validationErrors.email = 'Email is required.'
+            validationErrors.email = 'Email is required.';
         } else if (!/\S+@\S+\.\S+/.test(email)) {
-            validationErrors.email = 'Email is invalid.'
+            validationErrors.email = 'Email is invalid.';
         }
         setErrors(validationErrors);
         setIsFormValid(Object.keys(validationErrors).length === 0);
-    }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setSubmitted(true); // Mark form as submitted
+        validateForm();
         if (isFormValid) {
-            router.push('/new-password')
+            router.push('/new-password');
             console.log('Form submitted successfully!');
         } else {
             console.log('Form has errors, please correct them.');
-
         }
-    }
+    };
 
     const inputFields = [
         {
@@ -57,14 +58,14 @@ export default function ForgotPage() {
             placeholder: 'Enter your email',
             labelClass: 'text-[17px] text-customBlue',
             icon: image.mail,
-            error: errors.email,
+            error: errors.email, // Display error based on validation
         },
     ];
 
     return (
         <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
             <Head>
-                <title>Forgot Page</title>
+                <title>Forgot Password</title>
             </Head>
 
             <div className="w-full md:w-[50%] flex flex-col items-center">
@@ -95,20 +96,17 @@ export default function ForgotPage() {
                                 labelClass={field.labelClass}
                                 onChange={field.change}
                                 icon={field.icon}
-                                error={field.error}
+                                error={submitted ? field.error : null} // Only show error after submit
                             />
                         ))}
 
                         <div className='!mt-7'>
                             <button
                                 type="submit"
-                                // disabled={!isFormValid}
-                                className={`mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo ${!isFormValid ? 'opacity-50 cursor-not-allowed' : ''
-                                    }`}
+                                className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
                             >
                                 Next
-                            </button>
-                            {/* <Button name='Next' /> */}
+                            </button> 
                             <button className='mt-5 border-customBlue text-customBlue
                             w-full flex justify-center py-3 px-4 border rounded-[8px] text-sm font-medium '>
                                 Back

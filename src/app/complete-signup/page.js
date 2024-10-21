@@ -54,8 +54,8 @@ export default function CompleteSignup() {
     {
       label: 'Date of birth',
       type: 'date',
-      id: 'email',
-      name: 'email',
+      id: 'date',
+      name: 'date',
       placeholder: 'Enter Date of birth',
       labelClass: 'text-[17px] text-customBlue font-medium',
       icon: image.calendar
