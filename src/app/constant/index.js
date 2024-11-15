@@ -1,3 +1,12 @@
+const image = {
+    image: "/signup2.png",
+    logo: "/logo.svg",
+    mail: "/mail.svg",
+    key: "/key.svg",
+    user: "/user.svg",
+    phone: '/phone.svg'
+  };
+
 export const contact = [
     {
         image: '/contact1.svg',
@@ -162,23 +171,41 @@ export const Button = (props) => {
 export const cards = [
     {
         class: 'p-6 bg-customCard1 rounded-lg',
-        title: 'Total Files',
+        title: 'Total Events',
         count: '1,029',
     },
     {
         class: 'p-6 bg-customCard2 rounded-lg',
-        title: 'Shared Files',
+        title: 'Shared to me',
         count: '392',
     },
     {
         class: 'p-6 bg-customCard1 rounded-lg',
-        title: 'Files Received',
+        title: 'Shared by me',
+        count: '781',
+    },
+]
+
+export const cardsAdmin = [
+    {
+        class: 'p-6 bg-customCard1 rounded-lg',
+        title: 'Total Events',
+        count: '1,029',
+    },
+    {
+        class: 'p-6 bg-customCard2 rounded-lg',
+        title: 'Shared by me',
+        count: '392',
+    },
+    {
+        class: 'p-6 bg-customCard1 rounded-lg',
+        title: 'Shared to me ',
         count: '781',
     },
     {
         class: 'p-6 bg-customCard2 rounded-lg',
-        title: 'Total Documents',
-        count: '12,029',
+        title: 'Invited people',
+        count: '11,289',
     },
 ]
 
@@ -216,23 +243,23 @@ export const tableBodyContent = [
 export const imageUser = [
     {
         image: <>
-            <img src='share-1.png' alt='' className='w-[25px] h-[25px] inline-block object-contain mr-[-5px] relative z-10  ' />
+            <img src='/share-1.png' alt='' className='w-[25px] h-[25px] inline-block object-contain mr-[-5px] relative z-10  ' />
         </>
         ,
     },
     {
         image: <>
-            <img src='share-2.png' alt='' className='w-[25px] h-[25px] inline-block object-contain mr-[-5px] relative z-10  ' />
+            <img src='/share-2.png' alt='' className='w-[25px] h-[25px] inline-block object-contain mr-[-5px] relative z-10  ' />
         </>
     },
     {
         image: <>
-            <img src='share-3.png' alt='' className='w-[25px] h-[25px] inline-block object-contain mr-[-5px] relative z-10  ' />
+            <img src='/share-3.png' alt='' className='w-[25px] h-[25px] inline-block object-contain mr-[-5px] relative z-10  ' />
         </>
     },
     {
         image: <>
-            <img src='share-4.png' alt='' className='w-[25px] h-[25px] inline-block object-contain mr-[-5px] relative z-10  ' />
+            <img src='/share-4.png' alt='' className='w-[25px] h-[25px] inline-block object-contain mr-[-5px] relative z-10  ' />
         </>
     },
     {
@@ -306,39 +333,94 @@ export const tableBodyTrash = [
 
 export const documentsFile = [
     {
-        image: 'pdf-view.png',
-        icon: 'pdf.svg',
+        image: '/pdf-view.png',
+        icon: '/pdf.svg',
         title: 'PUXI04 - Review Slots',
-        dot: 'dot.svg',
+        dot: '/dot.svg',
         seen: 'Last Opened : Today',
     },
     {
-        image: 'pdf-view.png',
-        icon: 'pdf.svg',
+        image: '/pdf-view.png',
+        icon: '/pdf.svg',
         title: 'PUXI04 - Review Slots',
-        dot: 'dot.svg',
+        dot: '/dot.svg',
         seen: 'Last Opened : Today',
     },
     {
-        image: 'pdf-view.png',
-        icon: 'pdf.svg',
+        image: '/pdf-view.png',
+        icon: '/pdf.svg',
         title: 'PUXI04 - Review Slots',
-        dot: 'dot.svg',
+        dot: '/dot.svg',
         seen: 'Last Opened : Today',
     },
     {
-        image: 'pdf-view.png',
-        icon: 'pdf.svg',
+        image: '/pdf-view.png',
+        icon: '/pdf.svg',
         title: 'PUXI04 - Review Slots',
-        dot: 'dot.svg',
+        dot: '/dot.svg',
         seen: 'Last Opened : Today',
     },
     {
-        image: 'pdf-view.png',
-        icon: 'pdf.svg',
+        image: '/pdf-view.png',
+        icon: '/document.svg',
         title: 'PUXI04 - Review Slots',
-        dot: 'dot.svg',
+        dot: '/dot.svg',
         seen: 'Last Opened : Today',
     },
-    
+    {
+        image: '/pdf-view.png',
+        icon: '/document.svg',
+        title: 'PUXI04 - Review Slots',
+        dot: '/dot.svg',
+        seen: 'Last Opened : Today',
+    },
+
 ]
+
+export const legalName = [
+    {
+      label: "Full Name",
+      type: "text",
+      id: "firstName",
+      name: "firstName",
+      placeholder: "Enter your Full Name",
+      labelClass: "text-[17px] text-customBlue font-medium",
+      icon: image.user,
+    },
+    {
+      label: "Email",
+      type: "email",
+      id: "email",
+      name: "email",
+      placeholder: "username@mail.com",
+      labelClass: "text-[17px] text-customBlue font-medium",
+      icon: image.mail,
+    },
+    {
+      label: "Phone Number",
+      type: "tel",
+      id: "phone",
+      name: "phone",
+      placeholder: "Phone number",
+      labelClass: "text-[17px] text-customBlue font-medium",
+      icon: image.phone,
+    },
+    {
+      label: "Password",
+      type: "password",
+      id: "password",
+      name: "password",
+      placeholder: " Password",
+      labelClass: "text-[17px] text-customBlue font-medium",
+      icon: image.key,
+    },
+    {
+      label: "Confirm Password",
+      type: "password",
+      id: "confirmPassword",
+      name: "confirmPassword",
+      placeholder: "Password",
+      labelClass: "text-[17px] text-customBlue font-medium",
+      icon: image.key,
+    },
+  ];

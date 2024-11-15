@@ -1,28 +1,28 @@
 "use client";
+import AdminHader from '@/app/components/adminHeader';
+import ChartComponent from '@/app/components/Chart';
+import TableComponent from '@/app/components/table';
+import { cards, cardsAdmin, tableBodyContent } from '@/app/constant';
 import React, { useState } from 'react';
-import { cards, tableBodyContent } from './constant';
-// import ChartComponent from './components/Chart';
-import TableComponent from './components/table';
-import AdminHader from './components/adminHeader';
 
-const MainPage = () => {
+const Dashboard = () => {
 
-    // const [file, setFile] = useState(null);
-    // const [filePreview, setFilePreview] = useState(null);
+    const [file, setFile] = useState(null);
+    const [filePreview, setFilePreview] = useState(null);
 
-    // const handleFileChange = (e) => {
-    //     const selectedFile = e.target.files[0];
-    //     if (selectedFile) {
-    //         setFile(selectedFile);
-    //         if (selectedFile.type.startsWith('image/')) {
-    //             const reader = new FileReader();
-    //             reader.onload = () => {
-    //                 setFilePreview(reader.result);
-    //             };
-    //             reader.readAsDataURL(selectedFile);
-    //         }
-    //     }
-    // };
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        if (selectedFile) {
+            setFile(selectedFile);
+            if (selectedFile.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    setFilePreview(reader.result);
+                };
+                reader.readAsDataURL(selectedFile);
+            }
+        }
+    };
 
     const images = {
         bell: 'header3.svg',
@@ -33,26 +33,26 @@ const MainPage = () => {
     return (
         <div className="min-h-screen md:flex">
             <div className="md:flex-1 ">
-                <AdminHader title='Dashboards' divider='/' subTitle='Overview'
-                    classLabel='text-customBlack text-[17px] font-medium capitalize block mx-2' />
+                <AdminHader title='Dashboards' divider='/' subTitle='Overview' 
+                classLabel='text-customBlack text-[17px] font-medium capitalize block mx-2' />
                 <div className='md:p-6 p-3'>
-                    <div className="grid md:grid-cols-3 gap-4 mb-8">
+                    <div className="grid md:grid-cols-4 gap-4 mb-8">
                         {
-                            cards.map((item, index) => {
+                            cardsAdmin.map((item, index) => {
                                 return (
                                     <>
-
                                         <div key={index} className={item.class}>
                                             <div className="text-sm text-customBlue mb-3">{item.title}</div>
                                             <div className="text-2xl text-customBlue font-semibold">{item.count}</div>
                                         </div>
+
                                     </>
                                 )
                             })
                         }
                     </div>
 
-                    {/* <div className="grid md:grid-cols-12 gap-4 mb-2">
+                    <div className="grid md:grid-cols-12 gap-4 mb-2">
                         <div className="lg:col-span-7 col-span-12">
                             <div className="border-2 border-dashed border-customBg rounded-lg min-h-[250px] md:h-[300px] h-[350px] mb-8 block items-center justify-center relative ">
                                 <input
@@ -90,7 +90,8 @@ const MainPage = () => {
                             </div>
 
                         </div>
-                    </div> */}
+
+                    </div>
                     <div className="grid grid-cols-1 gap-4 mb-8">
                         <div className="bg-white p-4 border border-custom rounded-[12px] ">
                             <div className='flex justify-between items-center'>
@@ -115,4 +116,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+export default Dashboard;

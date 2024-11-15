@@ -1,181 +1,244 @@
 "use client";
-import Head from 'next/head';
-import CustomInput from '../components/input';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { Button, socials } from '../constant';
-import Link from 'next/link';
+import Head from "next/head";
+import CustomInput from "../components/input";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+const image = {
+  image: "/signup.png",
+  logo: "/logo.svg",
+  google: "/social.svg",
+  facebook: "/social2.svg",
+  apple: "/social3.svg",
+  mail: "/mail.svg",
+  key: "/key.svg",
+  gap: "or.svg",
+};
 
 export default function LoginPage() {
-    const router = useRouter();
+  const router = useRouter();
 
-    const handleSignUpClick = (e) => {
-        e.preventDefault();
-        router.push('/signup');
-    };
+  const [errors, setErrors] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
 
-    const handleForgotClick = (e) => {
-        e.preventDefault();
-        router.push('/forgot');
-    };
+  useEffect(() => {
+    if (isSubmitted) {
+      validateForm();
+    }
+  }, [formValues.email, formValues.password]);
 
-    const image = {
-        image: '/login.png',
-        logo: '/logo.svg',
-        mail: '/mail.svg',
-        key: '/key.svg',
-    };
+  const validateForm = () => {
+    let validationErrors = {};
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState({});
-    const [isFormValid, setIsFormValid] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    if (!formValues.email) {
+      validationErrors.email = "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
+      validationErrors.email = "Email is invalid.";
+    }
 
-    useEffect(() => {
-        if (isSubmitted) {
-            validateForm();
-        }
-    }, [email, password]);
+    if (!formValues.password) {
+      validationErrors.password = "Password is required.";
+    } else if (formValues.password.length < 6) {
+      validationErrors.password = "Password must be at least 6 characters.";
+    }
 
-    const validateForm = () => {
-        let validationErrors = {};
+    setErrors(validationErrors);
+    setIsFormValid(Object.keys(validationErrors).length === 0);
+  };
 
-        if (!email) {
-            validationErrors.email = 'Email is required.';
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            validationErrors.email = 'Email is invalid.';
-        }
-        if (!password) {
-            validationErrors.password = 'Password is required.';
-        } else if (password.length < 6) {
-            validationErrors.password = 'Password must be at least 6 characters.';
-        }
-        setErrors(validationErrors);
-        setIsFormValid(Object.keys(validationErrors).length === 0);
-    };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setIsSubmitted(true);
-        validateForm();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+    validateForm();
 
-        if (isFormValid) {
-            router.push('/dashboard');
-            console.log('Form submitted successfully!');
-        } else {
-            console.log('Form has errors, please correct them.');
-        }
-    };
+    if (isFormValid) {
+      // API call for login can go here
+      // const response = await LoginApi(formValues);
+      // if (response) {
+      //   dispatch(setUser(response));
+      //   router.push("/profile");
+      // }
+      router.push('/')
+      console.log("Form is valid, submitting...");
+    } else {
+      console.log("Form has errors:", errors);
+    }
+  };
 
-    const inputFields = [
-        {
-            label: 'Email',
-            type: 'email',
-            value: email,
-            change: (e) => setEmail(e.target.value),
-            id: 'email',
-            name: 'email',
-            placeholder: 'Enter your email',
-            labelClass: 'text-[17px] text-customBlue',
-            icon: image.mail,
-            error: isSubmitted ? errors.email : '',
-        },
-        {
-            label: 'Password',
-            type: 'password',
-            value: password,
-            change: (e) => setPassword(e.target.value),
-            id: 'password',
-            name: 'password',
-            placeholder: 'Enter your password',
-            labelClass: 'text-[17px] text-customBlue',
-            icon: image.key,
-            error: isSubmitted ? errors.password : '',
-        },
-    ];
+  const handleSignUpClick = (e) => {
+    e.preventDefault();
+    router.push("/complete-signup");
+  };
 
-    return (
-        <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
-            <Head>
-                <title>Login Page</title>
-            </Head>
+  const handleForgotClick = (e) => {
+    e.preventDefault();
+    router.push("/forgot");
+  };
 
-            <div className="w-full md:w-[50%] flex flex-col items-center">
-                <div className='text-left w-full'>
-                    <img src={image.logo} alt="Car Dealership" className='w-[140px] h-auto' />
-                </div>
+  const inputFields = [
+    {
+      label: "Email",
+      type: "email",
+      id: "email",
+      name: "email",
+      placeholder: "Enter your email",
+      labelClass: "text-[17px] text-customBlue",
+      icon: image.mail,
+      error: errors.email,
+    },
+    {
+      label: "Password",
+      type: "password",
+      id: "password",
+      name: "password",
+      placeholder: "Enter your password",
+      labelClass: "text-[17px] text-customBlue",
+      icon: image.key,
+      error: errors.email,
+    },
+  ];
 
-                <div className="max-w-md w-full py-5 px-4 md:px-0">
-                    <h1 className="text-2xl font-semibold mb-2 text-center text-[30px] text-customBlue">
-                        Sign In
-                    </h1>
+  return (
+    <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
+      <Head>
+        <title>Login Page</title>
+      </Head>
 
-                    <form className="space-y-4" onSubmit={handleSubmit}>
-                        {inputFields.map((field) => (
-                            <CustomInput
-                                key={field.id}
-                                label={field.label}
-                                type={field.type}
-                                value={field.value}
-                                id={field.id}
-                                name={field.name}
-                                placeholder={field.placeholder}
-                                labelClass={field.labelClass}
-                                icon={field.icon}
-                                onChange={field.change}
-                                error={field.error}
-                            />
-                        ))}
-
-                        <div className="mt-[10px]">
-                            <div className="text-sm text-right">
-                                <a
-                                    className="font-medium text-customGradiantFrom cursor-pointer"
-                                    onClick={handleForgotClick}
-                                >
-                                    Forgot password?
-                                </a>
-                            </div>
-                        </div>
-                        <button
-                            type="submit"
-                            className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
-                        >
-                            Sign In
-                        </button>
-
-                        <h6 className="text-2xl font-normal mb-8 text-center text-[15px] text-customText">
-                            Don’t have an account?{' '}
-                            <span
-                                className="text-customGradiantFrom font-medium cursor-pointer"
-                                onClick={handleSignUpClick}
-                            >
-                                Sign Up
-                            </span>
-                        </h6>
-                    </form>
-
-                    <div className="mt-6 grid grid-cols-2 gap-3">
-                        {socials.map((item, index) => (
-                            <div key={index} className='text-center border border-customBg py-2 px-2 rounded-[8px]'>
-                                <Link href="#">
-                                    <div className='flex items-center justify-center'>
-                                        <img src={item.image} alt="" className='w-[21px] inline-block h-auto' />
-                                        <p className='mx-3 text-customBlue text-[16px] font-medium capitalize '>
-                                            {item.title}
-                                        </p>
-                                    </div>
-                                </Link>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            <div className="w-full md:w-[50%]">
-                <img src={image.image} alt="Car Dealership" className='h-full w-full' />
-            </div>
+      <div className="w-full md:w-[65%] flex flex-col items-center">
+        <div className="text-left w-full">
+          <Image
+            src={image.logo}
+            alt="Car Dealership"
+            className="w-[140px] h-auto"
+            width={140}
+            height={70}
+          />
         </div>
-    );
+
+        <div className="max-w-md w-full py-5 px-4 md:px-0">
+          <h1 className="text-2xl font-semibold mb-2 text-center text-[30px] text-customBlue">
+            Login to Manage Events
+          </h1>
+
+          <form className="space-y-4 mt-8" onSubmit={handleSubmit}>
+            {inputFields.map((field) => (
+              <div key={field.id}>
+                <CustomInput
+                  label={field.label}
+                  type={field.type}
+                  id={field.id}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={formValues[field.name]}
+                  labelClass={field.labelClass}
+                  onChange={handleInputChange}
+                  icon={field.icon}
+                />
+                {errors[field.name] && (
+                  <p className="text-red-500 text-sm">{errors[field.name]}</p>
+                )}
+              </div>
+            ))}
+
+            <div className="mt-[10px]">
+              <div
+                className="text-sm text-left font-medium text-customText"
+                onClick={handleForgotClick}
+              >
+                Forgot password?
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+            >
+              Sign In
+            </button>
+            <div className="my-4">
+              <Image
+                src={image.gap}
+                className="w-full h-auto"
+                width={200}
+                height={10}
+                alt=""
+              />
+            </div>
+            <div className="mt-6 flex justify-center grid-cols-2 gap-3">
+              <div className="w-full text-center bg-transparent border border-customBg py-2 px-2 rounded-[8px]">
+                <Image
+                  src={image.google}
+                  alt="Google"
+                  className="w-[21px] inline-block h-auto align-sub"
+                  width={21}
+                  height={21}
+                />
+                <span className="mx-2 text-customBlue font-medium text-[16px] capitalize ">
+                  google
+                </span>
+              </div>
+              <div className="w-full text-center bg-transparent border border-customBg py-2 px-2 rounded-[8px]">
+                <Image
+                  src={image.facebook}
+                  alt="Facebook"
+                  className="w-[21px] inline-block h-auto align-sub "
+                  width={21}
+                  height={21}
+                />
+                <span className="mx-2 text-customBlue font-medium text-[16px] capitalize ">
+                  facebook
+                </span>
+              </div>
+            </div>
+            <div className="mt-6 flex justify-center grid-cols-1 gap-3">
+              <div className="w-full text-center bg-transparent border border-customBg py-2 px-2 rounded-[8px]">
+                <Image
+                  src={image.apple}
+                  alt="Apple"
+                  className="w-[21px] inline-block h-auto align-sub "
+                  width={21}
+                  height={21}
+                />
+                <span className="mx-2 text-customBlue font-medium text-[16px] capitalize ">
+                  apple
+                </span>
+              </div>
+            </div>
+
+            <h6 className="text-2xl font-normal mb-8 text-[15px] text-customText">
+              Don’t have an account?{" "}
+              <span
+                className="text-customBlue font-medium cursor-pointer"
+                onClick={handleSignUpClick}
+              >
+                Sign Up
+              </span>
+            </h6>
+          </form>
+        </div>
+      </div>
+      <div className="w-full md:w-[45%]">
+        <Image
+          src={image.image}
+          alt="Car Dealership"
+          className="h-full w-full !relative"
+          fill
+        />
+      </div>
+    </div>
+  );
 }

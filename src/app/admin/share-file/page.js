@@ -1,10 +1,9 @@
 "use client";
+import AdminHader from '@/app/components/adminHeader';
+import { documentsFile } from '@/app/constant';
 import React from 'react';
-import TableComponent from '../components/table';
-import { documentsFile, tableBodyTrash } from '../constant';
-import AdminHader from '../components/adminHeader';
 
-const DocumentsPage = () => {
+const SharedToMe = () => {
 
     const images = {
         bell: 'header3.svg',
@@ -17,18 +16,19 @@ const DocumentsPage = () => {
     return (
         <div className="min-h-screen md:flex">
             <div className="md:flex-1 ">
-                <AdminHader title='Dashboards' divider='/' subTitle='Documents' />
+                <AdminHader title='Dashboards' divider='/' subTitle='Events' divider1='/' subTitle1='Shared by me'
+                    classLabel='text-customText text-[17px] font-normal capitalize block mx-2' />
                 <div className='md:p-6 p-3'>
                     <div className="grid grid-cols-1 gap-4 mb-8">
                         <div className="bg-white p-4 border border-custom rounded-[12px] ">
                             <div className='flex justify-between items-center'>
-                                <h3 className="text-xl text-customBlue font-semibold mb-4">Documents Files</h3>
+                                <h3 className="text-xl text-customBlue font-semibold mb-4">Shared To Me</h3>
                                 <span className='bg-customDotBg w-[30px] h-[30px] rounded-[10px] text-center inline-block cursor-pointer'>
                                     <img src={images.dots} alt='' className='w-[15px] h-[15px] object-contain inline-block align-sub ' />
                                 </span>
                             </div>
                             <h6 className="text-md text-customBlue font-semibold mb-4">Sheets</h6>
-                            <div className='md:p-6 p-3'>
+                            <div className=''>
                                 <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-2 mb-8">
                                     {
                                         documentsFile.map((item, index) => {
@@ -65,4 +65,4 @@ const DocumentsPage = () => {
     );
 };
 
-export default DocumentsPage;
+export default SharedToMe;

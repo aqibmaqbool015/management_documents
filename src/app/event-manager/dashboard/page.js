@@ -1,9 +1,9 @@
 "use client";
+import AdminHader from '@/app/components/adminHeader';
+import ChartComponent from '@/app/components/Chart';
+import TableComponent from '@/app/components/table';
+import { cards, tableBodyContent } from '@/app/constant';
 import React, { useState } from 'react';
-import { cards, tableBodyContent } from '../constant';
-import ChartComponent from '../components/Chart';
-import TableComponent from '../components/table';
-import AdminHader from '../components/adminHeader';
 
 const Dashboard = () => {
 
@@ -33,14 +33,14 @@ const Dashboard = () => {
     return (
         <div className="min-h-screen md:flex">
             <div className="md:flex-1 ">
-                <AdminHader title='Dashboards' divider='/' subTitle='Overview' />
+                <AdminHader title='Dashboards' divider='/' subTitle='Overview' 
+                classLabel='text-customBlack text-[17px] font-medium capitalize block mx-2' />
                 <div className='md:p-6 p-3'>
-                    <div className="grid md:grid-cols-4 gap-4 mb-8">
+                    <div className="grid md:grid-cols-3 gap-4 mb-8">
                         {
                             cards.map((item, index) => {
                                 return (
                                     <>
-
                                         <div key={index} className={item.class}>
                                             <div className="text-sm text-customBlue mb-3">{item.title}</div>
                                             <div className="text-2xl text-customBlue font-semibold">{item.count}</div>

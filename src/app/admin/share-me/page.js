@@ -1,13 +1,13 @@
 "use client";
-import React, { useState } from 'react';
-import TableComponent from '../components/table';
-import { imageUser } from '../constant';
-import AdminHader from '../components/adminHeader';
+import AdminHader from '@/app/components/adminHeader';
+import TableComponent from '@/app/components/table';
+import { imageUser } from '@/app/constant';
+import React from 'react';
 
-const Shared = () => {
+const SharedByMe = () => {
 
     const images = {
-        bell: 'header3.svg',
+        bell: '/header3.svg',
         user: '/user-client.svg',
         upload: '/upload.svg',
         dots: '/dots.svg',
@@ -83,11 +83,12 @@ const Shared = () => {
             </>,
         },
     ]
+
     return (
         <div className="min-h-screen md:flex">
             <div className="md:flex-1 ">
-            <AdminHader title='Dashboards' divider='/' subTitle='Shared' />
-
+                <AdminHader title='Dashboards' divider='/' subTitle='Events' divider1='/' subTitle1='Shared to me'
+                    classLabel='text-customText text-[17px] font-normal capitalize block mx-2' />
                 <div className='md:p-6 p-3'>
                     <div className="grid grid-cols-1 gap-4 mb-8">
                         <div className="bg-white p-4 border border-custom rounded-[12px] ">
@@ -101,7 +102,8 @@ const Shared = () => {
                                 name='Name'
                                 date='Date'
                                 file='File Size'
-                                last='Shared Users'
+                                last='Action'
+                                // showCheckbox={true}
                                 tableBodyContent={tableBodyContent}
                             />
                         </div>
@@ -112,4 +114,4 @@ const Shared = () => {
     );
 };
 
-export default Shared;
+export default SharedByMe;

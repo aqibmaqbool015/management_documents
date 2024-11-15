@@ -13,7 +13,7 @@ ChartJS.register(ArcElement, Tooltip, Legend, Title, LinearScale);
 
 const ChartComponent = () => {
     const data = {
-        labels: ['Files Uploaded', 'Shared Files', 'Download Files', 'Deleted Files'],
+        labels: ['Total events', 'Shared by me', 'Shares to me', 'Invited People'],
         datasets: [
             {
                 data: [38.6, 22.5, 30.8, 8.1],
@@ -48,28 +48,28 @@ const ChartComponent = () => {
                 <li className="flex items-center justify-between text-[12px] text-customBlue font-medium ">
                     <div className='flex items-center'>
                         <span className="block w-2 h-2 rounded-full mr-2" style={{ backgroundColor: '#464647' }}></span>
-                        Files Uploaded
+                        Total Events
                     </div>
                     <span className="ml-7">38.6%</span>
                 </li>
                 <li className="flex items-center justify-between text-[12px] text-customBlue font-medium ">
                     <div className='flex items-center'>
                         <span className="block w-2 h-2 rounded-full mr-2" style={{ backgroundColor: '#480048' }}></span>
-                        Shared Files
+                        Shared by me
                     </div>
                     <span className="ml-7">22.5%</span>
                 </li>
                 <li className="flex items-center justify-between text-[12px] text-customBlue font-medium ">
                     <div className='flex items-center'>
                         <span className="block w-2 h-2 rounded-full mr-2" style={{ backgroundColor: '#EB4335' }}></span>
-                        Download Files
+                        Shared to me
                     </div>
                     <span className="ml-7">30.8%</span>
                 </li>
                 <li className="flex items-center justify-between text-[12px] text-customBlue font-medium ">
                     <div className='flex items-center'>
                         <span className="block w-2 h-2 rounded-full mr-2" style={{ backgroundColor: '#C04848' }}></span>
-                        Deleted Files
+                        Invited People
                     </div>
                     <span className="ml-7">8.1%</span>
                 </li>
