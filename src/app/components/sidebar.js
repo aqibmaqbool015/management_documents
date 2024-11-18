@@ -270,7 +270,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="md:w-64 bg-white p-6 border-r border-r-custom h-full">
+    <div className="md:w-64 bg-white p-6 border-r border-r-cus` tom h-full">
       <div className="text-center">
         <Image
           src={image.logo}

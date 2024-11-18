@@ -73,7 +73,7 @@ export default function LoginPage() {
       //   router.push("/profile");
       // }
       router.push('/')
-      console.log("Form is valid, submitting...");
+    console.log("Form is valid, submitting...")
     } else {
       console.log("Form has errors:", errors);
     }

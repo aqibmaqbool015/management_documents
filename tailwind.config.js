@@ -39,6 +39,8 @@ module.exports = {
         customRed: '#FF1400',
         customTextColor: '#3C4043',
         customSeen: '#6C7074',
+        customBlack1: '#222222',
+        customGray2: '#666666',
       },
       border: {
         'custom': 'rgba(28, 28, 28, 0.1)',
