@@ -1,10 +1,11 @@
 "use client";
+
 import Head from "next/head";
-import CustomInput from "../components/input";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { legalName } from "../constant";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { legalName } from "../constant";
 
 const image = {
   image: "/signup2.png",
@@ -19,73 +20,34 @@ const image = {
   gap: "/or.svg",
 };
 
-export default function CompleteSignup() {
+const validationSchema = Yup.object().shape({
+  fullName: Yup.string().required("Name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  phone: Yup.string()
+    .matches(/^\d{10}$/, "Phone number must be 10 digits")
+    .required("Phone is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Confirm Password is required"),
+});
+
+const CompleteSignup = () => {
   const router = useRouter();
 
-  const handleSignUpClick = (e) => {
-    e.preventDefault();
-    router.push("/login");
-  };
-
-  const [formValues, setFormValues] = useState({
+  const initialValues = {
     fullName: "",
     email: "",
     phone: "",
     password: "",
     confirmPassword: "",
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
   };
 
-  const validateForm = () => {
-    const validationErrors = {};
-
-    if (!formValues.firstName) {
-      validationErrors.firstName = "Name is required";
-    }
-    if (!formValues.email) {
-      validationErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
-      validationErrors.email = "Email is invalid";
-    }
-    if (!formValues.phone) {
-      validationErrors.phone = "Phone is required";
-    } else if (/0-9/.test(formValues.phone)) {
-      validationErrors.phone = "Phone is invalid";
-    }
-    if (!formValues.password) {
-      validationErrors.password = "Password is required";
-    } else if (formValues.password.length < 6) {
-      validationErrors.password = "Password must be at least 6 characters long";
-    }
-    if (!formValues.confirmPassword) {
-      validationErrors.confirmPassword = "Confirm Password is required";
-    } else if (formValues.confirmPassword.length < 6) {
-      validationErrors.confirmPassword =
-        "Confirm Password must be at least 6 characters long";
-    }
-
-    setErrors(validationErrors);
-
-    return Object.keys(validationErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      router.push("/login");
-      console.log("Form submitted successfully!");
-    } else {
-      console.log("Form has errors.");
-    }
+  const handleSubmit = (values) => {
+    console.log("Form submitted successfully:", values);
+    router.push("/login");
   };
 
   return (
@@ -97,8 +59,9 @@ export default function CompleteSignup() {
         <Image
           src={image.image}
           alt="Car Dealership"
-          className="h-full w-full !relative"
-          fill
+          className="h-lvh w-full !relative"
+          width={300}
+          height={300}
         />
         <div className="text-left w-full">
           <Image
@@ -116,92 +79,153 @@ export default function CompleteSignup() {
             Enter Details To Signup
           </h1>
 
-          <form className="space-y-4 mt-10" onSubmit={handleSubmit}>
-            {legalName.map((field) => (
-              <CustomInput
-                key={field.id}
-                label={field.label}
-                type={field.type}
-                id={field.id}
-                name={field.name}
-                placeholder={field.placeholder}
-                value={formValues[field.name]}
-                labelClass={field.labelClass}
-                onChange={handleInputChange}
-                icon={field.icon}
-                error={errors[field.name]}
-              />
-            ))}
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ isSubmitting }) => (
+              <Form className="space-y-4 mt-10">
+                <div>
+                  <label htmlFor="fullName" className="block mb-1 text-sm">
+                    Full Name
+                  </label>
+                  <Field
+                    type="text"
+                    name="fullName"
+                    id="fullName"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2"
+                    placeholder="Enter your full name"
+                  />
+                  <ErrorMessage
+                    name="fullName"
+                    component="div"
+                    className="text-red-500 text-sm mt-1"
+                  />
+                </div>
 
-            <div className="!mt-7">
-              <button
-                type="submit"
-                className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
-              >
-                Sign Up
-              </button>
-              <div className="my-4">
-                <Image
-                  src={image.gap}
-                  className="w-full h-auto"
-                  width={200}
-                  height={10}
-                  alt=""
-                />
-              </div>
-              <div className="mt-6 flex justify-center grid-cols-2 gap-3">
-                <div className="w-full text-center bg-transparent border border-customBg py-2 px-2 rounded-[8px]">
-                  <Image
-                    src={image.google}
-                    alt="Google"
-                    className="w-[21px] inline-block h-auto align-sub"
-                    width={21}
-                    height={21}
+                <div>
+                  <label htmlFor="email" className="block mb-1 text-sm">
+                    Email
+                  </label>
+                  <Field
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2"
+                    placeholder="Enter your email"
                   />
-                  <span className="mx-2 text-customBlue font-medium text-[16px] capitalize ">
-                    google
-                  </span>
-                </div>
-                <div className="w-full text-center bg-transparent border border-customBg py-2 px-2 rounded-[8px]">
-                  <Image
-                    src={image.facebook}
-                    alt="Facebook"
-                    className="w-[21px] inline-block h-auto align-sub "
-                    width={21}
-                    height={21}
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="text-red-500 text-sm mt-1"
                   />
-                  <span className="mx-2 text-customBlue font-medium text-[16px] capitalize ">
-                    facebook
-                  </span>
                 </div>
-              </div>
-              <div className="mt-6 flex justify-center grid-cols-1 gap-3">
-                <div className="w-full text-center bg-transparent border border-customBg py-2 px-2 rounded-[8px]">
-                  <Image
-                    src={image.apple}
-                    alt="Apple"
-                    className="w-[21px] inline-block h-auto align-sub "
-                    width={21}
-                    height={21}
+
+                <div>
+                  <label htmlFor="phone" className="block mb-1 text-sm">
+                    Phone
+                  </label>
+                  <Field
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2"
+                    placeholder="Enter your phone number"
                   />
-                  <span className="mx-2 text-customBlue font-medium text-[16px] capitalize ">
-                    apple
-                  </span>
+                  <ErrorMessage
+                    name="phone"
+                    component="div"
+                    className="text-red-500 text-sm mt-1"
+                  />
                 </div>
-              </div>
-              <h6 className="text-2xl font-normal mb-8 text-[15px] text-customText my-3">
-                Already have an account? {""}
-                <span
-                  className="text-customBlue font-medium cursor-pointer"
-                  onClick={handleSignUpClick}
+
+                <div>
+                  <label htmlFor="password" className="block mb-1 text-sm">
+                    Password
+                  </label>
+                  <Field
+                    type="password"
+                    name="password"
+                    id="password"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2"
+                    placeholder="Enter your password"
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="text-red-500 text-sm mt-1"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="confirmPassword"
+                    className="block mb-1 text-sm"
+                  >
+                    Confirm Password
+                  </label>
+                  <Field
+                    type="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2"
+                    placeholder="Confirm your password"
+                  />
+                  <ErrorMessage
+                    name="confirmPassword"
+                    component="div"
+                    className="text-red-500 text-sm mt-1"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                  disabled={isSubmitting}
                 >
-                  Login
-                </span>
-              </h6>
+                  Sign Up
+                </button>
+              </Form>
+            )}
+          </Formik>
+
+          <div className="my-4">
+            <Image
+              width={100}
+              height={100}
+              src={image.gap}
+              className="w-full h-auto"
+              alt=""
+            />
+          </div>
+          <div className="mt-6 flex justify-center grid-cols-2 gap-3">
+            <div className="w-full text-center bg-transparent border border-customBg py-2 px-2 rounded-[8px]">
+              <Image
+                width={100}
+                height={100}
+                src={image.google}
+                alt="Google"
+                className="w-[21px] inline-block h-auto align-sub"
+              />
+              <span className="mx-2 text-customBlue font-medium text-[16px] capitalize ">
+                continue with google
+              </span>
             </div>
-          </form>
+          </div>
+          <h6 className="text-2xl font-normal text-center mb-8 text-[15px] text-customText my-3">
+            Already have an account?{" "}
+            <span
+              className="text-customBlue font-medium cursor-pointer"
+              onClick={() => router.push("/login")}
+            >
+              Login
+            </span>
+          </h6>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default CompleteSignup;

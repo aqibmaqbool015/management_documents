@@ -4,6 +4,9 @@ import CustomInput from "../components/input";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { toast, ToastContainer } from "react-toastify";
+import CustomToast from "../components/toast";
+import "react-toastify/dist/ReactToastify.css";
 
 const image = {
   image: "/signup.png",
@@ -22,6 +25,7 @@ export default function LoginPage() {
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -64,19 +68,19 @@ export default function LoginPage() {
     e.preventDefault();
     setIsSubmitted(true);
     validateForm();
-
+    setLoading(true);
     if (isFormValid) {
-      // API call for login can go here
-      // const response = await LoginApi(formValues);
-      // if (response) {
-      //   dispatch(setUser(response));
-      //   router.push("/profile");
-      // }
-      router.push('/')
-    console.log("Form is valid, submitting...")
+      toast.success(
+        <CustomToast
+          content="Login Successfully"
+        />
+      );
+      router.push("/");
+      console.log("Form is valid, submitting...");
     } else {
       console.log("Form has errors:", errors);
     }
+    setLoading(false);
   };
 
   const handleSignUpClick = (e) => {
@@ -118,7 +122,7 @@ export default function LoginPage() {
         <title>Login Page</title>
       </Head>
 
-      <div className="w-full md:w-[65%] flex flex-col items-center">
+      <div className="w-full md:w-[50%] flex flex-col items-center">
         <div className="text-left w-full">
           <Image
             src={image.logo}
@@ -156,7 +160,7 @@ export default function LoginPage() {
 
             <div className="mt-[10px]">
               <div
-                className="text-sm text-left font-medium text-customText"
+                className="text-sm text-left font-medium text-customText cursor-pointer "
                 onClick={handleForgotClick}
               >
                 Forgot password?
@@ -167,7 +171,10 @@ export default function LoginPage() {
               type="submit"
               className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
             >
-              Sign In
+              {loading ? (
+                <span className="animate-spin rounded-full h-5 w-5 border-t-2 border-white border-opacity-50 mr-2"></span>
+              ) : null}
+              {loading ? "Loading..." : "Sign In"}
             </button>
             <div className="my-4">
               <Image
@@ -188,10 +195,10 @@ export default function LoginPage() {
                   height={21}
                 />
                 <span className="mx-2 text-customBlue font-medium text-[16px] capitalize ">
-                  google
+                  continue with google
                 </span>
               </div>
-              <div className="w-full text-center bg-transparent border border-customBg py-2 px-2 rounded-[8px]">
+              {/* <div className="w-full text-center bg-transparent border border-customBg py-2 px-2 rounded-[8px]">
                 <Image
                   src={image.facebook}
                   alt="Facebook"
@@ -202,9 +209,9 @@ export default function LoginPage() {
                 <span className="mx-2 text-customBlue font-medium text-[16px] capitalize ">
                   facebook
                 </span>
-              </div>
+              </div> */}
             </div>
-            <div className="mt-6 flex justify-center grid-cols-1 gap-3">
+            {/* <div className="mt-6 flex justify-center grid-cols-1 gap-3">
               <div className="w-full text-center bg-transparent border border-customBg py-2 px-2 rounded-[8px]">
                 <Image
                   src={image.apple}
@@ -217,9 +224,9 @@ export default function LoginPage() {
                   apple
                 </span>
               </div>
-            </div>
+            </div> */}
 
-            <h6 className="text-2xl font-normal mb-8 text-[15px] text-customText">
+            <h6 className="text-2xl font-normal text-center mb-8 text-[15px] text-customText">
               Don’t have an account?{" "}
               <span
                 className="text-customBlue font-medium cursor-pointer"
@@ -231,7 +238,7 @@ export default function LoginPage() {
           </form>
         </div>
       </div>
-      <div className="w-full md:w-[45%]">
+      <div className="w-full md:w-[50%]">
         <Image
           src={image.image}
           alt="Car Dealership"
@@ -239,6 +246,7 @@ export default function LoginPage() {
           fill
         />
       </div>
+      <ToastContainer position="top-right" />
     </div>
   );
 }

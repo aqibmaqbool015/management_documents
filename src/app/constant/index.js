@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 const image = {
   image: "/signup2.png",
   logo: "/logo.svg",
@@ -5,6 +8,10 @@ const image = {
   key: "/key.svg",
   user: "/user.svg",
   phone: "/phone.svg",
+  dots: "/three-dots.svg",
+  upload: "/upload.svg",
+  trash: "/trash.svg",
+  download: "/download.svg",
 };
 
 export const contact = [
@@ -143,20 +150,20 @@ export const userListingDetail = [
 export const socials = [
   {
     image: "/social.svg",
-    title: "google",
+    title: "Continue With Google",
   },
-  {
-    image: "/social2.svg",
-    title: "facebook",
-  },
-  {
-    image: "/social3.svg",
-    title: "apple",
-  },
-  {
-    image: "/gmail.svg",
-    title: "email",
-  },
+  // {
+  //   image: "/social2.svg",
+  //   title: "facebook",
+  // },
+  // {
+  //   image: "/social3.svg",
+  //   title: "apple",
+  // },
+  // {
+  //   image: "/gmail.svg",
+  //   title: "email",
+  // },
 ];
 
 export const Button = (props) => {
@@ -216,30 +223,306 @@ export const tableBodyContent = [
   {
     image: "/image.svg",
     name: "Website Design.png",
-    date: "Jun,24 2024",
-    size: "2.5 Mb",
-    modify: "Aug,29 2024",
+    date: "4140 Parker Rd ",
+    size: "Faran",
+    modify: "11 oct 2024",
   },
   {
     image: "/image.svg",
     name: "Website Design.png",
-    date: "Jun,24 2024",
-    size: "2.5 Mb",
-    modify: "Aug,29 2024",
+    date: "4140 Parker Rd ",
+    size: "Faran",
+    modify: "11 oct 2024",
   },
   {
     image: "/image.svg",
     name: "Website Design.png",
-    date: "Jun,24 2024",
-    size: "2.5 Mb",
-    modify: "Aug,29 2024",
+    date: "4140 Parker Rd ",
+    size: "Faran",
+    modify: "11 oct 2024",
   },
   {
     image: "/image.svg",
     name: "Website Design.png",
-    date: "Jun,24 2024",
-    size: "2.5 Mb",
-    modify: "Aug,29 2024",
+    date: "4140 Parker Rd ",
+    size: "Faran",
+    modify: "11 oct 2024",
+  },
+];
+export const tableContentCategory = [
+  {
+    image: "/gallery-tick.svg",
+    date: "Farah",
+    size: "Weddings",
+    icon: "/three-dots.svg",
+    // modify: (
+    //   <>
+    //     <span className="inline-block relative group">
+    //       <Image
+    //         src={image.dots}
+    //         width={20}
+    //         height={20}
+    //         alt=""
+    //         className="cursor-pointer object-contain inline-block w-[20px] h-auto "
+    //       />
+    //       <div
+    //         className="absolute left-1 mt-0 w-32 p-1 bg-white border border-customGray rounded shadow-lg hidden group-hover:block
+    //             z-50 "
+    //       >
+    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
+    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+    //             <Image
+    //               src={image.download}
+    //               alt=""
+    //               width={20}
+    //               height={20}
+    //               className="w-[15px] h-auto object-contain "
+    //             />
+    //           </span>
+    //           Downlaod
+    //         </p>
+    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
+    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+    //             <Image
+    //               src={image.upload}
+    //               alt=""
+    //               width={20}
+    //               height={20}
+    //               className="w-[15px] h-auto object-contain "
+    //             />
+    //           </span>
+    //           Share
+    //         </p>
+    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
+    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+    //             <Image
+    //               src={image.trash}
+    //               alt=""
+    //               width={20}
+    //               height={20}
+    //               className="w-[15px] h-auto object-contain "
+    //             />
+    //           </span>
+    //           Move to bin
+    //         </p>
+    //       </div>
+    //     </span>
+    //   </>
+    // ),
+  },
+  {
+    image: "/image.svg",
+    date: "Farah",
+    size: "Weddings",
+    icon: "/three-dots.svg",
+    // modify: (
+    //   <>
+    //     <span className="inline-block relative group">
+    //       <Image
+    //         src={image.dots}
+    //         width={20}
+    //         height={20}
+    //         alt=""
+    //         className="cursor-pointer object-contain inline-block w-[20px] h-auto "
+    //       />
+    //       <div
+    //         className="absolute left-1 mt-0 w-32 p-1 bg-white border border-customGray rounded shadow-lg hidden group-hover:block
+    //             z-50 "
+    //       >
+    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
+    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+    //             <Image
+    //               src={image.download}
+    //               alt=""
+    //               width={20}
+    //               height={20}
+    //               className="w-[15px] h-auto object-contain "
+    //             />
+    //           </span>
+    //           Downlaod
+    //         </p>
+    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
+    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+    //             <Image
+    //               src={image.upload}
+    //               alt=""
+    //               width={20}
+    //               height={20}
+    //               className="w-[15px] h-auto object-contain "
+    //             />
+    //           </span>
+    //           Share
+    //         </p>
+    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
+    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+    //             <Image
+    //               src={image.trash}
+    //               alt=""
+    //               width={20}
+    //               height={20}
+    //               className="w-[15px] h-auto object-contain "
+    //             />
+    //           </span>
+    //           Move to bin
+    //         </p>
+    //       </div>
+    //     </span>
+    //   </>
+    // ),
+  },
+  {
+    image: "/image.svg",
+    date: "Farah",
+    size: "Weddings",
+    icon: "/three-dots.svg",
+    // modify: (
+    //   <>
+    //     <span className="inline-block relative group">
+    //       <Image
+    //         src={image.dots}
+    //         width={20}
+    //         height={20}
+    //         alt=""
+    //         className="cursor-pointer object-contain inline-block w-[20px] h-auto "
+    //       />
+    //       <div
+    //         className="absolute left-1 mt-0 w-32 p-1 bg-white border border-customGray rounded shadow-lg hidden group-hover:block
+    //             z-50 "
+    //       >
+    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
+    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+    //             <Image
+    //               src={image.download}
+    //               alt=""
+    //               width={20}
+    //               height={20}
+    //               className="w-[15px] h-auto object-contain "
+    //             />
+    //           </span>
+    //           Downlaod
+    //         </p>
+    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
+    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+    //             <Image
+    //               src={image.upload}
+    //               alt=""
+    //               width={20}
+    //               height={20}
+    //               className="w-[15px] h-auto object-contain "
+    //             />
+    //           </span>
+    //           Share
+    //         </p>
+    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
+    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+    //             <Image
+    //               src={image.trash}
+    //               alt=""
+    //               width={20}
+    //               height={20}
+    //               className="w-[15px] h-auto object-contain "
+    //             />
+    //           </span>
+    //           Move to bin
+    //         </p>
+    //       </div>
+    //     </span>
+    //   </>
+    // ),
+  },
+  {
+    image: "/image.svg",
+    date: "4140 Parker Rd ",
+    size: "Weddings",
+    icon: "/three-dots.svg",
+    // modify: (
+    //   <>
+    //     <span className="inline-block relative group">
+    //       <Image
+    //         src={image.dots}
+    //         width={20}
+    //         height={20}
+    //         alt=""
+    //         className="cursor-pointer object-contain inline-block w-[20px] h-auto "
+    //       />
+    //       <div
+    //         className="absolute left-1 mt-0 w-32 p-1 bg-white border border-customGray rounded shadow-lg hidden group-hover:block
+    //             z-50 "
+    //       >
+    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
+    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+    //             <Image
+    //               src={image.download}
+    //               alt=""
+    //               width={20}
+    //               height={20}
+    //               className="w-[15px] h-auto object-contain "
+    //             />
+    //           </span>
+    //           Downlaod
+    //         </p>
+    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
+    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+    //             <Image
+    //               src={image.upload}
+    //               alt=""
+    //               width={20}
+    //               height={20}
+    //               className="w-[15px] h-auto object-contain "
+    //             />
+    //           </span>
+    //           Share
+    //         </p>
+    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
+    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+    //             <Image
+    //               src={image.trash}
+    //               alt=""
+    //               width={20}
+    //               height={20}
+    //               className="w-[15px] h-auto object-contain "
+    //             />
+    //           </span>
+    //           Move to bin
+    //         </p>
+    //       </div>
+    //     </span>
+    //   </>
+    // ),
+  },
+];
+export const tableContactCategory = [
+  {
+    image: "/userIcon.svg",
+    name: "Liam Livingston",
+    event: "Sarmad Wedding",
+    date: "Jun 24, 2022",
+    email: "abc123@gmail.com",
+    phone: "+902342142",
+  },
+  {
+    image: "/userIcon.svg",
+    name: "Liam Livingston",
+    event: "Sarmad Wedding",
+    date: "Jun 24, 2022",
+    email: "abc123@gmail.com",
+    phone: "+902342142",
+  },
+  {
+    image: "/userIcon.svg",
+    name: "Liam Livingston",
+    event: "Sarmad Wedding",
+    date: "Jun 24, 2022",
+    email: "abc123@gmail.com",
+    phone: "+902342142",
+  },
+  {
+    image: "/userIcon.svg",
+    name: "Liam Livingston",
+    event: "Sarmad Wedding",
+    date: "Jun 24, 2022",
+    email: "abc123@gmail.com",
+    phone: "+902342142",
   },
 ];
 
@@ -247,7 +530,9 @@ export const imageUser = [
   {
     image: (
       <>
-        <img
+        <Image
+          width={20}
+          height={20}
           src="/share-1.png"
           alt=""
           className="w-[25px] h-[25px] inline-block object-contain mr-[-5px] relative z-10  "
@@ -258,7 +543,9 @@ export const imageUser = [
   {
     image: (
       <>
-        <img
+        <Image
+          width={20}
+          height={20}
           src="/share-2.png"
           alt=""
           className="w-[25px] h-[25px] inline-block object-contain mr-[-5px] relative z-10  "
@@ -269,7 +556,9 @@ export const imageUser = [
   {
     image: (
       <>
-        <img
+        <Image
+          width={20}
+          height={20}
           src="/share-3.png"
           alt=""
           className="w-[25px] h-[25px] inline-block object-contain mr-[-5px] relative z-10  "
@@ -280,7 +569,9 @@ export const imageUser = [
   {
     image: (
       <>
-        <img
+        <Image
+          width={20}
+          height={20}
           src="/share-4.png"
           alt=""
           className="w-[25px] h-[25px] inline-block object-contain mr-[-5px] relative z-10  "
@@ -462,33 +753,127 @@ export const legalName = [
 
 export const recentCards = [
   {
+    picture: "/event1.png",
+    title: "Birthday Event",
+    date: "23 Oct 2024",
+    location: "4140 Parker Rd. Allentown",
+    icon: "/dot.svg",
+  },
+  {
+    picture: "/event2.png",
+    title: "Wedding Event",
+    date: "23 Oct 2024",
+    location: "4140 Parker Rd. Allentown",
+    icon: "/dot.svg",
+  },
+  {
+    picture: "/event3.png",
+    title: "Business Conference",
+    date: "23 Oct 2024",
+    location: "4140 Parker Rd. Allentown",
+    icon: "/dot.svg",
+  },
+  {
+    picture: "/card4.png",
+    title: "Public Lecture",
+    date: "23 Oct 2024",
+    location: "4140 Parker Rd. Allentown",
+    icon: "/dot.svg",
+  },
+];
+export const recentCardsBirthday = [
+  {
     picture: "/card1.png",
-    title: "Birthday Event (London)",
+    title: "Emma's Birthday Event",
     date: "23 Oct 2024",
     icon: "/dot.svg",
   },
   {
     picture: "/card2.png",
-    title: "Sarmad’s Wedding (Lahore)",
+    title: "John's Birthday Event",
     date: "23 Oct 2024",
     icon: "/dot.svg",
   },
+];
+
+export const notificationsBar = [
   {
-    picture: "/card1.png",
-    title: "Halloween Party (Morroco)",
-    date: "23 Oct 2024",
-    icon: "/dot.svg",
+    image: "/user1.svg",
+    name: "alex cary",
+    invite: "has Invited you to join",
+    event: "Birthday Party",
+    date: "8 Nov, 2024.",
+    time: "8 hours ago",
   },
   {
-    picture: "/card4.png",
-    title: "Chrismas Night (Paris)",
-    date: "23 Oct 2024",
-    icon: "/dot.svg",
+    image: "/user2.svg",
+    name: "john doe",
+    invite: "has Invited you to join",
+    event: "Birthday Party",
+    date: "8 Nov, 2024.",
+    time: "8 hours ago",
   },
   {
-    picture: "/card5.png",
-    title: "Easter Day",
-    date: "20 Apr 2024",
-    icon: "/dot.svg",
+    image: "/user3.svg",
+    name: "marie",
+    invite: "has Invited you to join",
+    event: "Birthday Party",
+    date: "8 Nov, 2024.",
+    time: "8 hours ago",
+  },
+];
+
+export const tableBodyContentUser = [
+  {
+    image: "/image.svg",
+    name: "Website Design.png",
+    date: "Jun,24 2024",
+    size: "2.5 Mb",
+    modify: (
+      <>
+        {imageUser.map((item) => {
+          return <>{item.image}</>;
+        })}
+      </>
+    ),
+  },
+  {
+    image: "/image.svg",
+    name: "Website Design.png",
+    date: "Jun,24 2024",
+    size: "2.5 Mb",
+    modify: (
+      <>
+        {imageUser.map((item) => {
+          return <>{item.image}</>;
+        })}
+      </>
+    ),
+  },
+  {
+    image: "/image.svg",
+    name: "Website Design.png",
+    date: "Jun,24 2024",
+    size: "2.5 Mb",
+    modify: (
+      <>
+        {imageUser.map((item) => {
+          return <>{item.image}</>;
+        })}
+      </>
+    ),
+  },
+  {
+    image: "/image.svg",
+    name: "Website Design.png",
+    date: "Jun,24 2024",
+    size: "2.5 Mb",
+    modify: (
+      <>
+        {imageUser.map((item) => {
+          return <>{item.image}</>;
+        })}
+      </>
+    ),
   },
 ];
