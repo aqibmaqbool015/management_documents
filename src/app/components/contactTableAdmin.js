@@ -1,8 +1,8 @@
 import Image from "next/image";
-const ContactTable = ({
+import { useState } from "react";
+const ContactTableAdmin = ({
   tableContactCategory,
   name,
-  event,
   date,
   email,
   phone,
@@ -15,9 +15,6 @@ const ContactTable = ({
             <tr>
               <th scope="col" className="px-3 py-3 font-medium">
                 {name}
-              </th>
-              <th scope="col" className="px-3 py-3 font-medium">
-                {event}
               </th>
               <th scope="col" className="px-3 py-3 font-medium">
                 {date}
@@ -76,4 +73,4 @@ const ContactTable = ({
   );
 };
 
-export default ContactTable;
+export default ContactTableAdmin;

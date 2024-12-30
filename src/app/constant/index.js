@@ -491,6 +491,22 @@ export const tableContentCategory = [
     // ),
   },
 ];
+export const tableContacts = [
+  {
+    image: "/userIcon.svg",
+    name: "Liam Livingston",
+    date: "Jun 24, 2022",
+    email: "abc123@gmail.com",
+    phone: "+902342142",
+  },
+  {
+    image: "/userIcon.svg",
+    name: "Liam Livingston",
+    date: "Jun 24, 2022",
+    email: "abc123@gmail.com",
+    phone: "+902342142",
+  },
+];
 export const tableContactCategory = [
   {
     image: "/userIcon.svg",

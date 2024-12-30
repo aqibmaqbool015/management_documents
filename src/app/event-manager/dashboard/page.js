@@ -211,7 +211,7 @@ const Dashboard = () => {
                 <Image
                   src={images.cross}
                   alt="Close"
-                  className="w-[15px] h-auto cursor-pointer"
+                  className="w-[20px] h-auto cursor-pointer"
                   width={15}
                   height={15}
                   onClick={closeCommentModal}

@@ -1,8 +1,6 @@
 "use client";
 import localFont from "next/font/local";
 import "./globals.css";
-import Footer from './components/Footer';
-import Header from "./components/Header";
 import { usePathname } from 'next/navigation';
 import { metadata } from "./metadata";
 import Sidebar from "./components/sidebar";

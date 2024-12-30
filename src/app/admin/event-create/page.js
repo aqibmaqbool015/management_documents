@@ -1,6 +1,7 @@
 "use client";
 
 import AdminHader from "@/app/components/adminHeader";
+import CreateEventForm from "@/app/components/createEventForm";
 import EventForm from "@/app/components/eventForm";
 
 const EventCreate = () => {
@@ -11,10 +12,8 @@ const EventCreate = () => {
           <AdminHader
             title="Dashboard"
             divider="/"
-            subTitle="Birthday Event"
-            divider1="/"
-            subTitle1="Create New Event"
-            classLabel="text-customText md:text-[17px] text-[14px] font-normal capitalize block mx-2"
+            subTitle="Create New Event"
+            classLabel="text-customBlack md:text-[17px] text-[14px] font-medium capitalize block mx-2"
           />
 
           <div className="md:p-6 p-3">
@@ -31,7 +30,7 @@ const EventCreate = () => {
                   </button>
                 </div>
                 <div className="my-4">
-                  <EventForm />
+                  <CreateEventForm />
                 </div>
               </div>
             </div>

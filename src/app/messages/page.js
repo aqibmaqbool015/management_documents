@@ -53,7 +53,7 @@ function Messages() {
       />
       <div className="min-h-screen md:flex">
         <div
-          className={`md:w-1/4 p-2 border-r border-r-customLightBorder overflow-y-auto h-[600px] bg-transparent cursor-pointer ${
+          className={`md:w-1/4 p-2 border-r border-r-customLightBorder overflow-y-auto md:h-[600px] bg-transparent cursor-pointer ${
             isChatOpen ? "hidden md:block" : "block"
           }`}
         >

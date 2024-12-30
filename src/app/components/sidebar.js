@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import GradientDropdown from "./dropdown";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -19,6 +18,7 @@ const image = {
   contactEvent: "/contact-event.svg",
   event: "/event-create.svg",
   contact: "/contact.svg",
+  cross: "/cross.svg",
 };
 
 const Sidebar = () => {
@@ -30,6 +30,10 @@ const Sidebar = () => {
   const [isEventCreature, setIsEventCreature] = useState(true);
   const [eventSite, setEventSite] = useState(true);
   const [companyContacts, setCompanyContacts] = useState(true);
+  const [isDeleteModal, setIsDeleteModal] = useState(false);
+  const handleModalOpen = () => setIsDeleteModal(true);
+  const handleModalClose = () => setIsDeleteModal(false);
+
   useEffect(() => {
     const role = localStorage.getItem("admin") || "admin";
     setUserRole(role);
@@ -48,6 +52,12 @@ const Sidebar = () => {
   const handleClickPending = () => router.push("/admin/event-site/pending");
   const handleClickCompleted = () => router.push("/admin/event-site/completed");
   const handleClickEventAdmin = () => router.push("/admin/event-create");
+  const handleClickAllCreators = () => router.push("/admin/all-event-creators");
+  const handleClickEventCategory = () => router.push("/admin/category");
+  const handleClickAllEventAdmin = () =>
+    router.push("/admin/events/all-events");
+  const handleClickevents = () => router.push("/admin/events/birthday");
+  const handleClickContacts = () => router.push("/admin/contacts");
 
   // Event Manager
   const handleClickEvent = () => router.push("/event-manager/dashboard");
@@ -167,7 +177,10 @@ const Sidebar = () => {
       <label className="text-customText text-[17px] font-normal capitalize mb-2 block">
         pages
       </label>
-      <li className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]">
+      <li
+        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+        onClick={handleClickEventCategory}
+      >
         <Image
           src={image.category}
           alt=""
@@ -205,15 +218,30 @@ const Sidebar = () => {
       </li>
       {isEventCreature && (
         <ul className="pl-4 mb-3">
-          <li className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer">
+          <li
+            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            onClick={handleClickAllEventAdmin}
+          >
+            All Events
+          </li>
+          <li
+            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            onClick={handleClickevents}
+          >
             Birthday Events
           </li>
-          <li className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer">
+          <li
+            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            onClick={handleClickevents}
+          >
             Wedding Events
           </li>
         </ul>
       )}
-      <li className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]">
+      <li
+        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+        onClick={handleClickContacts}
+      >
         <Image
           src={image.contact}
           alt=""
@@ -225,7 +253,7 @@ const Sidebar = () => {
       </li>
       <li
         className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
-        onClick={handleClickEventAdmin}
+        onClick={handleClickAllCreators}
       >
         <Image
           src={image.contactEvent}
@@ -234,7 +262,7 @@ const Sidebar = () => {
           width={20}
           height={20}
         />
-        Event Creators
+        All Event Creators
       </li>
       <li
         className="mb-3 text-customBlackC1 text-[17px] font-normal cursor-pointer"
@@ -264,6 +292,12 @@ const Sidebar = () => {
       </li>
       {eventSite && (
         <ul className="pl-4 mb-3">
+          <li
+            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            onClick={handleClickEventAdmin}
+          >
+            Site Created
+          </li>
           <li
             className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
             onClick={handleClickRequest}
@@ -333,7 +367,10 @@ const Sidebar = () => {
         />
         Messages
       </li>
-      <li className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]">
+      <li
+        onClick={handleModalOpen}
+        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+      >
         <Image
           src={image.trash}
           alt=""
@@ -461,7 +498,10 @@ const Sidebar = () => {
         />
         Messages
       </li>
-      <li className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]">
+      <li
+        onClick={handleModalOpen}
+        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+      >
         <Image
           src={image.trash}
           alt=""
@@ -503,6 +543,43 @@ const Sidebar = () => {
         />
       </div> */}
       {renderSidebarContent()}
+
+      {isDeleteModal && (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white rounded-lg shadow-lg w-11/12 sm:w-1/2 md:w-[400px] max-h-[90vh] overflow-y-auto">
+            <div className="p-4 relative">
+              <div className="absolute right-3 top-4">
+                <Image
+                  src={image.cross}
+                  alt="Close"
+                  className="w-[20px] h-auto cursor-pointer"
+                  onClick={handleModalClose}
+                  width={15}
+                  height={15}
+                />
+              </div>
+            </div>
+            <div className="my-4 px-4">
+              <p className="text-[15px] text-customBlackLight text-center ">
+                Do you really want to delete your account. All your details will
+                be removed from your account.
+              </p>
+              <div className="my-3 text-center">
+                <span
+                  onClick={handleModalClose}
+                  className="text-customBlue inline-block capitalize mx-2 bg-transparent border border-customBlue rounded-[20px] px-3 min-w-[100px] py-1
+                  cursor-pointer "
+                >
+                  cancel
+                </span>
+                <button className="text-white capitalize mx-2 bg-customRed border border-transparent rounded-[20px] px-3 min-w-[100px] py-1 ">
+                  delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

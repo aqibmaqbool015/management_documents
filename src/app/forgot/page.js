@@ -1,7 +1,8 @@
 "use client";
 import Head from "next/head";
-import CustomInput from "../components/input";
-import { useState, useEffect, useRef } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "../constant";
@@ -14,41 +15,9 @@ export default function ForgotPage() {
     logo: "/logo.svg",
     mail: "/mail.svg",
     cross: "/cross.svg",
-
   };
 
-  const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState({});
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleClick = () => {
-    router.push("/new-password");
-  };
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  useEffect(() => {
-    if (submitted) {
-      validateForm();
-    }
-  }, [email, submitted]);
-
-  const validateForm = () => {
-    let validationErrors = {};
-    if (!email) {
-      validationErrors.email = "Email is required.";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      validationErrors.email = "Email is invalid.";
-    }
-    setErrors(validationErrors);
-    setIsFormValid(Object.keys(validationErrors).length === 0);
-  };
   const placeholders = ["1", "2", "3", "4", "5", "6"];
   const inputRefs = useRef([]);
 
@@ -58,34 +27,25 @@ export default function ForgotPage() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-    const isValid = validateForm();
-    setIsFormValid(isValid);
-    openModal();
-    if (isValid) {
-      openModal();
-      console.log("Form submitted successfully!");
-    } else {
-      console.log("Form has errors, please correct them.");
-    }
+  const handleSubmit = (values) => {
+    console.log("Form submitted with values:", values);
+    setIsModalOpen(true);
   };
 
-  const inputFields = [
-    {
-      label: "Email",
-      type: "email",
-      value: email,
-      change: (e) => setEmail(e.target.value),
-      id: "email",
-      name: "email",
-      placeholder: "Enter your email",
-      labelClass: "text-[17px] text-customBlue",
-      icon: image.mail,
-      error: errors.email, // Display error based on validation
-    },
-  ];
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const otpSubmit = () => {
+    router.push("/new-password");
+  };
+
+  // Validation Schema
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+  });
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
@@ -116,38 +76,50 @@ export default function ForgotPage() {
             your password.
           </h6>
 
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            {inputFields.map((field) => (
-              <CustomInput
-                key={field.id}
-                label={field.label}
-                type={field.type}
-                value={field.value}
-                id={field.id}
-                name={field.name}
-                placeholder={field.placeholder}
-                labelClass={field.labelClass}
-                onChange={field.change}
-                icon={field.icon}
-                error={submitted ? field.error : null}
-              />
-            ))}
-
-            <div className="!mt-7">
-              <button className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo">
-                Next
-              </button>
-
-              {/* <button
-                className="mt-5 border-customBlue text-customBlue
-                            w-full flex justify-center py-3 px-4 border rounded-[8px] text-sm font-medium "
-              >
-                Back
-              </button> */}
-            </div>
-          </form>
+          <Formik
+            initialValues={{ email: "" }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ isSubmitting }) => (
+              <Form className="space-y-4">
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="text-[17px] text-customBlue"
+                  >
+                    Email
+                  </label>
+                  <div className="relative mt-1">
+                    <Field
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      className="w-full border rounded-[8px] py-3 px-4 text-sm text-customBlue focus:outline-none "
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="text-red-500 text-sm mt-1"
+                    />
+                  </div>
+                </div>
+                <div className="!mt-7">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                  >
+                    {isSubmitting ? "Submitting..." : "Next"}
+                  </button>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
+
       {isModalOpen && (
         <div
           id="myModal"
@@ -169,7 +141,7 @@ export default function ForgotPage() {
               <h4 className="text-[26px] text-center font-medium text-customBlue capitalize mt-4">
                 Enter OTP Code
               </h4>
-              <div className="">
+              <div>
                 <h6 className="text-[20px] font-semibold capitalize mt-4 text-transparent bg-clip-text bg-gradient-to-r from-customGradiantFrom to-customGradiantTo">
                   Check your email
                 </h6>
@@ -180,21 +152,19 @@ export default function ForgotPage() {
                 </p>
 
                 <div className="text-center md:mt-4">
-                  {Array(6)
-                    .fill("")
-                    .map((_, index) => (
-                      <input
-                        key={index}
-                        type="number"
-                        maxLength="1"
-                        className="w-10 h-16 text-center text-lg border border-customBg rounded-[8px] focus:outline-none focus:border-customGradiantFrom appearance-none placeholder-customBlue mx-2 md:my-3 my-2"
-                        onInput={(e) => handleInput(e, index)}
-                        ref={(el) => (inputRefs.current[index] = el)}
-                      />
-                    ))}
+                  {placeholders.map((_, index) => (
+                    <input
+                      key={index}
+                      type="number"
+                      maxLength="1"
+                      className="w-10 h-16 text-center text-lg border border-customBg rounded-[8px] focus:outline-none focus:border-customGradiantFrom appearance-none placeholder-customBlue mx-2 md:my-3 my-2"
+                      onInput={(e) => handleInput(e, index)}
+                      ref={(el) => (inputRefs.current[index] = el)}
+                    />
+                  ))}
 
                   <div className="px-10 mt-4">
-                    <Button name="Continue" onClick={handleClick} />
+                    <Button name="Continue" onClick={otpSubmit} />
                     <p className="text-customBlue text-[14px] mt-3 mb-5">
                       Didn't receive a code?{" "}
                       <a href="#" className="text-customGradiantFrom">

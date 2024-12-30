@@ -11,8 +11,6 @@ const CreateEvent = () => {
           <AdminHader
             title="Dashboard"
             divider="/"
-            subTitle="Birthday Event"
-            divider1="/"
             subTitle1="Create New Event"
             classLabel="text-customText md:text-[17px] text-[14px] font-normal capitalize block mx-2"
           />
