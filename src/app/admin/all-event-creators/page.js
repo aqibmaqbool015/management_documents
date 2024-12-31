@@ -3,16 +3,8 @@ import AdminHader from "@/app/components/adminHeader";
 import { cards, tableContacts } from "@/app/constant";
 import React from "react";
 import Image from "next/image";
-import ContactTable from "@/app/components/contactTable";
 import ContactTableAdmin from "@/app/components/contactTableAdmin";
-
-const images = {
-  bell: "header3.svg",
-  user: "/user-client.svg",
-  upload: "/upload.svg",
-  dots: "/dots.svg",
-  cross: "/cross.svg",
-};
+import { imagesUsers } from "@/app/utils/images";
 
 const AllEventCreators = () => {
   return (
@@ -50,7 +42,7 @@ const AllEventCreators = () => {
                 </h3>
                 <span className="bg-customDotBg w-[30px] h-[30px] rounded-[10px] text-center inline-block cursor-pointer">
                   <Image
-                    src={images.dots}
+                    src={imagesUsers.dots}
                     width={15}
                     height={15}
                     alt=""

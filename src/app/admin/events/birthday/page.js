@@ -1,16 +1,10 @@
 "use client";
 import AdminHader from "@/app/components/adminHeader";
-import { cards, recentCards, recentCardsBirthday } from "@/app/constant";
+import { cards, recentCardsBirthday } from "@/app/constant";
+import { imagesUsers } from "@/app/utils/images";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-
-const images = {
-  bell: "header3.svg",
-  user: "/user-client.svg",
-  upload: "/upload.svg",
-  dots: "/dots.svg",
-};
+import React from "react";
 
 const Birthday = () => {
   const router = useRouter();
@@ -52,7 +46,7 @@ const Birthday = () => {
                 </h3>
                 <span className="bg-customDotBg w-[30px] h-[30px] rounded-[10px] text-center inline-block cursor-pointer">
                   <Image
-                    src={images.dots}
+                    src={imagesUsers.dots}
                     width={10}
                     height={10}
                     alt=""
@@ -60,13 +54,13 @@ const Birthday = () => {
                   />
                 </span>
               </div>
-              <div className="grid lg:grid-cols-5 md:grid-cols-3 gap-2 mb-2 mt-5">
+              <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-2 mb-2 mt-5">
                 {recentCardsBirthday.map((item, index) => {
                   return (
                     <>
                       <div
                         key={index}
-                        className="border border-customBg rounded-[8px] p-0.5 cursor-pointer "
+                        className="bg-customCardBg shadow-custom rounded-[8px] pb-2 cursor-pointer relative"
                         onClick={clickHandleData}
                       >
                         <Image

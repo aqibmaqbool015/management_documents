@@ -16,9 +16,9 @@ const ContactTable = ({
               <th scope="col" className="px-3 py-3 font-medium">
                 {name}
               </th>
-              <th scope="col" className="px-3 py-3 font-medium">
+              {/* <th scope="col" className="px-3 py-3 font-medium">
                 {event}
-              </th>
+              </th> */}
               <th scope="col" className="px-3 py-3 font-medium">
                 {date}
               </th>

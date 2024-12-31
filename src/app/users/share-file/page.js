@@ -1,17 +1,15 @@
 "use client";
 import AdminHader from "@/app/components/adminHeader";
-import { documentsFile, recentCards, recentCardsBirthday } from "@/app/constant";
+import { recentCardsBirthday } from "@/app/constant";
+import { imagesUsers } from "@/app/utils/images";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const SharedToMe = () => {
-  const images = {
-    bell: "header3.svg",
-    user: "/user-client.svg",
-    upload: "/upload.svg",
-    dots: "/dots.svg",
-    date: "/date.svg",
-    location: "/location.svg",
+  const router = useRouter();
+  const clickHandleData = () => {
+    router.push("/users/events/details");
   };
 
   return (
@@ -36,7 +34,7 @@ const SharedToMe = () => {
                   <Image
                     width={10}
                     height={10}
-                    src={images.dots}
+                    src={imagesUsers.dots}
                     alt=""
                     className="w-[15px] h-[15px] object-contain inline-block align-sub "
                   />
@@ -74,7 +72,7 @@ const SharedToMe = () => {
                           <p className="text-customTextCard text-[12px] font-light px-1">
                             <span className="inline-block w-[13px] h-[13px]">
                               <Image
-                                src={images.date}
+                                src={imagesUsers.date}
                                 alt=""
                                 className=" object-contain w-full h-full align-baseline inline-block "
                                 width={10}

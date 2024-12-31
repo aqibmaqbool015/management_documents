@@ -1,58 +1,21 @@
 "use client";
 import Head from "next/head";
-import CustomInput from "../components/input";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { images } from "../utils/images";
+import {
+  initialValuesPassword,
+  validationSchemaPassword,
+} from "../utils/formikConfig";
+import { Button } from "../utils/buttons";
 
 export default function NewPassword() {
   const router = useRouter();
 
-  const image = {
-    image: "/create.png",
-    logo: "/logo.svg",
-    key: "/key.svg",
-    check: "/check.svg",
-    checks: "/checks.svg",
-    eyeOff: "/eye-off.svg",
-  };
-
-  const message = [
-    {
-      icon: image.checks,
-      text: "Password must be between 8 to 32 characters.",
-    },
-    {
-      icon: image.checks,
-      text: "Must contain an uppercase character.",
-    },
-    {
-      icon: image.checks,
-      text: "Must contain a number.",
-    },
-    {
-      icon: image.check,
-      text: "Must contain one special character.",
-    },
-  ];
-
-  const validationSchema = Yup.object({
-    password: Yup.string()
-      .min(8, "Password must be at least 8 characters")
-      .max(32, "Password cannot exceed 32 characters")
-      .matches(/[A-Z]/, "Must contain an uppercase character")
-      .matches(/[0-9]/, "Must contain a number")
-      .matches(/[!@#$%^&*(),.?":{}|<>]/, "Must contain one special character")
-      .required("Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords must match")
-      .required("Confirmation password is required"),
-  });
-
   const handleSubmit = (values) => {
     console.log("Form values:", values);
-    router.push("/login"); // Redirect to login after successful submission
+    router.push("/login");
   };
 
   return (
@@ -66,7 +29,7 @@ export default function NewPassword() {
           <Image
             width={100}
             height={100}
-            src={image.logo}
+            src={images.logo}
             alt="Car Dealership"
             className="w-[140px] h-auto"
           />
@@ -82,14 +45,11 @@ export default function NewPassword() {
           </h6>
 
           <Formik
-            initialValues={{
-              password: "",
-              confirmPassword: "",
-            }}
-            validationSchema={validationSchema}
+            initialValues={initialValuesPassword}
+            validationSchema={validationSchemaPassword}
             onSubmit={handleSubmit}
           >
-            {({ values, handleChange }) => (
+            {() => (
               <Form className="space-y-4">
                 <div>
                   <label
@@ -107,7 +67,7 @@ export default function NewPassword() {
                   <ErrorMessage
                     name="password"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-customRed text-sm mt-1"
                   />
                 </div>
 
@@ -131,37 +91,12 @@ export default function NewPassword() {
                   />
                 </div>
 
-                <div className="my-5">
-                  {message.map((item, index) => (
-                    <div key={index} className="flex items-center">
-                      <Image
-                        width={100}
-                        height={100}
-                        src={item.icon}
-                        alt=""
-                        className="w-[15px] h-[15px] object-contain inline-block"
-                      />
-                      <p className="mx-2 text-[14px] text-customBlue font-normal">
-                        {item.text}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
                 <div className="!mt-7">
-                  <button
+                  <Button
                     type="submit"
-                    className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
-                  >
-                    Reset Password
-                  </button>
-                  {/* <button
-                    type="button"
-                    onClick={() => router.back()}
-                    className="mt-5 border-customBlue text-customBlue w-full flex justify-center py-3 px-4 border rounded-[8px] text-sm font-medium"
-                  >
-                    Back
-                  </button> */}
+                    class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                    name="Reset Password"
+                  />
                 </div>
               </Form>
             )}
@@ -173,7 +108,7 @@ export default function NewPassword() {
         <Image
           width={100}
           height={100}
-          src={image.image}
+          src={images.image}
           alt="Car Dealership"
           className="h-full w-full"
         />

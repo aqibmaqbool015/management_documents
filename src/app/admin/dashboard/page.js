@@ -1,18 +1,11 @@
 "use client";
 import AdminHader from "@/app/components/adminHeader";
 import ChartComponent from "@/app/components/Chart";
-import TableComponent from "@/app/components/table";
 import {cardsAdmin, recentCards } from "@/app/constant";
+import { imagesUsers } from "@/app/utils/images";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-
-const images = {
-  bell: "header3.svg",
-  user: "/user-client.svg",
-  upload: "/upload.svg",
-  dots: "/dots.svg",
-};
 
 const Dashboard = () => {
   const [file, setFile] = useState(null);
@@ -35,13 +28,13 @@ const Dashboard = () => {
   const router = useRouter();
   const clickHandleData = (index) => {
     if (index === 0) {
-      router.push(`/event-manager/events/birthday`);
+      router.push(`/admin/events/birthday`);
     } else if (index === 1) {
-      router.push(`/event-manager/events/weddings`);
+      router.push(`/admin/events/weddings`);
     } else if (index === 2) {
-      router.push(`/event-manager/events/birthday`);
+      router.push(`/admin/events/birthday`);
     } else if (index === 3) {
-      router.push(`/event-manager/events/birthday`);
+      router.push(`/admin/events/birthday`);
     }
   };
 
@@ -108,7 +101,7 @@ const Dashboard = () => {
                       <Image
                         width={100}
                         height={100}
-                        src={images.upload}
+                        src={imagesUsers.upload}
                         alt=""
                         className="w-[40px] h-[40px] object-contain inline-block align-sub mr-3 "
                       />
@@ -137,7 +130,7 @@ const Dashboard = () => {
                 </h3>
                 <span className="bg-customDotBg w-[30px] h-[30px] rounded-[10px] text-center inline-block cursor-pointer">
                   <Image
-                    src={images.dots}
+                    src={imagesUsers.dots}
                     width={15}
                     height={15}
                     alt=""

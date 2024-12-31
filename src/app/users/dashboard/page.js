@@ -3,18 +3,10 @@ import AdminHader from "@/app/components/adminHeader";
 import { AreaChartComponent } from "@/app/components/areaChartComponent";
 import LineChartComponent from "@/app/components/lineChartComponent";
 import { cards, recentCards } from "@/app/constant";
+import { imagesUsers } from "@/app/utils/images";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-
-const images = {
-  bell: "header3.svg",
-  user: "/user-client.svg",
-  upload: "/upload.svg",
-  dots: "/dots.svg",
-  date: "/date.svg",
-  location: "/location.svg",
-};
+import React from "react";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -86,7 +78,7 @@ const Dashboard = () => {
                   <Image
                     width={200}
                     height={200}
-                    src={images.dots}
+                    src={imagesUsers.dots}
                     alt=""
                     className="w-[15px] h-[15px] object-contain inline-block align-sub "
                   />
@@ -112,18 +104,12 @@ const Dashboard = () => {
                           <p className="text-customBlack1 text-[12px] font-medium ">
                             {item.title}
                           </p>
-                          {/* <Image
-                            src={item.icon}
-                            alt=""
-                            className="w-[15px] h-[15px] object-contain "
-                            width={18}
-                            height={18}
-                          /> */}
+                          
                         </div>
                         <p className="text-customTextCard text-[12px] font-light px-1">
                           <span className="inline-block w-[13px] h-[13px]">
                             <Image
-                              src={images.date}
+                              src={imagesUsers.date}
                               alt=""
                               className=" object-contain w-full h-full align-baseline inline-block "
                               width={10}
@@ -135,7 +121,7 @@ const Dashboard = () => {
                         <p className="text-customTextCard text-[12px] font-light px-1">
                           <span className="inline-block w-[13px] h-[13px]">
                             <Image
-                              src={images.location}
+                              src={imagesUsers.location}
                               alt=""
                               className=" object-contain w-full h-full align-baseline inline-block "
                               width={10}

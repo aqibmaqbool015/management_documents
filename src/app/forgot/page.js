@@ -1,22 +1,20 @@
+// pages/forgot.js
+
 "use client";
 import Head from "next/head";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Button } from "../constant";
+import { forgotPageImages as image } from "../utils/images";
+import {
+  forgotPasswordInitialValues,
+  forgotPasswordSchema,
+} from "../utils/formikConfig";
+import { Button } from "../utils/buttons";
 
 export default function ForgotPage() {
   const router = useRouter();
-
-  const image = {
-    image: "/login.png",
-    logo: "/logo.svg",
-    mail: "/mail.svg",
-    cross: "/cross.svg",
-  };
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const placeholders = ["1", "2", "3", "4", "5", "6"];
   const inputRefs = useRef([]);
@@ -40,13 +38,6 @@ export default function ForgotPage() {
     router.push("/new-password");
   };
 
-  // Validation Schema
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
-  });
-
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
       <Head>
@@ -68,17 +59,14 @@ export default function ForgotPage() {
           <h1 className="text-2xl font-semibold mb-2 text-center text-[30px] text-customBlue">
             Forgot Password
           </h1>
-          <h6
-            className="text-2xl font-normal mb-8 text-center text-[14px] leading-normal
-                    text-customBlue"
-          >
+          <h6 className="text-2xl font-normal mb-8 text-center text-[14px] leading-normal text-customBlue">
             Enter the email of your account and we will send the email to reset
             your password.
           </h6>
 
           <Formik
-            initialValues={{ email: "" }}
-            validationSchema={validationSchema}
+            initialValues={forgotPasswordInitialValues}
+            validationSchema={forgotPasswordSchema}
             onSubmit={handleSubmit}
           >
             {({ isSubmitting }) => (
@@ -96,23 +84,28 @@ export default function ForgotPage() {
                       id="email"
                       name="email"
                       placeholder="Enter your email"
-                      className="w-full border rounded-[8px] py-3 px-4 text-sm text-customBlue focus:outline-none "
+                      className="w-full border rounded-[8px] py-3 px-4 text-sm text-customBlue focus:outline-none"
                     />
                     <ErrorMessage
                       name="email"
                       component="div"
-                      className="text-red-500 text-sm mt-1"
+                      className="text-customRed text-sm mt-1"
                     />
                   </div>
                 </div>
                 <div className="!mt-7">
-                  <button
+                  {/* <button
                     type="submit"
                     disabled={isSubmitting}
                     className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
                   >
                     {isSubmitting ? "Submitting..." : "Next"}
-                  </button>
+                  </button> */}
+                  <Button
+                    type="submit"
+                    class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                    name=" Next"
+                  />
                 </div>
               </Form>
             )}
@@ -137,7 +130,6 @@ export default function ForgotPage() {
                   onClick={closeModal}
                 />
               </div>
-
               <h4 className="text-[26px] text-center font-medium text-customBlue capitalize mt-4">
                 Enter OTP Code
               </h4>
@@ -146,11 +138,10 @@ export default function ForgotPage() {
                   Check your email
                 </h6>
                 <p className="text-customBlue text-[16px] font-normal">
-                  We’ve sent a 6-digit confirmation OTP code to{" "}
+                  We ve sent a 6-digit confirmation OTP code to{" "}
                   <b>username@gmail.com</b>. Make sure you enter the correct
                   code.
                 </p>
-
                 <div className="text-center md:mt-4">
                   {placeholders.map((_, index) => (
                     <input
@@ -162,9 +153,13 @@ export default function ForgotPage() {
                       ref={(el) => (inputRefs.current[index] = el)}
                     />
                   ))}
-
                   <div className="px-10 mt-4">
-                    <Button name="Continue" onClick={otpSubmit} />
+                    <Button
+                      type="button"
+                      name="Continue"
+                      class="w-full flex justify-center py-3 px-4 border border-transparent rounded-[8px] shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                      onClick={otpSubmit}
+                    />
                     <p className="text-customBlue text-[14px] mt-3 mb-5">
                       Didn't receive a code?{" "}
                       <a href="#" className="text-customGradiantFrom">

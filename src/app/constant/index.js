@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { imageLogin } from "../utils/images";
 
 const image = {
   image: "/signup2.png",
@@ -166,18 +167,6 @@ export const socials = [
   // },
 ];
 
-export const Button = (props) => {
-  return (
-    <button
-      type="button"
-      onClick={props.onClick}
-      className="w-full flex justify-center py-3 px-4 border border-transparent rounded-[8px] shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
-    >
-      {props.name}
-    </button>
-  );
-};
-
 export const cards = [
   {
     class: "p-6 bg-customCard1 rounded-lg",
@@ -249,6 +238,7 @@ export const tableBodyContent = [
     modify: "11 oct 2024",
   },
 ];
+
 export const tableContentCategory = [
   {
     image: "/gallery-tick.svg",
@@ -511,7 +501,6 @@ export const tableContactCategory = [
   {
     image: "/userIcon.svg",
     name: "Liam Livingston",
-    event: "Sarmad Wedding",
     date: "Jun 24, 2022",
     email: "abc123@gmail.com",
     phone: "+902342142",
@@ -519,7 +508,6 @@ export const tableContactCategory = [
   {
     image: "/userIcon.svg",
     name: "Liam Livingston",
-    event: "Sarmad Wedding",
     date: "Jun 24, 2022",
     email: "abc123@gmail.com",
     phone: "+902342142",
@@ -527,7 +515,6 @@ export const tableContactCategory = [
   {
     image: "/userIcon.svg",
     name: "Liam Livingston",
-    event: "Sarmad Wedding",
     date: "Jun 24, 2022",
     email: "abc123@gmail.com",
     phone: "+902342142",
@@ -535,7 +522,6 @@ export const tableContactCategory = [
   {
     image: "/userIcon.svg",
     name: "Liam Livingston",
-    event: "Sarmad Wedding",
     date: "Jun 24, 2022",
     email: "abc123@gmail.com",
     phone: "+902342142",
@@ -891,5 +877,25 @@ export const tableBodyContentUser = [
         })}
       </>
     ),
+  },
+];
+export const inputFields = [
+  {
+    label: "Email",
+    type: "email",
+    id: "email",
+    name: "email",
+    placeholder: "Enter your email",
+    labelClass: "text-[17px] text-customBlue",
+    icon: imageLogin.mail,
+  },
+  {
+    label: "Password",
+    type: "password",
+    id: "password",
+    name: "password",
+    placeholder: "Enter your password",
+    labelClass: "text-[17px] text-customBlue",
+    icon: imageLogin.key,
   },
 ];

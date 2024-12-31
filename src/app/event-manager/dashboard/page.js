@@ -5,14 +5,7 @@ import { cards, recentCards } from "@/app/constant";
 import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
-const images = {
-  bell: "header3.svg",
-  user: "/user-client.svg",
-  upload: "/upload.svg",
-  dots: "/dots.svg",
-  cross: "/cross.svg",
-};
+import { imagesUsers } from "@/app/utils/images";
 
 const Dashboard = () => {
   const [file, setFile] = useState();
@@ -108,7 +101,7 @@ const Dashboard = () => {
                   <>
                     <div className="text-center relative top-[35%]">
                       <Image
-                        src={images.upload}
+                        src={imagesUsers.upload}
                         width={40}
                         height={40}
                         alt=""
@@ -139,7 +132,7 @@ const Dashboard = () => {
                 </h3>
                 <span className="bg-customDotBg w-[30px] h-[30px] rounded-[10px] text-center inline-block cursor-pointer">
                   <Image
-                    src={images.dots}
+                    src={imagesUsers.dots}
                     width={15}
                     height={15}
                     alt=""
@@ -209,7 +202,7 @@ const Dashboard = () => {
               </h2>
               <div className="absolute right-3 top-4">
                 <Image
-                  src={images.cross}
+                  src={imagsimagesUserss.cross}
                   alt="Close"
                   className="w-[20px] h-auto cursor-pointer"
                   width={15}

@@ -1,28 +1,25 @@
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import Image from "next/image";
 import { useState } from "react";
-
-const images = {
-  upload: "/upload.svg",
-  uploadImage: "/upload-image.svg",
-};
-
-const validationSchema = Yup.object({
-  type: Yup.string().required("Event type is required"),
-  name: Yup.string().required("Event name is required"),
-  manager: Yup.string().required("Event manager is required"),
-  file: Yup.mixed()
-    .required("File is required")
-    .test("fileType", "Unsupported file type", (value) =>
-      value
-        ? ["image/jpeg", "image/png", "image/gif"].includes(value.type)
-        : true
-    ),
-});
+import { imagesUsers } from "../utils/images";
+import {
+  initialValuesEvent,
+  validationSchemaEvent,
+} from "../utils/formikConfig";
+import { useFormik } from "formik";
+import { Button, CancelButton } from "../utils/buttons";
 
 const CreateEventForm = () => {
   const [fileName, setFileName] = useState("");
+
+  const formik = useFormik({
+    initialValues: initialValuesEvent,
+    validationSchema: validationSchemaEvent,
+    validateOnChange: false,
+    validateOnBlur: true,
+    onSubmit: async (values) => {
+      console.log("Form submitted", values);
+    },
+  });
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -30,21 +27,6 @@ const CreateEventForm = () => {
       setFileName(file.name);
     }
   };
-
-  const formik = useFormik({
-    initialValues: {
-      type: "",
-      name: "",
-      manager: "",
-      file: null,
-    },
-    validationSchema: validationSchema,
-    validateOnChange: false,
-    validateOnBlur: true,
-    onSubmit: async (values) => {
-      console.log("Form submitted", values);
-    },
-  });
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -102,7 +84,7 @@ const CreateEventForm = () => {
                 className="cursor-pointer absolute top-0 right-0 px-4 py-3 text-customText rounded-[8px]"
               >
                 <Image
-                  src={images.uploadImage}
+                  src={imagesUsers.uploadImage}
                   alt=""
                   width={10}
                   height={10}
@@ -179,18 +161,16 @@ const CreateEventForm = () => {
         </div>
       </div>
 
-      <div className="text-center">
-        <div className="bg-customGraySelect cursor-pointer inline-block mx-2 px-3 py-2 rounded-[6px] text-center my-1 min-w-[140px]">
-          <div className=" capitalize  bg-clip-text bg-gradient-to-r from-customGradiantFrom to-customGradiantTo text-transparent">
-            cancel
-          </div>
-        </div>
-        <button
-          type="submit"
-          className="inline-block capitalize rounded-[8px] mx-2 py-2 px-3 min-w-[140px] text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
-        >
-          create event
-        </button>
+      <div className="text-center mt-6">
+        <CancelButton
+          className="bg-customGraySelect cursor-pointer inline-block mx-2 px-3 py-2 rounded-[6px] text-center my-1 min-w-[140px]"
+          name="Cancel"
+        />
+        <Button
+          type="button"
+          class="inline-block py-2.5 px-3 mx-2 my-1 min-w-[140px] border border-transparent rounded-[8px] shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+          name="Create Event"
+        />
       </div>
     </form>
   );

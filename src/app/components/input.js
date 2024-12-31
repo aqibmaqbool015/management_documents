@@ -41,7 +41,7 @@ const CustomInput = ({
           onChange={onChange}
           className={`mt-1 block w-full px-10 py-3 shadow-sm placeholder-customDarkGray focus:outline-none 
                       focus:ring-indigo-500 focus:border-indigo-500 border border-[#CFCFCF] rounded-[8px]
-                      ${error ? "border-red-500" : ""}`}
+                      ${error ? "border-customRed" : ""}`}
         />
         <Image
           width={10}

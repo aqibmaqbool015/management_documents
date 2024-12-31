@@ -2,13 +2,11 @@
 import AdminHader from "@/app/components/adminHeader";
 import CategoryTable from "@/app/components/categoryTable";
 import { tableContentCategory } from "@/app/constant";
+import { Button } from "@/app/utils/buttons";
+import { imagesUsers } from "@/app/utils/images";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-
-const images = {
-  search: "/search-status.svg",
-};
+import React from "react";
 
 const Category = () => {
   const router = useRouter();
@@ -35,7 +33,7 @@ const Category = () => {
                 <div class="relative md:w-[450px] md:my-0 my-2">
                   <div class="absolute inset-y-0 start-0 flex items-center ps-3 ">
                     <Image
-                      src={images.search}
+                      src={imagesUsers.search}
                       alt=""
                       width={15}
                       height={15}
@@ -50,14 +48,12 @@ const Category = () => {
                     required
                   />
                 </div>
-
-                <button
-                  className="md:my-0 my-2 font-normal rounded-[8px] text-center px-3 min-w-[100px] mx-1 text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo
+                <Button
+                  type="button"
+                  class="md:my-0 my-2 font-normal rounded-[8px] text-center px-3 min-w-[100px] mx-1 text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo
                 h-[40px]"
-                  onClick={handleClickCreateEvent}
-                >
-                  + Add More
-                </button>
+                  name="+ Add More"
+                />
               </div>
               <CategoryTable
                 image="Image"

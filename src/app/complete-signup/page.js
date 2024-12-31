@@ -4,46 +4,15 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { legalName } from "../constant";
-
-const image = {
-  image: "/signup2.png",
-  logo: "/logo.svg",
-  mail: "/mail.svg",
-  key: "/key.svg",
-  calendar: "/calendar.svg",
-  user: "/user.svg",
-  google: "/social.svg",
-  facebook: "/social2.svg",
-  apple: "/social3.svg",
-  gap: "/or.svg",
-};
-
-const validationSchema = Yup.object().shape({
-  fullName: Yup.string().required("Name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  phone: Yup.string()
-    .matches(/^\d{10}$/, "Phone number must be 10 digits")
-    .required("Phone is required"),
-  password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Confirm Password is required"),
-});
+import { imageSignup } from "../utils/images";
+import {
+  initialValuesSignup,
+  validationSchemaSignup,
+} from "../utils/formikConfig";
+import { Button } from "../utils/buttons";
 
 const CompleteSignup = () => {
   const router = useRouter();
-
-  const initialValues = {
-    fullName: "",
-    email: "",
-    phone: "",
-    password: "",
-    confirmPassword: "",
-  };
 
   const handleSubmit = (values) => {
     console.log("Form submitted successfully:", values);
@@ -57,7 +26,7 @@ const CompleteSignup = () => {
       </Head>
       <div className="w-full md:w-[50%] relative">
         <Image
-          src={image.image}
+          src={imageSignup.image}
           alt="Car Dealership"
           className="h-lvh w-full !relative"
           width={300}
@@ -65,7 +34,7 @@ const CompleteSignup = () => {
         />
         <div className="text-left w-full">
           <Image
-            src={image.logo}
+            src={imageSignup.logo}
             alt="Car Dealership"
             className="w-[140px] h-auto absolute left-3 top-3"
             width={140}
@@ -80,8 +49,8 @@ const CompleteSignup = () => {
           </h1>
 
           <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
+            initialValues={initialValuesSignup}
+            validationSchema={validationSchemaSignup}
             onSubmit={handleSubmit}
           >
             {({ isSubmitting }) => (
@@ -100,10 +69,9 @@ const CompleteSignup = () => {
                   <ErrorMessage
                     name="fullName"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-customRed text-sm mt-1"
                   />
                 </div>
-
                 <div>
                   <label htmlFor="email" className="block mb-1 text-sm">
                     Email
@@ -118,10 +86,9 @@ const CompleteSignup = () => {
                   <ErrorMessage
                     name="email"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-customRed text-sm mt-1"
                   />
                 </div>
-
                 <div>
                   <label htmlFor="phone" className="block mb-1 text-sm">
                     Phone
@@ -136,10 +103,9 @@ const CompleteSignup = () => {
                   <ErrorMessage
                     name="phone"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-customRed text-sm mt-1"
                   />
                 </div>
-
                 <div>
                   <label htmlFor="password" className="block mb-1 text-sm">
                     Password
@@ -154,10 +120,9 @@ const CompleteSignup = () => {
                   <ErrorMessage
                     name="password"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-customRed text-sm mt-1"
                   />
                 </div>
-
                 <div>
                   <label
                     htmlFor="confirmPassword"
@@ -175,17 +140,21 @@ const CompleteSignup = () => {
                   <ErrorMessage
                     name="confirmPassword"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-customRed text-sm mt-1"
                   />
                 </div>
-
-                <button
+                {/* <button
                   type="submit"
                   className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
                   disabled={isSubmitting}
                 >
                   Sign Up
-                </button>
+                </button> */}
+                <Button
+                  type="submit"
+                  class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                  name=" Sign Up"
+                />
               </Form>
             )}
           </Formik>
@@ -194,7 +163,7 @@ const CompleteSignup = () => {
             <Image
               width={100}
               height={100}
-              src={image.gap}
+              src={imageSignup.gap}
               className="w-full h-auto"
               alt=""
             />
@@ -204,7 +173,7 @@ const CompleteSignup = () => {
               <Image
                 width={100}
                 height={100}
-                src={image.google}
+                src={imageSignup.google}
                 alt="Google"
                 className="w-[21px] inline-block h-auto align-sub"
               />

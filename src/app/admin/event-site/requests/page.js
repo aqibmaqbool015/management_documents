@@ -1,12 +1,10 @@
 "use client";
 import AdminHader from "@/app/components/adminHeader";
+import { Button, CancelButton } from "@/app/utils/buttons";
+import { imagesUsers } from "@/app/utils/images";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
-
-const images = {
-  user: "/avatar-image.svg",
-};
 
 const Requests = () => {
   const router = useRouter();
@@ -28,11 +26,10 @@ const Requests = () => {
                 <p className="text-customBlue md:text-[18px] text-[15px] font-medium capitalize mb-3">
                   Event Requests
                 </p>
-                <button className="bg-customGraySelect rounded-[8px] py-2 px-3 ">
-                  <p className="inline-block cursor-pointer text-[15px] bg-clip-text bg-gradient-to-r from-customGradiantFrom to-customGradiantTo text-transparent mr-1">
-                    Create New Event
-                  </p>
-                </button>
+                <CancelButton
+                  className="bg-customGraySelect cursor-pointer inline-block mx-2 px-3 py-2 rounded-[6px] text-center my-1 min-w-[140px]"
+                  name="Create New Event"
+                />
               </div>
               <div className="md:flex justify-between items-center mt-5 cursor-pointer hover:bg-customBgLight p-1 border-b border-b-customBorderBottom pb-3 ">
                 <div class="relative md:w-[450px] md:my-0 my-2">
@@ -41,7 +38,7 @@ const Requests = () => {
                       <Image
                         width={15}
                         height={15}
-                        src={images.user}
+                        src={imagesUsers.users}
                         alt=""
                         className="w-full h-full object-contain rounded-full inline-block"
                       />
@@ -61,12 +58,15 @@ const Requests = () => {
                 </div>
 
                 <div className="my-2">
-                  <button className="font-normal rounded-[8px] text-center py-2 px-3 min-w-[100px] mx-1 text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo">
-                    Accept
-                  </button>
-                  <button className="font-normal rounded-[8px] text-center py-2 px-3 min-w-[100px] mx-1 text-customButtontext border border-customBorderBottom bg-white  ">
-                    Decline
-                  </button>
+                  <Button
+                    type="button"
+                    class="inline-block py-1.5 px-3 mx-2 my-1 min-w-[90px] border border-transparent rounded-[8px] shadow-sm text-sm font-normal text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                    name="Accept"
+                  />
+                  <CancelButton
+                    className="bg-customGraySelect cursor-pointer inline-block mx-2 px-3 py-1.5 rounded-[6px] text-center my-1 min-w-[90px]"
+                    name="Decline"
+                  />
                 </div>
               </div>
             </div>

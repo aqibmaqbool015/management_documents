@@ -1,16 +1,10 @@
 "use client";
 import AdminHader from "@/app/components/adminHeader";
-import { cards, recentCards, recentCardsBirthday } from "@/app/constant";
+import { cards, recentCardsBirthday } from "@/app/constant";
+import { imagesUsers } from "@/app/utils/images";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-
-const images = {
-  bell: "header3.svg",
-  user: "/user-client.svg",
-  upload: "/upload.svg",
-  dots: "/dots.svg",
-};
+import React from "react";
 
 const Weddings = () => {
   const router = useRouter();
@@ -52,7 +46,7 @@ const Weddings = () => {
                 </h3>
                 <span className="bg-customDotBg w-[30px] h-[30px] rounded-[10px] text-center inline-block cursor-pointer">
                   <Image
-                    src={images.dots}
+                    src={imagesUsers.dots}
                     width={15}
                     height={15}
                     alt=""

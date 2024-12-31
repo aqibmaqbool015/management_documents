@@ -2,14 +2,7 @@
 import { useRef, useState } from "react";
 import AdminHader from "@/app/components/adminHeader";
 import Image from "next/image";
-
-const images = {
-  user1: "/user1.svg",
-  user2: "/user2.svg",
-  user3: "/user3.svg",
-  images: "/images.svg",
-  back: "/back.png",
-};
+import { imagesChat } from "../utils/images";
 
 function Messages() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -65,7 +58,7 @@ function Messages() {
               <Image
                 width={40}
                 height={40}
-                src={images.user1}
+                src={imagesChat.user1}
                 alt="img"
                 className="w-[40px] h-[40px] rounded-full object-contain"
               />
@@ -91,7 +84,7 @@ function Messages() {
                 className="mr-3 text-customBlue text-sm md:hidden"
               >
                 <Image
-                  src={images.back}
+                  src={imagesChat.back}
                   alt=""
                   width={20}
                   height={20}
@@ -102,7 +95,7 @@ function Messages() {
             <Image
               width={40}
               height={40}
-              src={images.user2}
+              src={imagesChat.user2}
               alt="img"
               className="w-[40px] h-[40px] rounded-full object-contain"
             />
@@ -116,7 +109,7 @@ function Messages() {
               <Image
                 width={40}
                 height={40}
-                src={images.user3}
+                src={imagesChat.user3}
                 alt=""
                 className="rounded-full w-[40px] h-[40px] mx-3 object-contain"
               />
@@ -137,7 +130,7 @@ function Messages() {
               <Image
                 width={40}
                 height={40}
-                src={images.user2}
+                src={imagesChat.user2}
                 alt=""
                 className="rounded-full w-[40px] h-[40px] mx-3 object-contain"
               />
@@ -154,7 +147,7 @@ function Messages() {
               />
 
               <Image
-                src={images.images}
+                src={imagesChat.images}
                 alt="Upload"
                 width={30}
                 height={30}

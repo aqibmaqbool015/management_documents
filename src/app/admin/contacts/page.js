@@ -4,14 +4,8 @@ import { tableContacts } from "@/app/constant";
 import React from "react";
 import Image from "next/image";
 import ContactTableAdmin from "@/app/components/contactTableAdmin";
+import { imagesUsers } from "@/app/utils/images";
 
-const images = {
-  bell: "header3.svg",
-  user: "/user-client.svg",
-  upload: "/upload.svg",
-  dots: "/dots.svg",
-  cross: "/cross.svg",
-};
 
 const Contacts = () => {
   return (
@@ -32,7 +26,7 @@ const Contacts = () => {
                 </h3>
                 <span className="bg-customDotBg w-[30px] h-[30px] rounded-[10px] text-center inline-block cursor-pointer">
                   <Image
-                    src={images.dots}
+                    src={imagesUsers.dots}
                     width={15}
                     height={15}
                     alt=""

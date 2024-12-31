@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
+import { Button } from "../utils/buttons";
 
 const images = {
   upload: "/upload.svg",
@@ -211,12 +212,11 @@ const CategoryTable = ({
                     </div>
                   </div>
                   <div className="flex justify-end">
-                    <button
-                      type="submit"
-                      className="flex justify-center py-2.5 px-12 border border-transparent rounded-[25px] shadow-sm text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo !mt-2"
-                    >
-                      Create
-                    </button>
+                    <Button
+                      type="button"
+                      class="flex justify-center py-2 px-12 border border-transparent rounded-[25px] shadow-sm text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo !mt-2"
+                      name="Done"
+                    />
                   </div>
                 </div>
               </div>

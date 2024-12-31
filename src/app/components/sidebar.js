@@ -2,28 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-
-const image = {
-  logo: "/event-logo.svg",
-  arrow: "/arrow-right.svg",
-  project: "/projects.svg",
-  overview: "/overview.svg",
-  corporate: "/corporate.svg",
-  account: "/account.svg",
-  files: "/files.svg",
-  message: "/message.svg",
-  date: "/date.svg",
-  category: "/category.svg",
-  trash: "/trash.svg",
-  contactEvent: "/contact-event.svg",
-  event: "/event-create.svg",
-  contact: "/contact.svg",
-  cross: "/cross.svg",
-};
+import { imageSidebar } from "../utils/images";
 
 const Sidebar = () => {
   const router = useRouter();
-
   const [userRole, setUserRole] = useState("userRole");
   // const [creatureRole, setCreatureRole] = useState('creature');
   const [isProjectsOpen, setIsProjectsOpen] = useState(true);
@@ -42,7 +24,7 @@ const Sidebar = () => {
   // users
   const handleClick = () => router.push("/users/dashboard");
   const handleClickMessage = () => router.push("/messages");
-  const handleClickShared = () => router.push("/users/events");
+  const handleClickShared = () => router.push("/users/events/birthday");
   const handleClickTrash = () => router.push("/users/share-me");
   const handleClickDocuments = () => router.push("/users/share-file");
 
@@ -81,7 +63,7 @@ const Sidebar = () => {
         className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
       >
         <Image
-          src={image.overview}
+          src={imageSidebar.overview}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -102,7 +84,7 @@ const Sidebar = () => {
           }`}
         >
           <Image
-            src={image.arrow}
+            src={imageSidebar.arrow}
             alt=""
             className="w-[13px] h-[13px] object-contain inline-block align-baseline"
             width={13}
@@ -110,7 +92,7 @@ const Sidebar = () => {
           />
         </span>
         <Image
-          src={image.project}
+          src={imageSidebar.project}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-text-bottom mr-2"
           width={20}
@@ -124,7 +106,7 @@ const Sidebar = () => {
             className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
             onClick={handleClickShared}
           >
-            Birthday Events
+            All Events
           </li>
           <li
             className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
@@ -145,7 +127,7 @@ const Sidebar = () => {
         className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
       >
         <Image
-          src={image.message}
+          src={imageSidebar.message}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -166,7 +148,7 @@ const Sidebar = () => {
         className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
       >
         <Image
-          src={image.overview}
+          src={imageSidebar.overview}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -182,7 +164,7 @@ const Sidebar = () => {
         onClick={handleClickEventCategory}
       >
         <Image
-          src={image.category}
+          src={imageSidebar.category}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -200,7 +182,7 @@ const Sidebar = () => {
           }`}
         >
           <Image
-            src={image.arrow}
+            src={imageSidebar.arrow}
             alt=""
             className="w-[13px] h-[13px] object-contain inline-block align-baseline"
             width={13}
@@ -208,7 +190,7 @@ const Sidebar = () => {
           />
         </span>
         <Image
-          src={image.project}
+          src={imageSidebar.project}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-text-bottom mr-2"
           width={20}
@@ -243,7 +225,7 @@ const Sidebar = () => {
         onClick={handleClickContacts}
       >
         <Image
-          src={image.contact}
+          src={imageSidebar.contact}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -256,7 +238,7 @@ const Sidebar = () => {
         onClick={handleClickAllCreators}
       >
         <Image
-          src={image.contactEvent}
+          src={imageSidebar.contactEvent}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -274,7 +256,7 @@ const Sidebar = () => {
           }`}
         >
           <Image
-            src={image.arrow}
+            src={imageSidebar.arrow}
             alt=""
             className="w-[13px] h-[13px] object-contain inline-block align-baseline"
             width={13}
@@ -282,7 +264,7 @@ const Sidebar = () => {
           />
         </span>
         <Image
-          src={image.event}
+          src={imageSidebar.event}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-text-bottom mr-2"
           width={20}
@@ -328,7 +310,7 @@ const Sidebar = () => {
           }`}
         >
           <Image
-            src={image.arrow}
+            src={imageSidebar.arrow}
             alt=""
             className="w-[13px] h-[13px] object-contain inline-block align-baseline"
             width={13}
@@ -336,7 +318,7 @@ const Sidebar = () => {
           />
         </span>
         <Image
-          src={image.contactEvent}
+          src={imageSidebar.contactEvent}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-text-bottom mr-2"
           width={20}
@@ -359,7 +341,7 @@ const Sidebar = () => {
         className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
       >
         <Image
-          src={image.message}
+          src={imageSidebar.message}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -372,7 +354,7 @@ const Sidebar = () => {
         className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
       >
         <Image
-          src={image.trash}
+          src={imageSidebar.trash}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -393,7 +375,7 @@ const Sidebar = () => {
         className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
       >
         <Image
-          src={image.overview}
+          src={imageSidebar.overview}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -406,7 +388,7 @@ const Sidebar = () => {
         className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
       >
         <Image
-          src={image.date}
+          src={imageSidebar.date}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -423,7 +405,7 @@ const Sidebar = () => {
         className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
       >
         <Image
-          src={image.category}
+          src={imageSidebar.category}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -441,7 +423,7 @@ const Sidebar = () => {
           }`}
         >
           <Image
-            src={image.arrow}
+            src={imageSidebar.arrow}
             alt=""
             className="w-[13px] h-[13px] object-contain inline-block align-baseline"
             width={13}
@@ -449,7 +431,7 @@ const Sidebar = () => {
           />
         </span>
         <Image
-          src={image.project}
+          src={imageSidebar.project}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-text-bottom mr-2"
           width={20}
@@ -490,7 +472,7 @@ const Sidebar = () => {
         className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
       >
         <Image
-          src={image.message}
+          src={imageSidebar.message}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -503,7 +485,7 @@ const Sidebar = () => {
         className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
       >
         <Image
-          src={image.trash}
+          src={imageSidebar.trash}
           alt=""
           className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
           width={20}
@@ -529,7 +511,7 @@ const Sidebar = () => {
     <div className="md:w-64 bg-white p-6 border-r border-r-cus` tom h-full">
       <div className="text-center">
         <Image
-          src={image.logo}
+          src={imageSidebar.logo}
           alt=""
           className="w-[120px] h-auto object-contain inline-block cursor-pointer"
           width={120}
@@ -550,7 +532,7 @@ const Sidebar = () => {
             <div className="p-4 relative">
               <div className="absolute right-3 top-4">
                 <Image
-                  src={image.cross}
+                  src={imageSidebar.cross}
                   alt="Close"
                   className="w-[20px] h-auto cursor-pointer"
                   onClick={handleModalClose}

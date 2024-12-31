@@ -2,8 +2,7 @@
 
 import AdminHader from "@/app/components/adminHeader";
 import CreateEventForm from "@/app/components/createEventForm";
-import EventForm from "@/app/components/eventForm";
-
+import { CancelButton } from "@/app/utils/buttons";
 const EventCreate = () => {
   return (
     <>
@@ -23,11 +22,10 @@ const EventCreate = () => {
                   <p className="text-customBlue md:text-[18px] text-[15px] font-medium capitalize mb-3">
                     Create Event Site
                   </p>
-                  <button className="bg-customGraySelect rounded-[8px] py-2 px-3 ">
-                    <p className="inline-block cursor-pointer text-[15px] bg-clip-text bg-gradient-to-r from-customGradiantFrom to-customGradiantTo text-transparent mr-1">
-                      Create New Event
-                    </p>
-                  </button>
+                  <CancelButton
+                    className="bg-customGraySelect cursor-pointer inline-block mx-2 px-3 py-2 rounded-[6px] text-center my-1 min-w-[140px]"
+                    name="Create New Event"
+                  />
                 </div>
                 <div className="my-4">
                   <CreateEventForm />

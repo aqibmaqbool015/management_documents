@@ -1,20 +1,12 @@
 "use client";
 import AdminHader from "@/app/components/adminHeader";
 import TableComponent from "@/app/components/table";
-import { imageUser, tableBodyContentUser } from "@/app/constant";
+import { tableBodyContentUser } from "@/app/constant";
+import { imagesUsers } from "@/app/utils/images";
 import Image from "next/image";
 import React from "react";
 
 const AllEvents = () => {
-  const images = {
-    bell: "/header3.svg",
-    user: "/user-client.svg",
-    upload: "/upload.svg",
-    dots: "/dots.svg",
-  };
-
- 
-
   return (
     <div className="min-h-screen md:flex">
       <div className="md:flex-1 ">
@@ -38,7 +30,7 @@ const AllEvents = () => {
                   <Image
                     width={10}
                     height={10}
-                    src={images.dots}
+                    src={imagesUsers.dots}
                     alt=""
                     className="w-[15px] h-[15px] object-contain inline-block align-sub "
                   />

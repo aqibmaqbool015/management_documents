@@ -2,12 +2,9 @@
 import AdminHader from "@/app/components/adminHeader";
 import ContactTable from "@/app/components/contactTable";
 import { tableContactCategory } from "@/app/constant";
+import { imagesUsers } from "@/app/utils/images";
 import Image from "next/image";
-import React, { useState } from "react";
-
-const images = {
-  dots: "/dots.svg",
-};
+import React from "react";
 
 const ContactByme = () => {
   return (
@@ -28,7 +25,7 @@ const ContactByme = () => {
                 </p>
                 <span className="bg-customDotBg w-[30px] h-[30px] rounded-[10px] text-center inline-block cursor-pointer">
                   <Image
-                    src={images.dots}
+                    src={imagesUsers.dots}
                     width={15}
                     height={15}
                     alt=""
@@ -38,7 +35,6 @@ const ContactByme = () => {
               </div>
               <ContactTable
                 name="name"
-                event="event"
                 date="date"
                 email="email"
                 phone="phone"
