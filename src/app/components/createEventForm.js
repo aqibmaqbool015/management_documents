@@ -160,7 +160,6 @@ const CreateEventForm = () => {
           )}
         </div>
       </div>
-
       <div className="text-center mt-6">
         <CancelButton
           className="bg-customGraySelect cursor-pointer inline-block mx-2 px-3 py-2 rounded-[6px] text-center my-1 min-w-[140px]"

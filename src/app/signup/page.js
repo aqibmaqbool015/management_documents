@@ -15,7 +15,6 @@ import CustomInput from "../components/input";
 
 const Signup = () => {
   const router = useRouter();
-
   const formik = useFormik({
     initialValues: initialValuesSignup,
     validationSchema: validationSchemaSignup,
@@ -28,8 +27,7 @@ const Signup = () => {
     },
   });
 
-  const { errors, touched, handleBlur, handleChange, values } =
-    formik;
+  const { errors, touched, handleBlur, handleChange, values } = formik;
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -80,6 +78,7 @@ const Signup = () => {
                 )}
               </div>
             ))}
+
             <Button
               type="submit"
               class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"

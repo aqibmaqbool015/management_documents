@@ -77,7 +77,6 @@ export default function ForgotPage() {
             className="w-[140px] h-auto"
           />
         </div>
-
         <div className="max-w-md w-full py-5 px-4 md:px-0">
           <h1 className="text-2xl font-semibold mb-2 text-center text-[30px] text-customBlue">
             Forgot Password
@@ -86,7 +85,6 @@ export default function ForgotPage() {
             Enter the email of your account and we will send the email to reset
             your password.
           </h6>
-
           <form onSubmit={formik.handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="email" className="text-[17px] text-customBlue">

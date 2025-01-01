@@ -8,7 +8,7 @@ export default function OtpPage() {
   const router = useRouter();
 
   const handleNewClick = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     router.push("/new-password");
   };
   const inputRefs = useRef([]);
@@ -95,7 +95,6 @@ export default function OtpPage() {
                   ))}
               </div>
             </div>
-
             <button
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-[25px] shadow-sm text-sm font-medium text-white 

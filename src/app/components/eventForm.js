@@ -34,7 +34,6 @@ const EventForm = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      {/* Form fields with formik integration */}
       <div className="grid grid-cols-1 gap-4 mb-3">
         <div>
           <label
@@ -59,10 +58,7 @@ const EventForm = () => {
           )}
         </div>
       </div>
-
-      {/* Other fields */}
       <div className="grid md:grid-cols-2 gap-4 mb-3">
-        {/* Date */}
         <div>
           <label
             htmlFor="date"
@@ -108,8 +104,6 @@ const EventForm = () => {
           )}
         </div>
       </div>
-
-      {/* Description */}
       <div>
         <label
           htmlFor="description"
@@ -132,8 +126,6 @@ const EventForm = () => {
           <div className="text-customRed">{formik.errors.description}</div>
         )}
       </div>
-
-      {/* File Upload */}
       <div>
         <label
           htmlFor="file"
@@ -176,8 +168,6 @@ const EventForm = () => {
           <div className="text-customRed">{formik.errors.file}</div>
         )}
       </div>
-
-      {/* Submit Button */}
       <div className="text-center">
         <CancelButton
           className="bg-customGraySelect cursor-pointer inline-block mx-2 px-3 py-2 rounded-[6px] text-center my-1 min-w-[140px]"
