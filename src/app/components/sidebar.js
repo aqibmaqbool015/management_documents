@@ -7,7 +7,6 @@ import { imageSidebar } from "../utils/images";
 const Sidebar = () => {
   const router = useRouter();
   const [userRole, setUserRole] = useState("userRole");
-  // const [creatureRole, setCreatureRole] = useState('creature');
   const [isProjectsOpen, setIsProjectsOpen] = useState(true);
   const [isEventCreature, setIsEventCreature] = useState(true);
   const [eventSite, setEventSite] = useState(true);
@@ -44,7 +43,6 @@ const Sidebar = () => {
   // Event Manager
   const handleClickEvent = () => router.push("/event-manager/dashboard");
   const handleClickAllEvent = () => router.push("/event-manager/all-events");
-  const handleClickEventShared = () => router.push("/event-manager/events");
   const handleClickEventBy = () =>
     router.push("/event-manager/events/contact-by-me");
   const handleClickEventDocuments = () =>

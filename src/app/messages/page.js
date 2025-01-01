@@ -24,7 +24,6 @@ function Messages() {
   };
 
   const handleSendMessage = () => {
-    console.log({ message, uploadedImage });
     setMessage("");
     setUploadedImage(null);
   };

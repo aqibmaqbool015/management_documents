@@ -3,10 +3,11 @@ import Head from "next/head";
 import CustomInput from "../components/input";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button, socials } from "../constant";
+import { socials } from "../constant";
 import Link from "next/link";
 import CountryCodeDropdown from "../components/countryCode";
 import Image from "next/image";
+import { Button } from "../utils/buttons";
 
 export default function Signup() {
   const router = useRouter();
@@ -46,7 +47,6 @@ export default function Signup() {
       console.log("Form submitted successfully!");
     } else {
       setIsFormValid(false);
-      console.log("Form has some errors.");
     }
   };
 
@@ -116,8 +116,12 @@ export default function Signup() {
                 type="submit"
                 className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
               >
-                Sign up
               </button>
+              <Button
+                type="submit"
+                class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                name="Sign Up"
+              />
             </div>
 
             <h6 className="text-2xl font-normal mb-8 text-center text-[15px] text-customText">

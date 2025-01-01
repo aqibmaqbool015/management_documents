@@ -1,5 +1,3 @@
-// pages/forgot.js
-
 "use client";
 import Head from "next/head";
 import { useFormik } from "formik";
@@ -92,13 +90,6 @@ export default function ForgotPage() {
               </div>
             </div>
             <div className="!mt-7">
-              {/* <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
-                  >
-                    {isSubmitting ? "Submitting..." : "Next"}
-                  </button> */}
               <Button
                 type="submit"
                 class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"

@@ -1,6 +1,5 @@
 "use client";
 import Head from "next/head";
-import CustomInput from "../components/input";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -24,18 +23,6 @@ export default function OtpPage() {
     image: "/auth-otp.png",
     logo: "/logo.svg",
   };
-  const [formValues, setFormValues] = useState({
-    email: "",
-  });
-  const inputFields = [
-    {
-      label: "OTP Code",
-      type: "number",
-      id: "otp",
-      name: "otp",
-      placeholder: "1",
-    },
-  ];
   const placeholders = ["1", "2", "3", "4", "5", "6"];
   const [time, setTime] = useState(90);
 

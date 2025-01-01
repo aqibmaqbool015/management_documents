@@ -28,7 +28,7 @@ const CompleteSignup = () => {
     },
   });
 
-  const { errors, touched, handleBlur, handleChange, handleSubmit, values } =
+  const { errors, touched, handleBlur, handleChange, values } =
     formik;
 
   return (

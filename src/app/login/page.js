@@ -87,7 +87,7 @@ export default function LoginPage() {
 
             <div className="mt-[10px]">
               <div
-                className="text-sm text-left font-medium text-customText cursor-pointer"
+                className="text-sm text-left font-medium text-customText cursor-pointer inline-block"
                 onClick={handleForgotClick}
               >
                 Forgot password?
