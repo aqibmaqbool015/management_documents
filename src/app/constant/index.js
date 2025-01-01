@@ -899,3 +899,72 @@ export const inputFields = [
     icon: imageLogin.key,
   },
 ];
+
+export const inputFieldsPassword = [
+  {
+    label: "New Password",
+    type: "password",
+    id: "password",
+    name: "password",
+    placeholder: "Enter your Password",
+    labelClass: "text-[17px] text-customBlue",
+    icon: imageLogin.key,
+  },
+  {
+    label: "Confirm Password",
+    type: "password",
+    id: "confirmPassword",
+    name: "confirmPassword",
+    placeholder: "Enter your confirm password",
+    labelClass: "text-[17px] text-customBlue",
+    icon: imageLogin.key,
+  },
+];
+
+export const inputFieldsSignup = [
+  {
+    label: "Full Name",
+    type: "text",
+    id: "fullName",
+    name: "fullName",
+    placeholder: "Enter your full name",
+    labelClass: "text-[17px] text-customBlue",
+    icon: imageLogin.user,
+  },
+  {
+    label: "Email",
+    type: "email",
+    id: "email",
+    name: "email",
+    placeholder: "user@mail.com",
+    labelClass: "text-[17px] text-customBlue",
+    icon: imageLogin.mail,
+  },
+  {
+    label: "Phone",
+    type: "tel",
+    id: "phone",
+    name: "phone",
+    placeholder: "+71 3231 31231",
+    labelClass: "text-[17px] text-customBlue",
+    icon: imageLogin.phone,
+  },
+  {
+    label: "Password",
+    type: "password",
+    id: "password",
+    name: "password",
+    placeholder: "Enter your Password",
+    labelClass: "text-[17px] text-customBlue",
+    icon: imageLogin.key,
+  },
+  {
+    label: "Confirm Password",
+    type: "password",
+    id: "confirmPassword",
+    name: "confirmPassword",
+    placeholder: "Enter your confirm password",
+    labelClass: "text-[17px] text-customBlue",
+    icon: imageLogin.key,
+  },
+];

@@ -2,7 +2,7 @@
 
 "use client";
 import Head from "next/head";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -25,10 +25,16 @@ export default function ForgotPage() {
     }
   };
 
-  const handleSubmit = (values) => {
-    console.log("Form submitted with values:", values);
-    setIsModalOpen(true);
-  };
+  const formik = useFormik({
+    initialValues: forgotPasswordInitialValues,
+    validationSchema: forgotPasswordSchema,
+    validateOnChange: true,
+    validateOnBlur: true,
+    onSubmit: async (values) => {
+      console.log("Form submitted with values:", values);
+      setIsModalOpen(true);
+    },
+  });
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -64,52 +70,42 @@ export default function ForgotPage() {
             your password.
           </h6>
 
-          <Formik
-            initialValues={forgotPasswordInitialValues}
-            validationSchema={forgotPasswordSchema}
-            onSubmit={handleSubmit}
-          >
-            {({ isSubmitting }) => (
-              <Form className="space-y-4">
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="text-[17px] text-customBlue"
-                  >
-                    Email
-                  </label>
-                  <div className="relative mt-1">
-                    <Field
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="Enter your email"
-                      className="w-full border rounded-[8px] py-3 px-4 text-sm text-customBlue focus:outline-none"
-                    />
-                    <ErrorMessage
-                      name="email"
-                      component="div"
-                      className="text-customRed text-sm mt-1"
-                    />
-                  </div>
-                </div>
-                <div className="!mt-7">
-                  {/* <button
+          <form onSubmit={formik.handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="email" className="text-[17px] text-customBlue">
+                Email
+              </label>
+              <div className="relative mt-1">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  className="w-full border rounded-[8px] py-3 px-4 text-sm text-customBlue focus:outline-none"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.email && formik.errors.email && (
+                  <div className="text-customRed">{formik.errors.email}</div>
+                )}
+              </div>
+            </div>
+            <div className="!mt-7">
+              {/* <button
                     type="submit"
                     disabled={isSubmitting}
                     className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
                   >
                     {isSubmitting ? "Submitting..." : "Next"}
                   </button> */}
-                  <Button
-                    type="submit"
-                    class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
-                    name=" Next"
-                  />
-                </div>
-              </Form>
-            )}
-          </Formik>
+              <Button
+                type="submit"
+                class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                name=" Next"
+              />
+            </div>
+          </form>
         </div>
       </div>
 

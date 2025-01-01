@@ -3,21 +3,33 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import { imageSignup } from "../utils/images";
 import {
   initialValuesSignup,
   validationSchemaSignup,
 } from "../utils/formikConfig";
 import { Button } from "../utils/buttons";
+import { inputFieldsSignup } from "../constant";
+import CustomInput from "../components/input";
 
 const CompleteSignup = () => {
   const router = useRouter();
 
-  const handleSubmit = (values) => {
-    console.log("Form submitted successfully:", values);
-    router.push("/login");
-  };
+  const formik = useFormik({
+    initialValues: initialValuesSignup,
+    validationSchema: validationSchemaSignup,
+    validateOnChange: true,
+    validateOnBlur: true,
+    onSubmit: async (values, { setSubmitting }) => {
+      setSubmitting(true);
+      router.push("/login");
+      setSubmitting(false);
+    },
+  });
+
+  const { errors, touched, handleBlur, handleChange, handleSubmit, values } =
+    formik;
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -48,116 +60,32 @@ const CompleteSignup = () => {
             Enter Details To Signup
           </h1>
 
-          <Formik
-            initialValues={initialValuesSignup}
-            validationSchema={validationSchemaSignup}
-            onSubmit={handleSubmit}
-          >
-            {({ isSubmitting }) => (
-              <Form className="space-y-4 mt-10">
-                <div>
-                  <label htmlFor="fullName" className="block mb-1 text-sm">
-                    Full Name
-                  </label>
-                  <Field
-                    type="text"
-                    name="fullName"
-                    id="fullName"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2"
-                    placeholder="Enter your full name"
-                  />
-                  <ErrorMessage
-                    name="fullName"
-                    component="div"
-                    className="text-customRed text-sm mt-1"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block mb-1 text-sm">
-                    Email
-                  </label>
-                  <Field
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2"
-                    placeholder="Enter your email"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="text-customRed text-sm mt-1"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block mb-1 text-sm">
-                    Phone
-                  </label>
-                  <Field
-                    type="text"
-                    name="phone"
-                    id="phone"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2"
-                    placeholder="Enter your phone number"
-                  />
-                  <ErrorMessage
-                    name="phone"
-                    component="div"
-                    className="text-customRed text-sm mt-1"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="password" className="block mb-1 text-sm">
-                    Password
-                  </label>
-                  <Field
-                    type="password"
-                    name="password"
-                    id="password"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2"
-                    placeholder="Enter your password"
-                  />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="text-customRed text-sm mt-1"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="confirmPassword"
-                    className="block mb-1 text-sm"
-                  >
-                    Confirm Password
-                  </label>
-                  <Field
-                    type="password"
-                    name="confirmPassword"
-                    id="confirmPassword"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2"
-                    placeholder="Confirm your password"
-                  />
-                  <ErrorMessage
-                    name="confirmPassword"
-                    component="div"
-                    className="text-customRed text-sm mt-1"
-                  />
-                </div>
-                {/* <button
-                  type="submit"
-                  className="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
-                  disabled={isSubmitting}
-                >
-                  Sign Up
-                </button> */}
-                <Button
-                  type="submit"
-                  class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
-                  name=" Sign Up"
+          <form onSubmit={formik.handleSubmit} className="space-y-4 mt-10">
+            {inputFieldsSignup.map((field) => (
+              <div key={field.id}>
+                <CustomInput
+                  label={field.label}
+                  type={field.type}
+                  id={field.id}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  labelClass={field.labelClass}
+                  value={values[field.name]}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  icon={field.icon}
                 />
-              </Form>
-            )}
-          </Formik>
+                {errors[field.name] && touched[field.name] && (
+                  <p className="text-customRed text-sm">{errors[field.name]}</p>
+                )}
+              </div>
+            ))}
+            <Button
+              type="submit"
+              class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+              name=" Sign Up"
+            />
+          </form>
 
           <div className="my-4">
             <Image

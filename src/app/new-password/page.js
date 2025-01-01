@@ -2,21 +2,31 @@
 import Head from "next/head";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import { images } from "../utils/images";
+import { Button } from "../utils/buttons";
+import { inputFieldsPassword } from "../constant";
+import CustomInput from "../components/input";
+import { useFormik } from "formik";
 import {
   initialValuesPassword,
   validationSchemaPassword,
 } from "../utils/formikConfig";
-import { Button } from "../utils/buttons";
 
 export default function NewPassword() {
   const router = useRouter();
-
-  const handleSubmit = (values) => {
-    console.log("Form values:", values);
-    router.push("/login");
-  };
+  const formik = useFormik({
+    initialValues: initialValuesPassword,
+    validationSchema: validationSchemaPassword,
+    validateOnChange: true,
+    validateOnBlur: true,
+    onSubmit: async (values, { setSubmitting }) => {
+      setSubmitting(true);
+      router.push("/login");
+      setSubmitting(false);
+    },
+  });
+  const { errors, touched, handleBlur, handleChange, handleSubmit, values } =
+    formik;
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
@@ -44,63 +54,35 @@ export default function NewPassword() {
             your password.
           </h6>
 
-          <Formik
-            initialValues={initialValuesPassword}
-            validationSchema={validationSchemaPassword}
-            onSubmit={handleSubmit}
-          >
-            {() => (
-              <Form className="space-y-4">
-                <div>
-                  <label
-                    className="text-[17px] text-customBlue"
-                    htmlFor="password"
-                  >
-                    New Password
-                  </label>
-                  <Field
-                    name="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    className="w-full border rounded-md p-3 mt-1"
-                  />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="text-customRed text-sm mt-1"
-                  />
-                </div>
+          <form onSubmit={formik.handleSubmit} className="space-y-4">
+            {inputFieldsPassword.map((field) => (
+              <div key={field.id}>
+                <CustomInput
+                  label={field.label}
+                  type={field.type}
+                  id={field.id}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  labelClass={field.labelClass}
+                  value={values[field.name]}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  icon={field.icon}
+                />
+                {errors[field.name] && touched[field.name] && (
+                  <p className="text-customRed text-sm">{errors[field.name]}</p>
+                )}
+              </div>
+            ))}
 
-                <div>
-                  <label
-                    className="text-[17px] text-customBlue"
-                    htmlFor="confirmPassword"
-                  >
-                    Confirm New Password
-                  </label>
-                  <Field
-                    name="confirmPassword"
-                    type="password"
-                    placeholder="Re-enter your password"
-                    className="w-full border rounded-md p-3 mt-1"
-                  />
-                  <ErrorMessage
-                    name="confirmPassword"
-                    component="div"
-                    className="text-customRed text-sm mt-1"
-                  />
-                </div>
-
-                <div className="!mt-7">
-                  <Button
-                    type="submit"
-                    class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
-                    name="Reset Password"
-                  />
-                </div>
-              </Form>
-            )}
-          </Formik>
+            <div className="!mt-7">
+              <Button
+                type="submit"
+                class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                name="Reset Password"
+              />
+            </div>
+          </form>
         </div>
       </div>
 

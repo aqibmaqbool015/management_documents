@@ -23,6 +23,8 @@ export const imageLogin = {
   mail: "/mail.svg",
   key: "/key.svg",
   gap: "or.svg",
+  user: "/user.svg",
+  phone: "/phone.svg"
 };
 
 export const imageSignup = {
