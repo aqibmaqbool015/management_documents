@@ -34,7 +34,7 @@ export default function LoginPage() {
 
   const handleSignUpClick = (e) => {
     e.preventDefault();
-    router.push("/complete-signup");
+    router.push("/signup");
   };
 
   const handleForgotClick = (e) => {

@@ -1,7 +1,7 @@
 "use client";
 import Head from "next/head";
 import { useFormik } from "formik";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { forgotPageImages as image } from "../utils/images";
@@ -21,6 +21,25 @@ export default function ForgotPage() {
     if (e.target.value.length === 1 && index < inputRefs.current.length - 1) {
       inputRefs.current[index + 1].focus();
     }
+  };
+  const [time, setTime] = useState(90);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (time > 0) {
+        setTime((prevTime) => prevTime - 1);
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [time]);
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${
+      remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds
+    }`;
   };
 
   const formik = useFormik({
@@ -149,9 +168,14 @@ export default function ForgotPage() {
                     />
                     <p className="text-customBlue text-[14px] mt-3 mb-5">
                       Didn't receive a code?{" "}
-                      <a href="#" className="text-customGradiantFrom">
-                        Resend code
-                      </a>
+                      <div className="flex justify-between items-center w-full">
+                        <span className="text-customOrange cursor-pointer">
+                          Resend code to
+                        </span>
+                        <span className="text-customOrange">
+                          {formatTime(time)}
+                        </span>
+                      </div>
                     </p>
                   </div>
                 </div>
@@ -160,7 +184,6 @@ export default function ForgotPage() {
           </div>
         </div>
       )}
-
       <div className="w-full md:w-[50%]">
         <Image
           width={100}

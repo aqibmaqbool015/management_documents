@@ -1,17 +1,12 @@
-import { useFormik } from "formik";
 import * as Yup from "yup";
 
 export const validationSchemaPassword = Yup.object({
   password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .max(32, "Password cannot exceed 32 characters")
-    .matches(/[A-Z]/, "Must contain an uppercase character")
-    .matches(/[0-9]/, "Must contain a number")
-    .matches(/[!@#$%^&*(),.?":{}|<>]/, "Must contain one special character")
+    .min(6, "Password must be at least 6 characters")
     .required("Password is required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Confirmation password is required"),
+    .required("Confirm Password is required"),
 });
 
 export const initialValuesPassword = {
@@ -107,4 +102,13 @@ export const initialValuesEvent = {
   file: null,
 };
 
-
+// password: Yup.string()
+// .min(8, "Password must be at least 8 characters")
+// .max(32, "Password cannot exceed 32 characters")
+// .matches(/[A-Z]/, "Must contain an uppercase character")
+// .matches(/[0-9]/, "Must contain a number")
+// .matches(/[!@#$%^&*(),.?":{}|<>]/, "Must contain one special character")
+// .required("Password is required"),
+// confirmPassword: Yup.string()
+// .oneOf([Yup.ref("password"), null], "Passwords must match")
+// .required("Confirmation password is required"),

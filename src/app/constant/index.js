@@ -153,18 +153,6 @@ export const socials = [
     image: "/social.svg",
     title: "Continue With Google",
   },
-  // {
-  //   image: "/social2.svg",
-  //   title: "facebook",
-  // },
-  // {
-  //   image: "/social3.svg",
-  //   title: "apple",
-  // },
-  // {
-  //   image: "/gmail.svg",
-  //   title: "email",
-  // },
 ];
 
 export const cards = [

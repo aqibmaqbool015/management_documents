@@ -7,7 +7,7 @@ const EventCreate = () => {
   return (
     <>
       <div className="min-h-screen md:flex">
-        <div className="md:flex-1 ">
+        <div className="md:flex-1">
           <AdminHader
             title="Dashboard"
             divider="/"
