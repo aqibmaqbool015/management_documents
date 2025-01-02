@@ -39,7 +39,6 @@ export default function RootLayout({ children }) {
             {children}
           </div>
         </div>
-        {/* {!isAuthPage && <Footer />} */}
       </body>
     </html>
   );
