@@ -12,6 +12,7 @@ export const forgotPageImages = {
   logo: "/logo.svg",
   mail: "/mail.svg",
   cross: "/cross.svg",
+  
 };
 
 export const imageLogin = {
@@ -24,7 +25,13 @@ export const imageLogin = {
   key: "/key.svg",
   gap: "or.svg",
   user: "/user.svg",
-  phone: "/phone.svg"
+  phone: "/phone.svg",
+  eyeOff: "/eye-off.svg",
+  eye: "/eye.svg",
+  dots: "/three-dots.svg",
+  upload: "/upload.svg",
+  trash: "/trash.svg",
+  download: "/download.svg",
 };
 
 export const imageSignup = {
@@ -71,7 +78,15 @@ export const imagesUsers = {
   banner: "/event-banner.png",
   time: "/time.svg",
   users: "/avatar-image.svg",
-
+  profile: "/profile.svg",
+  logout: "/logout.svg",
+  upload: "/upload.svg",
+  trash: "/trash.svg",
+  download: "/download.svg",
+  access: "/access.svg",
+  lock: "/lock.svg",
+  image: "/auth-otp.png",
+  logo: "/logo.svg",
 };
 
 export const imagesChat = {
@@ -81,4 +96,3 @@ export const imagesChat = {
   images: "/images.svg",
   back: "/back.png",
 };
-

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { notificationsBar } from "../constant";
+import { imagesUsers } from "../utils/images";
 
 function AdminHader({
   title,
@@ -11,13 +12,7 @@ function AdminHader({
   subTitle1,
   classLabel,
 }) {
-  const images = {
-    bell: "/header3.svg",
-    user: "/user-client.svg",
-    profile: "/profile.svg",
-    logout: "/logout.svg",
-    dots: "/dot.svg",
-  };
+
   const [userRole, setUserRole] = useState(false);
   const [isopenDropdown, setIsOpenDropdown] = useState();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -48,7 +43,7 @@ function AdminHader({
         </div>
         <div className="flex items-center">
           <Image
-            src={images.bell}
+            src={imagesUsers.bell}
             height={10}
             width={18}
             alt=""
@@ -77,7 +72,7 @@ function AdminHader({
                       <Image
                         height={10}
                         width={18}
-                        src={images.dots}
+                        src={imagesUsers.dots}
                         alt=""
                         className="w-[12px] h-[12px] object-contain inline-block align-middle cursor-pointer "
                       />
@@ -136,7 +131,7 @@ function AdminHader({
           </span>
           <Image
             onClick={handleClick}
-            src={images.user}
+            src={imagesUsers.user}
             alt=""
             className="cursor-pointer w-[40px] h-[40px] object-contain inline-block align-text-bottom mx-2 "
             height={10}
@@ -148,7 +143,7 @@ function AdminHader({
                 <li className="px-4 text-customBlue font-medium py-2 hover:bg-gray-100 cursor-pointer">
                   <span className="inline-block mr-2">
                     <Image
-                      src={images.profile}
+                      src={imagesUsers.profile}
                       alt=""
                       className="w-[20px] h-[20px] object-contain inline-block "
                       height={10}
@@ -165,7 +160,7 @@ function AdminHader({
                     <Image
                       height={10}
                       width={18}
-                      src={images.logout}
+                      src={imagesUsers.logout}
                       alt=""
                       className="w-[20px] h-[20px] object-contain inline-block "
                     />

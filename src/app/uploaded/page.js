@@ -4,14 +4,10 @@ import TableComponent from "../components/table";
 import { tableBodyContent } from "../constant";
 import AdminHader from "../components/adminHeader";
 import Image from "next/image";
+import { imagesUsers } from "../utils/images";
 
 const Uploaded = () => {
-  const images = {
-    bell: "header3.svg",
-    user: "/user-client.svg",
-    upload: "/upload.svg",
-    dots: "/dots.svg",
-  };
+
   return (
     <div className="min-h-screen md:flex">
       <div className="md:flex-1 ">
@@ -27,7 +23,7 @@ const Uploaded = () => {
                   <Image
                     width={15}
                     height={15}
-                    src={images.dots}
+                    src={imagesUsers.dots}
                     alt=""
                     className="w-[15px] h-[15px] object-contain inline-block align-sub "
                   />

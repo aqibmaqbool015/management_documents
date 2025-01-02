@@ -1,19 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { imageLogin } from "../utils/images";
 
-const image = {
-  image: "/signup2.png",
-  logo: "/logo.svg",
-  mail: "/mail.svg",
-  key: "/key.svg",
-  user: "/user.svg",
-  phone: "/phone.svg",
-  dots: "/three-dots.svg",
-  upload: "/upload.svg",
-  trash: "/trash.svg",
-  download: "/download.svg",
-};
 
 export const contact = [
   {
@@ -233,240 +220,28 @@ export const tableContentCategory = [
     date: "Farah",
     size: "Weddings",
     icon: "/three-dots.svg",
-    // modify: (
-    //   <>
-    //     <span className="inline-block relative group">
-    //       <Image
-    //         src={image.dots}
-    //         width={20}
-    //         height={20}
-    //         alt=""
-    //         className="cursor-pointer object-contain inline-block w-[20px] h-auto "
-    //       />
-    //       <div
-    //         className="absolute left-1 mt-0 w-32 p-1 bg-white border border-customGray rounded shadow-lg hidden group-hover:block
-    //             z-50 "
-    //       >
-    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
-    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-    //             <Image
-    //               src={image.download}
-    //               alt=""
-    //               width={20}
-    //               height={20}
-    //               className="w-[15px] h-auto object-contain "
-    //             />
-    //           </span>
-    //           Downlaod
-    //         </p>
-    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
-    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-    //             <Image
-    //               src={image.upload}
-    //               alt=""
-    //               width={20}
-    //               height={20}
-    //               className="w-[15px] h-auto object-contain "
-    //             />
-    //           </span>
-    //           Share
-    //         </p>
-    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
-    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-    //             <Image
-    //               src={image.trash}
-    //               alt=""
-    //               width={20}
-    //               height={20}
-    //               className="w-[15px] h-auto object-contain "
-    //             />
-    //           </span>
-    //           Move to bin
-    //         </p>
-    //       </div>
-    //     </span>
-    //   </>
-    // ),
+   
   },
   {
     image: "/image.svg",
     date: "Farah",
     size: "Weddings",
     icon: "/three-dots.svg",
-    // modify: (
-    //   <>
-    //     <span className="inline-block relative group">
-    //       <Image
-    //         src={image.dots}
-    //         width={20}
-    //         height={20}
-    //         alt=""
-    //         className="cursor-pointer object-contain inline-block w-[20px] h-auto "
-    //       />
-    //       <div
-    //         className="absolute left-1 mt-0 w-32 p-1 bg-white border border-customGray rounded shadow-lg hidden group-hover:block
-    //             z-50 "
-    //       >
-    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
-    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-    //             <Image
-    //               src={image.download}
-    //               alt=""
-    //               width={20}
-    //               height={20}
-    //               className="w-[15px] h-auto object-contain "
-    //             />
-    //           </span>
-    //           Downlaod
-    //         </p>
-    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
-    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-    //             <Image
-    //               src={image.upload}
-    //               alt=""
-    //               width={20}
-    //               height={20}
-    //               className="w-[15px] h-auto object-contain "
-    //             />
-    //           </span>
-    //           Share
-    //         </p>
-    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
-    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-    //             <Image
-    //               src={image.trash}
-    //               alt=""
-    //               width={20}
-    //               height={20}
-    //               className="w-[15px] h-auto object-contain "
-    //             />
-    //           </span>
-    //           Move to bin
-    //         </p>
-    //       </div>
-    //     </span>
-    //   </>
-    // ),
+  
   },
   {
     image: "/image.svg",
     date: "Farah",
     size: "Weddings",
     icon: "/three-dots.svg",
-    // modify: (
-    //   <>
-    //     <span className="inline-block relative group">
-    //       <Image
-    //         src={image.dots}
-    //         width={20}
-    //         height={20}
-    //         alt=""
-    //         className="cursor-pointer object-contain inline-block w-[20px] h-auto "
-    //       />
-    //       <div
-    //         className="absolute left-1 mt-0 w-32 p-1 bg-white border border-customGray rounded shadow-lg hidden group-hover:block
-    //             z-50 "
-    //       >
-    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
-    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-    //             <Image
-    //               src={image.download}
-    //               alt=""
-    //               width={20}
-    //               height={20}
-    //               className="w-[15px] h-auto object-contain "
-    //             />
-    //           </span>
-    //           Downlaod
-    //         </p>
-    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
-    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-    //             <Image
-    //               src={image.upload}
-    //               alt=""
-    //               width={20}
-    //               height={20}
-    //               className="w-[15px] h-auto object-contain "
-    //             />
-    //           </span>
-    //           Share
-    //         </p>
-    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
-    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-    //             <Image
-    //               src={image.trash}
-    //               alt=""
-    //               width={20}
-    //               height={20}
-    //               className="w-[15px] h-auto object-contain "
-    //             />
-    //           </span>
-    //           Move to bin
-    //         </p>
-    //       </div>
-    //     </span>
-    //   </>
-    // ),
+    
   },
   {
     image: "/image.svg",
     date: "4140 Parker Rd ",
     size: "Weddings",
     icon: "/three-dots.svg",
-    // modify: (
-    //   <>
-    //     <span className="inline-block relative group">
-    //       <Image
-    //         src={image.dots}
-    //         width={20}
-    //         height={20}
-    //         alt=""
-    //         className="cursor-pointer object-contain inline-block w-[20px] h-auto "
-    //       />
-    //       <div
-    //         className="absolute left-1 mt-0 w-32 p-1 bg-white border border-customGray rounded shadow-lg hidden group-hover:block
-    //             z-50 "
-    //       >
-    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
-    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-    //             <Image
-    //               src={image.download}
-    //               alt=""
-    //               width={20}
-    //               height={20}
-    //               className="w-[15px] h-auto object-contain "
-    //             />
-    //           </span>
-    //           Downlaod
-    //         </p>
-    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
-    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-    //             <Image
-    //               src={image.upload}
-    //               alt=""
-    //               width={20}
-    //               height={20}
-    //               className="w-[15px] h-auto object-contain "
-    //             />
-    //           </span>
-    //           Share
-    //         </p>
-    //         <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light">
-    //           <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-    //             <Image
-    //               src={image.trash}
-    //               alt=""
-    //               width={20}
-    //               height={20}
-    //               className="w-[15px] h-auto object-contain "
-    //             />
-    //           </span>
-    //           Move to bin
-    //         </p>
-    //       </div>
-    //     </span>
-    //   </>
-    // ),
+    
   },
 ];
 export const tableContacts = [
@@ -701,7 +476,7 @@ export const legalName = [
     name: "firstName",
     placeholder: "Enter your Full Name",
     labelClass: "text-[17px] text-customBlue font-medium",
-    icon: image.user,
+    icon: imageLogin.user,
   },
   {
     label: "Email",
@@ -710,7 +485,7 @@ export const legalName = [
     name: "email",
     placeholder: "username@mail.com",
     labelClass: "text-[17px] text-customBlue font-medium",
-    icon: image.mail,
+    icon: imageLogin.mail,
   },
   {
     label: "Phone Number",
@@ -719,7 +494,7 @@ export const legalName = [
     name: "phone",
     placeholder: "Phone number",
     labelClass: "text-[17px] text-customBlue font-medium",
-    icon: image.phone,
+    icon: imageLogin.phone,
   },
   {
     label: "Password",
@@ -728,7 +503,7 @@ export const legalName = [
     name: "password",
     placeholder: " Password",
     labelClass: "text-[17px] text-customBlue font-medium",
-    icon: image.key,
+    icon: imageLogin.key,
   },
   {
     label: "Confirm Password",
@@ -737,7 +512,7 @@ export const legalName = [
     name: "confirmPassword",
     placeholder: "Password",
     labelClass: "text-[17px] text-customBlue font-medium",
-    icon: image.key,
+    icon: imageLogin.key,
   },
 ];
 

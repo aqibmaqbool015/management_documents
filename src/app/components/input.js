@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
+import { imageLogin } from "../utils/images";
 
 const CustomInput = ({
   label,
@@ -19,11 +20,6 @@ const CustomInput = ({
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!isPasswordVisible);
-  };
-
-  const image = {
-    eyeOff: "/eye-off.svg",
-    eye: "/eye.svg",
   };
 
   return (
@@ -55,7 +51,7 @@ const CustomInput = ({
           <Image
             width={10}
             height={10}
-            src={isPasswordVisible ? image.eye : image.eyeOff}
+            src={isPasswordVisible ? imageLogin.eye : imageLogin.eyeOff}
             alt=""
             className="w-[20px] h-[20px] object-contain absolute right-3 top-4 cursor-pointer"
             onClick={togglePasswordVisibility}

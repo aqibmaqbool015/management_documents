@@ -4,6 +4,7 @@ import { cards, recentCards } from "./constant";
 import AdminHader from "./components/adminHeader";
 import ChartComponent from "./components/Chart";
 import Image from "next/image";
+import { imagesUsers } from "./utils/images";
 
 const MainPage = () => {
   const [file, setFile] = useState(null);
@@ -23,12 +24,6 @@ const MainPage = () => {
     }
   };
 
-  const images = {
-    bell: "header3.svg",
-    user: "/user-client.svg",
-    upload: "/upload.svg",
-    dots: "/dots.svg",
-  };
   return (
     <div className="min-h-screen md:flex">
       <div className="md:flex-1 ">
@@ -91,7 +86,7 @@ const MainPage = () => {
                       <Image
                         width={100}
                         height={100}
-                        src={images.upload}
+                        src={imagesUsers.upload}
                         alt=""
                         className="w-[40px] h-[40px] object-contain inline-block align-sub mr-3 "
                       />
@@ -120,7 +115,7 @@ const MainPage = () => {
                 </h3>
                 <span className="bg-customDotBg w-[30px] h-[30px] rounded-[10px] text-center inline-block cursor-pointer">
                   <Image
-                    src={images.dots}
+                    src={imagesUsers.dots}
                     width={15}
                     height={15}
                     alt=""

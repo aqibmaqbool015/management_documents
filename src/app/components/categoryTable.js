@@ -1,16 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "../utils/buttons";
-
-const images = {
-  upload: "/upload.svg",
-  trash: "/trash.svg",
-  download: "/download.svg",
-  cross: "/cross.svg",
-  search: "/search-status.svg",
-  access: "/access.svg",
-  lock: "/lock.svg",
-};
+import { imagesUsers } from "../utils/images";
 
 const CategoryTable = ({
   tableContentCategory,
@@ -87,7 +78,7 @@ const CategoryTable = ({
                       <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light text-left">
                         <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
                           <Image
-                            src={images.download}
+                            src={imagesUsers.download}
                             alt=""
                             width={20}
                             height={20}
@@ -102,7 +93,7 @@ const CategoryTable = ({
                       >
                         <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
                           <Image
-                            src={images.upload}
+                            src={imagesUsers.upload}
                             alt=""
                             width={20}
                             height={20}
@@ -114,7 +105,7 @@ const CategoryTable = ({
                       <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light text-left">
                         <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
                           <Image
-                            src={images.trash}
+                            src={imagesUsers.trash}
                             alt=""
                             width={20}
                             height={20}
@@ -139,7 +130,7 @@ const CategoryTable = ({
                 </h2>
                 <div className="absolute right-3 top-4">
                   <Image
-                    src={images.cross}
+                    src={imagesUsers.cross}
                     alt="Close"
                     className="w-[20px] h-auto cursor-pointer"
                     width={15}
@@ -151,7 +142,7 @@ const CategoryTable = ({
                   <div class="relative w-full md:my-0 my-2">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 ">
                       <Image
-                        src={images.search}
+                        src={imagesUsers.search}
                         alt=""
                         width={15}
                         height={15}
@@ -173,7 +164,7 @@ const CategoryTable = ({
                     <Image
                       width={40}
                       height={40}
-                      src={images.access}
+                      src={imagesUsers.access}
                       alt="img"
                       className="w-[40px] h-[40px] rounded-full object-contain"
                     />
@@ -197,7 +188,7 @@ const CategoryTable = ({
                       <Image
                         width={40}
                         height={40}
-                        src={images.lock}
+                        src={imagesUsers.lock}
                         alt="img"
                         className="w-[20px] h-[20px] inline-block"
                       />

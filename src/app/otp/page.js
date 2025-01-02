@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { imagesUsers } from "../utils/images";
 
 export default function OtpPage() {
   const router = useRouter();
@@ -19,10 +20,6 @@ export default function OtpPage() {
     }
   };
 
-  const image = {
-    image: "/auth-otp.png",
-    logo: "/logo.svg",
-  };
   const placeholders = ["1", "2", "3", "4", "5", "6"];
   const [time, setTime] = useState(90);
 
@@ -54,7 +51,7 @@ export default function OtpPage() {
           <Image
             width={100}
             height={100}
-            src={image.logo}
+            src={imagesUsers.logo}
             alt="Car Dealership"
             className="w-[140px] h-auto"
           />
@@ -113,7 +110,7 @@ export default function OtpPage() {
         <Image
           width={100}
           height={100}
-          src={image.image}
+          src={imagesUsers.image}
           alt="Car Dealership"
           className="h-screen w-full"
         />
