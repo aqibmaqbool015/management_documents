@@ -58,12 +58,10 @@ export default function LoginPage() {
             height={70}
           />
         </div>
-
         <div className="max-w-md w-full py-5 px-4 md:px-0">
           <h1 className="text-2xl font-semibold mb-2 text-center text-[30px] text-customBlue">
             Login to Manage Events
           </h1>
-
           <form onSubmit={handleSubmit} className="space-y-4 mt-8">
             {inputFields.map((field) => (
               <div key={field.id}>
@@ -84,7 +82,6 @@ export default function LoginPage() {
                 )}
               </div>
             ))}
-
             <div className="mt-[10px]">
               <div
                 className="text-sm text-left font-medium text-customText cursor-pointer inline-block"
@@ -126,7 +123,7 @@ export default function LoginPage() {
               </div>
             </div>
             <h6 className="text-2xl font-normal text-center mb-8 text-[15px] text-customText">
-              Don’t have an account?{" "}
+              Don't have an account?{" "}
               <span
                 className="text-customBlue font-medium cursor-pointer"
                 onClick={handleSignUpClick}

@@ -26,10 +26,10 @@ const Requests = () => {
                 <p className="text-customBlue md:text-[18px] text-[15px] font-medium capitalize mb-3">
                   Event Requests
                 </p>
-                <CancelButton
+                {/* <CancelButton
                   className="bg-customGraySelect cursor-pointer inline-block mx-2 px-3 py-2 rounded-[6px] text-center my-1 min-w-[140px]"
                   name="Create New Event"
-                />
+                /> */}
               </div>
               <div className="md:flex justify-between items-center mt-5 cursor-pointer hover:bg-customBgLight p-1 border-b border-b-customBorderBottom pb-3 ">
                 <div class="relative md:w-[450px] md:my-0 my-2">

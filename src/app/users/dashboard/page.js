@@ -47,7 +47,7 @@ const Dashboard = () => {
               );
             })}
           </div>
-          <div className="grid md:grid-cols-3 gap-4 mb-8">
+          <div className="grid md:grid-cols-2 gap-4 mb-8">
             <div className="">
               <p className="text-customTitleColor text-[17px] capitalize font-medium mb-3 ">
                 Total Events
@@ -60,12 +60,12 @@ const Dashboard = () => {
               </p>
               <LineChartComponent />
             </div>
-            <div className="">
+            {/* <div className="">
               <p className="text-customTitleColor text-[17px] capitalize font-medium mb-3 ">
                 Shared By Me
               </p>
               <LineChartComponent />
-            </div>
+            </div> */}
           </div>
 
           <div className="grid grid-cols-1 gap-4 mb-8">

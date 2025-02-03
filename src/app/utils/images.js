@@ -66,7 +66,7 @@ export const imageSidebar = {
 };
 
 export const imagesUsers = {
-  bell: "header3.svg",
+  bell: "/header3.svg",
   user: "/user-client.svg",
   upload: "/upload.svg",
   uploadImage: "/upload-image.svg",

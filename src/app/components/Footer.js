@@ -3,12 +3,6 @@ import React from "react";
 
 
 function Footer() {
-    const image = {
-        logo: '/logo.svg',
-        social: '/social-1.svg',
-        social1: '/social-2.svg',
-        social2: '/social-3.svg',
-    }
     return (
         <>
             {/* <div className="  bg-customBlue

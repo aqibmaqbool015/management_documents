@@ -157,7 +157,7 @@ const Sidebar = () => {
       <label className="text-customText text-[17px] font-normal capitalize mb-2 block">
         pages
       </label>
-      <li
+      {/* <li
         className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
         onClick={handleClickEventCategory}
       >
@@ -169,7 +169,7 @@ const Sidebar = () => {
           height={20}
         />
         Category
-      </li>
+      </li> */}
       <li
         className="mb-3 text-customBlackC1 text-[17px] font-normal cursor-pointer"
         onClick={() => setIsEventCreature(!isEventCreature)}
@@ -272,12 +272,12 @@ const Sidebar = () => {
       </li>
       {eventSite && (
         <ul className="pl-4 mb-3">
-          <li
+          {/* <li
             className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
             onClick={handleClickEventAdmin}
           >
             Site Created
-          </li>
+          </li> */}
           <li
             className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
             onClick={handleClickRequest}
@@ -541,8 +541,7 @@ const Sidebar = () => {
             </div>
             <div className="my-4 px-4">
               <p className="text-[15px] text-customBlackLight text-center ">
-                Do you really want to delete your account. All your details will
-                be removed from your account.
+                Do you really want to trash your account.
               </p>
               <div className="my-3 text-center">
                 <span
@@ -553,7 +552,7 @@ const Sidebar = () => {
                   cancel
                 </span>
                 <button className="text-white capitalize mx-2 bg-customRed border border-transparent rounded-[20px] px-3 min-w-[100px] py-1 ">
-                  delete
+                  trash
                 </button>
               </div>
             </div>
