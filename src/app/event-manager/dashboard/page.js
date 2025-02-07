@@ -220,7 +220,7 @@ const Dashboard = () => {
                 <textarea
                   id="message"
                   rows="4"
-                  className="mt-1 block w-full px-3 py-2 shadow-sm placeholder-customDarkGray focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
+                  className="mt-1 block w-full px-3 py-2 shadow-sm placeholder-customDarkGray focus:outline-none focus:ring-customGradiantFrom focus:border-customGradiantFrom
                                  border border-[#CFCFCF] rounded-[25px]"
                   placeholder="Write a comment"
                 ></textarea>

@@ -28,7 +28,7 @@ export default function CountryCodeDropdown() {
         type="button" // Make sure this button is of type "button" to prevent form submission
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         className="mt-1 block w-full px-10 py-3 text-left shadow-sm placeholder-customDarkGray focus:outline-none 
-                      focus:ring-indigo-500 focus:border-indigo-500 border border-[#CFCFCF] rounded-[8px]"
+                      focus:ring-customGradiantFrom focus:border-customGradiantFrom border border-[#CFCFCF] rounded-[8px]"
       >
         <span className="text-customDarkGray">
           <Image

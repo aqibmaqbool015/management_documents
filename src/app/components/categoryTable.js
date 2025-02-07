@@ -205,7 +205,7 @@ const CategoryTable = ({
                   <div className="flex justify-end">
                     <Button
                       type="button"
-                      class="flex justify-center py-2 px-12 border border-transparent rounded-[25px] shadow-sm text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo !mt-2"
+                      classes="flex justify-center py-2 px-12 border border-transparent rounded-[25px] shadow-sm text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo !mt-2"
                       name="Done"
                     />
                   </div>

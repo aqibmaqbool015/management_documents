@@ -60,7 +60,7 @@ const Requests = () => {
                 <div className="my-2">
                   <Button
                     type="button"
-                    class="inline-block py-1.5 px-3 mx-2 my-1 min-w-[90px] border border-transparent rounded-[8px] shadow-sm text-sm font-normal text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                    classes="inline-block py-1.5 px-3 mx-2 my-1 min-w-[90px] border border-transparent rounded-[8px] shadow-sm text-sm font-normal text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
                     name="Accept"
                   />
                   <CancelButton

@@ -14,19 +14,35 @@ import { inputFieldsSignup } from "../constant";
 import CustomInput from "../components/input";
 import { useEffect, useRef, useState } from "react";
 import { forgotPageImages as image } from "../utils/images";
+import { registerApi, resendOTPApi, verifyOtpApi } from "./api";
+import { toast, ToastContainer } from "react-toastify";
+import CustomToast from "../components/toast";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [emailForOtp, setEmailForOtp] = useState("");
+  const [otpLoading, setOtpLoading] = useState(false);
+  const [time, setTime] = useState(90);
+
   const placeholders = ["1", "2", "3", "4", "5", "6"];
   const inputRefs = useRef([]);
 
+  const [otpValues, setOtpValues] = useState(["", "", "", "", "", ""]);
+
   const handleInput = (e, index) => {
-    if (e.target.value.length === 1 && index < inputRefs.current.length - 1) {
+    const value = e.target.value;
+    if (!/\d/.test(value) && value !== "") return;
+    const updatedOtpValues = [...otpValues];
+    updatedOtpValues[index] = value;
+    setOtpValues(updatedOtpValues);
+
+    if (value.length === 1 && index < inputRefs.current.length - 1) {
       inputRefs.current[index + 1].focus();
     }
   };
-  const [time, setTime] = useState(90);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -45,22 +61,102 @@ const Signup = () => {
       remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds
     }`;
   };
+  const handleResendOtp = async () => {
+    if (time === 0) {
+      const params = {
+        email: emailForOtp,
+      };
+      try {
+        const response = await resendOTPApi(params);
+        if (response.success) {
+          toast.success(<CustomToast content={response?.message} />);
+          setTime(90);
+        } else {
+          toast.error(<CustomToast content={response?.message} />);
+        }
+      } catch (error) {
+        console.error("API error while resending OTP:", error.message);
+        console.error(error);
+      }
+      return;
+    }
+    toast.error(<CustomToast content="Please wait for the time to stop" />);
+  };
   const formik = useFormik({
     initialValues: initialValuesSignup,
     validationSchema: validationSchemaSignup,
     validateOnChange: true,
     validateOnBlur: true,
-    onSubmit: async (values, { setSubmitting }) => {
-      setSubmitting(true);
-      setIsModalOpen(true);
-      setSubmitting(false);
+    onSubmit: async (values) => {
+      // setLoading(true);
+      const params = {
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        password: values.password,
+        confirmPassword: values.confirmPassword,
+        role: values.role,
+      };
+      console.log("--params----", params);
+
+      try {
+        const response = await registerApi(params);
+        console.log("---------respnonse--", response);
+
+        if (response && response.success) {
+          setIsModalOpen(true);
+          setEmailForOtp(values.email);
+        } else {
+          toast.error(
+            <CustomToast content={response.message || "Signup failed"} />
+          );
+        }
+      } catch (error) {
+        console.error("Error during signup:", error);
+        toast.error(<CustomToast content="An error occurred" />);
+      } finally {
+        setLoading(false);
+      }
     },
   });
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const otpSubmit = () => {
-    router.push("/login");
+  const handleOtpSubmit = async () => {
+    setOtpLoading(true);
+    const otp = otpValues.join("");
+
+    if (otp.length < 6) {
+      toast.error(<CustomToast content="Please enter a valid OTP" />);
+      setOtpLoading(false);
+      return;
+    }
+
+    const params = {
+      email: emailForOtp,
+      OTP: otp,
+    };
+    console.log("------------->", params);
+
+    try {
+      const response = await verifyOtpApi(params);
+      console.log(" API Response:", response);
+      if (response.success) {
+        toast.success(<CustomToast content="OTP verified successfully!" />);
+        closeModal();
+        router.push("/login");
+      } else {
+        toast.error(
+          <CustomToast
+            content={response.message || "OTP verification failed"}
+          />
+        );
+      }
+    } catch (error) {
+      console.error("Error during OTP verification:", error);
+    } finally {
+      setOtpLoading(false);
+    }
   };
 
   const { errors, touched, handleBlur, handleChange, values } = formik;
@@ -117,8 +213,9 @@ const Signup = () => {
 
             <Button
               type="submit"
-              class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+              classes="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
               name=" Sign Up"
+              onLoading={loading}
             />
           </form>
 
@@ -173,57 +270,67 @@ const Signup = () => {
                   onClick={closeModal}
                 />
               </div>
-              <h4 className="text-[26px] text-center font-medium text-customBlue capitalize mt-4">
-                Enter OTP Code
-              </h4>
               <div>
-                <h6 className="text-[20px] font-semibold capitalize mt-4 text-transparent bg-clip-text bg-gradient-to-r from-customGradiantFrom to-customGradiantTo">
-                  Check your email
+                <h6 className="text-[20px] font-semibold mt-4 text-customTextColor text-center">
+                  Enter verification code
                 </h6>
-                <p className="text-customBlue text-[16px] font-normal">
-                  We ve sent a 6-digit confirmation OTP code to{" "}
-                  <b>username@gmail.com</b>. Make sure you enter the correct
-                  code.
+                <p className="text-customText text-center text-[14px] font-normal">
+                  We,ve sent a 6-digit confirmation OTP code to
+                  <br />
+                  <b>{emailForOtp}</b>
                 </p>
                 <div className="text-center md:mt-4">
                   {placeholders.map((_, index) => (
                     <input
                       key={index}
-                      type="number"
+                      type="text"
                       maxLength="1"
-                      className="w-10 h-16 text-center text-lg border border-customBg rounded-[8px] focus:outline-none focus:border-customGradiantFrom appearance-none placeholder-customBlue mx-2 md:my-3 my-2"
+                      className="w-12 h-14 text-center text-lg border rounded-[8px] mx-2 md:my-3 my-2
+                       focus:ring-customGradiantFrom focus:border-customGradiantFrom border-[#CFCFCF]"
                       onInput={(e) => handleInput(e, index)}
                       ref={(el) => (inputRefs.current[index] = el)}
+                      value={otpValues[index]}
                     />
                   ))}
                   <div className="px-10 mt-4">
                     <Button
-                      type="button"
-                      name="Continue"
-                      class="w-full flex justify-center py-3 px-4 border border-transparent rounded-[8px] shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
-                      onClick={otpSubmit}
+                      type="submit"
+                      name="Submit"
+                      classes="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                      onClick={handleOtpSubmit}
+                      onLoading={otpLoading}
                     />
-                    <p className="text-customBlue text-[14px] mt-3 mb-5">
-                      Didn't receive a code?{" "}
-                      <div className="flex justify-between items-center w-full">
-                        <span className="text-customOrange cursor-pointer">
-                          Resend code to
-                        </span>
-                        <span className="text-customOrange">
-                          {formatTime(time)}
-                        </span>
-                      </div>
-                    </p>
                   </div>
                 </div>
               </div>
+              <div className="flex justify-between items-center w-full mt-4 px-3">
+                {time > 0 ? (
+                  <button
+                    className="text-customText cursor-not-allowed "
+                    onClick={() => handleResendOtp()}
+                  >
+                    Resend code to {emailForOtp}
+                  </button>
+                ) : (
+                  <button
+                    className="text-customOrange cursor-pointer"
+                    onClick={() => handleResendOtp()}
+                  >
+                    Resend code to {emailForOtp}
+                  </button>
+                )}
+
+                <span className="text-customOrange">
+                  {formatTime(time)}
+                </span>
+              </div>
             </div>
           </div>
+          <ToastContainer position="top-right" />
         </div>
       )}
     </div>
   );
 };
-//
 
 export default Signup;

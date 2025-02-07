@@ -84,8 +84,9 @@ export default function OtpPage() {
                       type="number"
                       maxLength="1"
                       placeholder={placeholders[index]}
-                      className="w-10 h-10 text-center text-lg border border-customBlue rounded-full focus:outline-none focus:border-black appearance-none
-                                            placeholder-customBlue"
+                      className="w-10 h-10 text-center text-lg border border-customBlue rounded-full focus:outline-none appearance-none
+                                            placeholder-customBlue
+                                            focus:ring-customGradiantFrom focus:border-customGradiantFrom"
                       onInput={(e) => handleInput(e, index)}
                       ref={(el) => (inputRefs.current[index] = el)}
                     />

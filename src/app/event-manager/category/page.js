@@ -50,7 +50,7 @@ const Category = () => {
                 </div>
                 <Button
                   type="button"
-                  class="md:my-0 my-2 font-normal rounded-[8px] text-center px-3 min-w-[100px] mx-1 text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo
+                  classes="md:my-0 my-2 font-normal rounded-[8px] text-center px-3 min-w-[100px] mx-1 text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo
                 h-[40px]"
                   name="+ Add More"
                 />

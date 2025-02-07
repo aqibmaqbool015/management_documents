@@ -11,18 +11,54 @@ import {
   initialValuesPassword,
   validationSchemaPassword,
 } from "../utils/formikConfig";
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import CustomToast from "../components/toast";
+import "react-toastify/dist/ReactToastify.css";
+import { resetPasswordApi } from "./api";
 
 export default function NewPassword() {
   const router = useRouter();
+  const [loading, setLoading] = useState();
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    const queryEmail = new URLSearchParams(window.location.search).get("email");
+    if (queryEmail) setEmail(queryEmail);
+  }, []);
+
   const formik = useFormik({
     initialValues: initialValuesPassword,
     validationSchema: validationSchemaPassword,
     validateOnChange: true,
     validateOnBlur: true,
-    onSubmit: async (values, { setSubmitting }) => {
-      setSubmitting(true);
-      router.push("/login");
-      setSubmitting(false);
+    onSubmit: async (values) => {
+      setLoading(true);
+      const params = {
+        email: email,
+        password: values.password,
+        confirmPassword: values.confirmPassword,
+      };
+      try {
+        const response = await resetPasswordApi(params);
+        console.log(" API Response:", response);
+        if (response.success) {
+          toast.success(
+            <CustomToast content="Password updated Successfully" />
+          );
+          router.push("/login");
+        } else {
+          toast.error(
+            <CustomToast
+              content={response.message || "Password updating failed"}
+            />
+          );
+        }
+      } catch (error) {
+        console.error("Error during Password updating:", error);
+      } finally {
+        setLoading(false);
+      }
     },
   });
   const { errors, touched, handleBlur, handleChange, handleSubmit, values } =
@@ -78,14 +114,15 @@ export default function NewPassword() {
             <div className="!mt-7">
               <Button
                 type="submit"
-                class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+                classes="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
                 name="Reset Password"
+                onLoading={loading}
               />
             </div>
           </form>
         </div>
       </div>
-
+      <ToastContainer position="top-right" />
       <div className="w-full md:w-[50%]">
         <Image
           width={100}

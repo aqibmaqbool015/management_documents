@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { imageLogin } from "../utils/images";
 
-
 export const contact = [
   {
     image: "/contact1.svg",
@@ -220,28 +219,24 @@ export const tableContentCategory = [
     date: "Farah",
     size: "Weddings",
     icon: "/three-dots.svg",
-   
   },
   {
     image: "/image.svg",
     date: "Farah",
     size: "Weddings",
     icon: "/three-dots.svg",
-  
   },
   {
     image: "/image.svg",
     date: "Farah",
     size: "Weddings",
     icon: "/three-dots.svg",
-    
   },
   {
     image: "/image.svg",
     date: "4140 Parker Rd ",
     size: "Weddings",
     icon: "/three-dots.svg",
-    
   },
 ];
 export const tableContacts = [
@@ -688,8 +683,8 @@ export const inputFieldsSignup = [
   {
     label: "Full Name",
     type: "text",
-    id: "fullName",
-    name: "fullName",
+    id: "name",
+    name: "name",
     placeholder: "Enter your full name",
     labelClass: "text-[17px] text-customBlue",
     icon: imageLogin.user,
@@ -729,5 +724,14 @@ export const inputFieldsSignup = [
     placeholder: "Enter your confirm password",
     labelClass: "text-[17px] text-customBlue",
     icon: imageLogin.key,
+  },
+  {
+    label: "Role",
+    type: "text",
+    id: "role",
+    name: "role",
+    placeholder: "Role",
+    labelClass: "text-[17px] text-customBlue",
+    icon: imageLogin.user,
   },
 ];

@@ -10,7 +10,7 @@ export const SelectInput = (props) => {
                 <div className="relative !mt-0">
                     <div className="relative w-full">
                         <div className="absolute inset-0 bg-gradient-to-r from-customGradiantFrom to-customGradiantTo rounded-[25px] pointer-events-none"></div>
-                        <select className="appearance-none mt-1 block w-full px-3 py-2 shadow-sm placeholder-customDarkGray focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 border border-[#CFCFCF] rounded-[25px] bg-transparent relative z-10" id="grid-state">
+                        <select className="appearance-none mt-1 block w-full px-3 py-2 shadow-sm placeholder-customDarkGray focus:outline-none focus:ring-customGradiantFrom focus:border-customGradiantFrom border border-[#CFCFCF] rounded-[25px] bg-transparent relative z-10" id="grid-state">
                             {props.options?.map((option, index) => (
                                 <option key={index} value={option}>
                                     {option}

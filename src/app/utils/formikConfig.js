@@ -39,7 +39,7 @@ export const loginInitialValues = {
 };
 
 export const validationSchemaSignup = Yup.object().shape({
-  fullName: Yup.string().required("Name is required"),
+  name: Yup.string().required("Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   phone: Yup.string()
     .matches(/^\d{10}$/, "Phone number must be 10 digits")
@@ -50,13 +50,15 @@ export const validationSchemaSignup = Yup.object().shape({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
+  role: Yup.string().required("Role is required"),
 });
 export const initialValuesSignup = {
-  fullName: "",
+  name: "",
   email: "",
   phone: "",
   password: "",
   confirmPassword: "",
+  role: "",
 };
 
 export const validationSchemaForm = Yup.object({

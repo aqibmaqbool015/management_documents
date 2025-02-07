@@ -51,7 +51,7 @@ const EventForm = () => {
             onBlur={formik.handleBlur}
             placeholder="Enter event title"
             className="mt-1 block w-full py-3 shadow-sm placeholder-customDarkGray focus:outline-none 
-              focus:ring-indigo-500 focus:border-indigo-500 border border-[#CFCFCF] rounded-[8px]"
+              focus:ring-customGradiantFrom focus:border-customGradiantFrom border border-[#CFCFCF] rounded-[8px]"
           />
           {formik.touched.title && formik.errors.title && (
             <div className="text-customRed">{formik.errors.title}</div>
@@ -74,7 +74,7 @@ const EventForm = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className="mt-1 block w-full py-3 shadow-sm placeholder-customDarkGray focus:outline-none 
-              focus:ring-indigo-500 focus:border-indigo-500 border border-[#CFCFCF] rounded-[8px]"
+              focus:ring-customGradiantFrom focus:border-customGradiantFrom border border-[#CFCFCF] rounded-[8px]"
           />
           {formik.touched.date && formik.errors.date && (
             <div className="text-customRed">{formik.errors.date}</div>
@@ -97,7 +97,7 @@ const EventForm = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className="mt-1 block w-full py-3 shadow-sm placeholder-customDarkGray focus:outline-none 
-              focus:ring-indigo-500 focus:border-indigo-500 border border-[#CFCFCF] rounded-[8px]"
+              focus:ring-customGradiantFrom focus:border-customGradiantFrom border border-[#CFCFCF] rounded-[8px]"
           />
           {formik.touched.time && formik.errors.time && (
             <div className="text-customRed">{formik.errors.time}</div>
@@ -120,7 +120,7 @@ const EventForm = () => {
           onBlur={formik.handleBlur}
           placeholder="Enter event description"
           className="mt-1 block w-full py-3 shadow-sm placeholder-customDarkGray focus:outline-none 
-            focus:ring-indigo-500 focus:border-indigo-500 border border-[#CFCFCF] rounded-[8px]"
+            focus:ring-customGradiantFrom focus:border-customGradiantFrom border border-[#CFCFCF] rounded-[8px]"
         ></textarea>
         {formik.touched.description && formik.errors.description && (
           <div className="text-customRed">{formik.errors.description}</div>
@@ -175,7 +175,7 @@ const EventForm = () => {
         />
         <Button
           type="button"
-          class="inline-block py-2.5 px-3 mx-2 my-1 min-w-[140px] border border-transparent rounded-[8px] shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+          classes="inline-block py-2.5 px-3 mx-2 my-1 min-w-[140px] border border-transparent rounded-[8px] shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
           name="Create Event"
         />
       </div>

@@ -45,7 +45,7 @@ const CreateEventForm = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               className="mt-1 block w-full py-3 shadow-sm placeholder-customDarkGray focus:outline-none text-customText
-                      focus:ring-indigo-500 focus:border-indigo-500 border border-[#CFCFCF] rounded-[8px]"
+                      focus:ring-customGradiantFrom focus:border-customGradiantFrom border border-[#CFCFCF] rounded-[8px]"
             >
               <option value="">Select event type</option>
             </select>
@@ -97,6 +97,7 @@ const CreateEventForm = () => {
                 readOnly
                 placeholder="Upload File"
                 className="mt-[8px] block w-full py-3 shadow-sm placeholder-customDarkGray focus:outline-none 
+                focus:ring-customGradiantFrom focus:border-customGradiantFrom
                       border border-[#CFCFCF] 
                      rounded-[8px] "
               />
@@ -131,7 +132,7 @@ const CreateEventForm = () => {
             onBlur={formik.handleBlur}
             placeholder="Event site name"
             className="mt-1 block w-full py-3 shadow-sm placeholder-customDarkGray focus:outline-none 
-                    focus:ring-indigo-500 focus:border-indigo-500 border border-[#CFCFCF] rounded-[8px]"
+                    focus:ring-customGradiantFrom focus:border-customGradiantFrom border border-[#CFCFCF] rounded-[8px]"
           />
           {formik.touched.name && formik.errors.name && (
             <div className="text-customRed">{formik.errors.name}</div>
@@ -153,7 +154,7 @@ const CreateEventForm = () => {
             onBlur={formik.handleBlur}
             placeholder="Enter manager name"
             className="mt-1 block w-full py-3 shadow-sm placeholder-customDarkGray focus:outline-none 
-                    focus:ring-indigo-500 focus:border-indigo-500 border border-[#CFCFCF] rounded-[8px]"
+                    focus:ring-customGradiantFrom focus:border-customGradiantFrom border border-[#CFCFCF] rounded-[8px]"
           />
           {formik.touched.manager && formik.errors.manager && (
             <div className="text-customRed">{formik.errors.manager}</div>
@@ -167,7 +168,7 @@ const CreateEventForm = () => {
         />
         <Button
           type="button"
-          class="inline-block py-2.5 px-3 mx-2 my-1 min-w-[140px] border border-transparent rounded-[8px] shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+          classes="inline-block py-2.5 px-3 mx-2 my-1 min-w-[140px] border border-transparent rounded-[8px] shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
           name="Create Event"
         />
       </div>

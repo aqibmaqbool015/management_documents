@@ -11,21 +11,53 @@ import { imageLogin } from "../utils/images";
 import { loginInitialValues, LoginSchema } from "../utils/formikConfig";
 import { inputFields } from "../constant";
 import { Button } from "../utils/buttons";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginApi } from "./api";
+import { setUser } from "@/redux/slice";
+import { setLocalStorageItem } from "@/utils/localStorage";
 
 export default function LoginPage() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  // const dispath = useDispatch();
 
   const formik = useFormik({
     initialValues: loginInitialValues,
     validationSchema: LoginSchema,
     validateOnChange: true,
     validateOnBlur: true,
-    onSubmit: async (values, { setSubmitting }) => {
-      setSubmitting(true);
-      toast.success(<CustomToast content="Login Successfully" />);
-      router.push("/");
-      setSubmitting(false);
-      console.log("Form submitted", values);
+    onSubmit: async (values) => {
+      setLoading(true);
+      const params = {
+        email: values.email,
+        password: values.password,
+      };
+      try {
+        const response = await loginApi(params);
+        console.log("-----response----", response);
+        if (response.success === true) {
+          // dispath(setUser(response));
+          await setLocalStorageItem("token", response.token);
+          toast.success(<CustomToast content="Login Successfully" />);
+          if (response.emailVerified === true) {
+            router.push("/users/dashboard");
+          } else {
+            toast.success(<CustomToast content={response.message} />);
+          }
+        } else {
+          toast.error(
+            <CustomToast content={response.message || "Login Failed"} />
+          );
+          setLoading(false);
+        }
+      } catch (error) {
+        toast.error(<CustomToast content="Something went wrong" />);
+      } finally {
+        setSubmitting(false);
+        setLoading(false);
+      }
     },
   });
 
@@ -93,9 +125,10 @@ export default function LoginPage() {
 
             <Button
               type="submit"
-              class="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
+              classes="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
               name="Sign In"
               isSubmitting={formik.isSubmitting}
+              onLoading={loading}
             />
 
             <div className="my-4">
