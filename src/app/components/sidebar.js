@@ -1,12 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { imageSidebar } from "../utils/images";
 
 const Sidebar = () => {
+  const pathname = usePathname();
   const router = useRouter();
-  const [userRole, setUserRole] = useState("userRole");
+  const [userRole, setUserRole] = useState("");
   const [isProjectsOpen, setIsProjectsOpen] = useState(true);
   const [isEventCreature, setIsEventCreature] = useState(true);
   const [eventSite, setEventSite] = useState(true);
@@ -16,7 +17,7 @@ const Sidebar = () => {
   const handleModalClose = () => setIsDeleteModal(false);
 
   useEffect(() => {
-    const role = localStorage.getItem("admin") || "admin";
+    const role = localStorage.getItem("role") || "user";
     setUserRole(role);
   }, []);
 
@@ -33,8 +34,9 @@ const Sidebar = () => {
   const handleClickPending = () => router.push("/admin/event-site/pending");
   const handleClickCompleted = () => router.push("/admin/event-site/completed");
   const handleClickEventAdmin = () => router.push("/admin/event-create");
+  const handleClickAdminUsers = () => router.push("/admin/users");
   const handleClickAllCreators = () => router.push("/admin/all-event-creators");
-  const handleClickEventCategory = () => router.push("/admin/category");
+  const handleClickEventCategory = () => router.push("/admin/event-types");
   const handleClickAllEventAdmin = () =>
     router.push("/admin/events/all-events");
   const handleClickevents = () => router.push("/admin/events/birthday");
@@ -143,7 +145,11 @@ const Sidebar = () => {
       </label>
       <li
         onClick={handleClickAdmin}
-        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+        className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+          pathname === "/admin/dashboard"
+            ? "bg-customGraySelect text-customBlackC1"
+            : "text-customBlackLight"
+        }`}
       >
         <Image
           src={imageSidebar.overview}
@@ -157,8 +163,12 @@ const Sidebar = () => {
       <label className="text-customText text-[17px] font-normal capitalize mb-2 block">
         pages
       </label>
-      {/* <li
-        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+      <li
+        className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+          pathname === "/admin/event-types"
+            ? "bg-customGraySelect text-customBlackC1"
+            : "text-customBlackLight"
+        }`}
         onClick={handleClickEventCategory}
       >
         <Image
@@ -168,8 +178,8 @@ const Sidebar = () => {
           width={20}
           height={20}
         />
-        Category
-      </li> */}
+        Event Types
+      </li>
       <li
         className="mb-3 text-customBlackC1 text-[17px] font-normal cursor-pointer"
         onClick={() => setIsEventCreature(!isEventCreature)}
@@ -199,27 +209,43 @@ const Sidebar = () => {
       {isEventCreature && (
         <ul className="pl-4 mb-3">
           <li
-            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+              pathname === "/admin/events/all-events"
+                ? "bg-customGraySelect text-customBlackC1"
+                : "text-customBlackLight"
+            }`}
             onClick={handleClickAllEventAdmin}
           >
             All Events
           </li>
           <li
-            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+              pathname === "/admin/events/birthday"
+                ? "bg-customGraySelect text-customBlackC1"
+                : "text-customBlackLight"
+            }`}
             onClick={handleClickevents}
           >
             Birthday Events
           </li>
-          <li
-            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+          {/* <li
+            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+              pathname === "/admin/events/birthday"
+                ? "bg-customGraySelect text-customBlackC1"
+                : "text-customBlackLight"
+            }`}
             onClick={handleClickevents}
           >
             Wedding Events
-          </li>
+          </li> */}
         </ul>
       )}
       <li
-        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+        className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+          pathname === "/admin/contacts"
+            ? "bg-customGraySelect text-customBlackC1"
+            : "text-customBlackLight"
+        }`}
         onClick={handleClickContacts}
       >
         <Image
@@ -232,7 +258,28 @@ const Sidebar = () => {
         Contacts
       </li>
       <li
-        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+        className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+          pathname === "/admin/users"
+            ? "bg-customGraySelect text-customBlackC1"
+            : "text-customBlackLight"
+        }`}
+        onClick={handleClickAdminUsers}
+      >
+        <Image
+          src={imageSidebar.contactEvent}
+          alt=""
+          className="w-[20px] h-[20px] object-contain inline-block align-sub mr-3"
+          width={20}
+          height={20}
+        />
+        Users
+      </li>
+      <li
+        className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+          pathname === "/admin/all-event-creators"
+            ? "bg-customGraySelect text-customBlackC1"
+            : "text-customBlackLight"
+        }`}
         onClick={handleClickAllCreators}
       >
         <Image
@@ -279,19 +326,31 @@ const Sidebar = () => {
             Site Created
           </li> */}
           <li
-            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+              pathname === "/admin/event-site/requests"
+                ? "bg-customGraySelect text-customBlackC1"
+                : "text-customBlackLight"
+            }`}
             onClick={handleClickRequest}
           >
             Requests Received
           </li>
           <li
-            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+              pathname === "/admin/event-site/pending"
+                ? "bg-customGraySelect text-customBlackC1"
+                : "text-customBlackLight"
+            }`}
             onClick={handleClickPending}
           >
             Pending Sites
           </li>
           <li
-            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+              pathname === "/admin/event-site/completed"
+                ? "bg-customGraySelect text-customBlackC1"
+                : "text-customBlackLight"
+            }`}
             onClick={handleClickCompleted}
           >
             Completed Sites
@@ -336,7 +395,11 @@ const Sidebar = () => {
       )}
       <li
         onClick={handleClickMessage}
-        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+        className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+          pathname === "/messages"
+            ? "bg-customGraySelect text-customBlackC1"
+            : "text-customBlackLight"
+        }`}
       >
         <Image
           src={imageSidebar.message}
@@ -370,7 +433,11 @@ const Sidebar = () => {
       </label>
       <li
         onClick={handleClickEvent}
-        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+        className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+          pathname === "/event-manager/dashboard"
+            ? "bg-customGraySelect text-customBlackC1"
+            : "text-customBlackLight"
+        }`}
       >
         <Image
           src={imageSidebar.overview}
@@ -383,7 +450,11 @@ const Sidebar = () => {
       </li>
       <li
         onClick={handleClickAllEvent}
-        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+        className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+          pathname === "/event-manager/all-events"
+            ? "bg-customGraySelect text-customBlackC1"
+            : "text-customBlackLight"
+        }`}
       >
         <Image
           src={imageSidebar.date}
@@ -400,7 +471,11 @@ const Sidebar = () => {
       </label>
       <li
         onClick={handleClickCategory}
-        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+        className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+          pathname === "/event-manager/category"
+            ? "bg-customGraySelect text-customBlackC1"
+            : "text-customBlackLight"
+        }`}
       >
         <Image
           src={imageSidebar.category}
@@ -440,25 +515,41 @@ const Sidebar = () => {
       {isProjectsOpen && (
         <ul className="pl-4 mb-3">
           <li
-            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+              pathname === "/event-manager/all-events"
+                ? "bg-customGraySelect text-customBlackC1"
+                : "text-customBlackLight"
+            }`}
             onClick={handleClickAllEvent}
           >
             All Events
           </li>
           <li
-            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+              pathname === "/event-manager/create-event"
+                ? "bg-customGraySelect text-customBlackC1"
+                : "text-customBlackLight"
+            }`}
             onClick={handleClickCreateEvent}
           >
             Create New Event
           </li>
           <li
-            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+              pathname === "/event-manager/events/contact-to-me"
+                ? "bg-customGraySelect text-customBlackC1"
+                : "text-customBlackLight"
+            }`}
             onClick={handleClickEventDocuments}
           >
             Contact to me
           </li>
           <li
-            className="mb-2 text-customBlackC1 text-[14px] font-normal px-4 py-2 rounded-[12px] hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer"
+            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+              pathname === "/event-manager/events/contact-by-me"
+                ? "bg-customGraySelect text-customBlackC1"
+                : "text-customBlackLight"
+            }`}
             onClick={handleClickEventBy}
           >
             Contact by me
@@ -467,7 +558,11 @@ const Sidebar = () => {
       )}
       <li
         onClick={handleClickMessage}
-        className="mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px]"
+        className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+          pathname === "/messages"
+            ? "bg-customGraySelect text-customBlackC1"
+            : "text-customBlackLight"
+        }`}
       >
         <Image
           src={imageSidebar.message}
@@ -506,7 +601,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="md:w-64 bg-white p-6 border-r border-r-cus` tom h-full">
+    <div className="md:w-64 bg-white p-6 border-r border-r-custom h-full">
       <div className="text-center">
         <Image
           src={imageSidebar.logo}

@@ -38,15 +38,31 @@ export default function LoginPage() {
         const response = await loginApi(params);
         console.log("-----response----", response);
         if (response.success === true) {
+          setLoading(false);
           // dispath(setUser(response));
           await setLocalStorageItem("token", response.token);
           toast.success(<CustomToast content="Login Successfully" />);
-          if (response.emailVerified === true) {
+          if (response?.data?.reviewStatus === "reviewed") {
             router.push("/users/dashboard");
           } else {
-            toast.success(<CustomToast content={response.message} />);
+            setLoading(false);
+            toast.success(
+              <CustomToast content="User account is under review, need to account verified." />
+            );
+          }
+          if (response?.data?.role) {
+            localStorage.setItem("role", response.data.role);
+            if (response.data.role === "admin") {
+              router.push("/admin/dashboard");
+            } else if (response.data.role === "manager") {
+              if (response?.data?.reviewStatus === "reviewed") {
+                router.push("/event-manager/dashboard");
+              }
+            } else {
+            }
           }
         } else {
+          setLoading(false);
           toast.error(
             <CustomToast content={response.message || "Login Failed"} />
           );

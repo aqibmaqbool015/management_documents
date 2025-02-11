@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Button } from "../utils/buttons";
 import { imagesUsers } from "../utils/images";
+import { Image_base } from "@/networking/network";
 
 const CategoryTable = ({
   tableContentCategory,
@@ -34,32 +35,36 @@ const CategoryTable = ({
             </tr>
           </thead>
           <tbody>
-            {tableContentCategory.map((item, index) => (
+            {tableContentCategory?.map((item, index) => (
               <tr
                 key={index}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <td className="px-6 py-4 font-normal text-gray-900 whitespace-nowrap dark:text-white">
                   <div className="flex items-center">
-                    <span className=" inline-block text-center w-[30px] h-[30px] p-1">
+                    <span className=" inline-block text-center w-[45px] h-[45px] p-1">
                       <Image
                         width={15}
                         height={15}
-                        src={item.image}
+                        src={
+                          item?.image
+                            ? `${Image_base}${item?.image}`
+                            : imagesUsers.users
+                        }
                         alt=""
-                        className="w-[15px] h-[15px] object-contain inline-block"
+                        className="w-full h-full rounded-full object-contain inline-block"
                       />
                     </span>
                   </div>
                 </td>
                 <td className="px-6 py-4">
                   <p className="text-customBlue font-normal text-[15px] capitalize">
-                    {item.date}
+                    {item.title}
                   </p>
                 </td>
                 <td className="px-6 py-4">
                   <p className="text-customBlue font-normal text-[15px] capitalize">
-                    {item.size}
+                    {item.description}
                   </p>
                 </td>
                 <td className="px-6 py-4">
@@ -67,7 +72,7 @@ const CategoryTable = ({
                     <Image
                       width={15}
                       height={15}
-                      src={item.icon}
+                      src={"/three-dots.svg"}
                       alt=""
                       className="w-[15px] h-[15px] object-contain inline-block"
                     />

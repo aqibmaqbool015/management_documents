@@ -104,6 +104,16 @@ export const initialValuesEvent = {
   file: null,
 };
 
+export const validationSchemaEventType = Yup.object({
+  title: Yup.string().required("Title is required"),
+  description: Yup.string().required("Description is required"),
+});
+
+export const initialValuesEventTypes = {
+  title: "",
+  description: "",
+};
+
 // password: Yup.string()
 // .min(8, "Password must be at least 8 characters")
 // .max(32, "Password cannot exceed 32 characters")

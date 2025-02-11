@@ -88,7 +88,7 @@ const Signup = () => {
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: async (values) => {
-      // setLoading(true);
+      setLoading(true);
       const params = {
         name: values.name,
         email: values.email,
@@ -101,19 +101,22 @@ const Signup = () => {
 
       try {
         const response = await registerApi(params);
-        console.log("---------respnonse--", response);
+        console.log("---------respnonse--", response?.message);
 
         if (response && response.success) {
+          setLoading(false);
+
           setIsModalOpen(true);
           setEmailForOtp(values.email);
         } else {
+          setLoading(false);
           toast.error(
-            <CustomToast content={response.message || "Signup failed"} />
+            <CustomToast content={response.message || "Signup Failed"} />
           );
+          setLoading(false);
         }
       } catch (error) {
-        console.error("Error during signup:", error);
-        toast.error(<CustomToast content="An error occurred" />);
+        toast.error(<CustomToast content="Something went wrong" />);
       } finally {
         setLoading(false);
       }
@@ -193,18 +196,41 @@ const Signup = () => {
           <form onSubmit={formik.handleSubmit} className="space-y-4 mt-10">
             {inputFieldsSignup.map((field) => (
               <div key={field.id}>
-                <CustomInput
-                  label={field.label}
-                  type={field.type}
-                  id={field.id}
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  labelClass={field.labelClass}
-                  value={values[field.name]}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  icon={field.icon}
-                />
+                {field.type === "select" ? (
+                  <div>
+                    <label className={field.labelClass}>{field.label}</label>
+                    <select
+                      id={field.id}
+                      name={field.name}
+                      value={values[field.name]}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="mt-1 block w-full text-customDarkGray px-3 py-3 shadow-sm placeholder-customDarkGray focus:outline-none 
+                      focus:ring-customGradiantFrom focus:border-customGradiantFrom border border-[#CFCFCF] rounded-[8px]"
+                    >
+                      <option value="">Select Role</option>
+                      {field.options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ) : (
+                  <CustomInput
+                    label={field.label}
+                    type={field.type}
+                    id={field.id}
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    labelClass={field.labelClass}
+                    value={values[field.name]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    icon={field.icon}
+                  />
+                )}
+
                 {errors[field.name] && touched[field.name] && (
                   <p className="text-customRed text-sm">{errors[field.name]}</p>
                 )}
@@ -214,7 +240,7 @@ const Signup = () => {
             <Button
               type="submit"
               classes="mt-4 w-full border-transparent rounded-[8px] py-3 px-4 shadow-sm text-sm font-medium text-white bg-gradient-to-r from-customGradiantFrom to-customGradiantTo"
-              name=" Sign Up"
+              name="Sign Up"
               onLoading={loading}
             />
           </form>
@@ -320,15 +346,13 @@ const Signup = () => {
                   </button>
                 )}
 
-                <span className="text-customOrange">
-                  {formatTime(time)}
-                </span>
+                <span className="text-customOrange">{formatTime(time)}</span>
               </div>
             </div>
           </div>
-          <ToastContainer position="top-right" />
         </div>
       )}
+      <ToastContainer position="top-right" />
     </div>
   );
 };

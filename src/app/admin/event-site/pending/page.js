@@ -16,7 +16,7 @@ const Requests = () => {
         <AdminHader
           title="Dashboards"
           divider="/"
-          subTitle="Create Event Site"
+          subTitle="Event Pending"
           classLabel="text-customBlack md:text-[17px] text-[14px] font-medium capitalize block mx-2"
         />
         <div className="md:p-6 p-3">

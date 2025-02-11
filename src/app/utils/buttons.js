@@ -15,11 +15,11 @@ export const Button = ({ onLoading, type, classes, onClick, name }) => {
     </button>
   );
 };
-export const CancelButton = (props) => {
+export const CancelButton = ({ onLoading, type, className, onClick, name }) => {
   return (
-    <div className={props.className}>
-      <div className="capitalize  bg-clip-text bg-gradient-to-r from-customGradiantFrom to-customGradiantTo text-transparent">
-        {props.name}
+    <div className={className}>
+      <div type={type} onClick={onClick} className="capitalize  bg-clip-text bg-gradient-to-r from-customGradiantFrom to-customGradiantTo text-transparent">
+        {name}
       </div>
     </div>
   );

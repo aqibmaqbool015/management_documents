@@ -239,6 +239,28 @@ export const tableContentCategory = [
     icon: "/three-dots.svg",
   },
 ];
+export const tableEventType = [
+  {
+    title: "Farah",
+    description: "Weddings",
+    icon: "/three-dots.svg",
+  },
+  {
+    title: "Farah",
+    description: "Weddings",
+    icon: "/three-dots.svg",
+  },
+  {
+    title: "Farah",
+    description: "Weddings",
+    icon: "/three-dots.svg",
+  },
+  {
+    title: "Farah",
+    description: "Weddings",
+    icon: "/three-dots.svg",
+  },
+];
 export const tableContacts = [
   {
     image: "/userIcon.svg",
@@ -727,10 +749,13 @@ export const inputFieldsSignup = [
   },
   {
     label: "Role",
-    type: "text",
+    type: "select",
     id: "role",
     name: "role",
-    placeholder: "Role",
+    options: [
+      { value: "user", label: "User" },
+      { value: "manager", label: "Manager" },
+    ],
     labelClass: "text-[17px] text-customBlue",
     icon: imageLogin.user,
   },

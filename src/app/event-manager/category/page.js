@@ -6,19 +6,30 @@ import { Button } from "@/app/utils/buttons";
 import { imagesUsers } from "@/app/utils/images";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAllEventCategoryApi } from "./api";
 
 const Category = () => {
   const router = useRouter();
-  const handleClickCreateEvent = () =>
-    router.push("/event-manager/create-event");
+  const [alleventCategory, setAllEventCategory] = useState([]);
+  console.log("===alleventCategory", alleventCategory);
+
+  useEffect(() => {
+    fetchGetAllEventCategory();
+  }, []);
+
+  const fetchGetAllEventCategory = async () => {
+    const response = await getAllEventCategoryApi();
+    setAllEventCategory(response?.data);
+  };
+
   return (
     <div className="min-h-screen md:flex">
       <div className="md:flex-1 ">
         <AdminHader
           title="Dashboards"
           divider="/"
-          subTitle="Birthday Events"
+          subTitle="Category"
           classLabel="text-customBlack md:text-[17px] text-[14px] font-medium capitalize block mx-2"
         />
         <div className="md:p-6 p-3">
@@ -60,7 +71,7 @@ const Category = () => {
                 title="Title"
                 type="Type"
                 status="Status"
-                tableContentCategory={tableContentCategory}
+                tableContentCategory={alleventCategory}
               />
             </div>
           </div>

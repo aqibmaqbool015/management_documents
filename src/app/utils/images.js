@@ -12,7 +12,6 @@ export const forgotPageImages = {
   logo: "/logo.svg",
   mail: "/mail.svg",
   cross: "/cross.svg",
-  
 };
 
 export const imageLogin = {
@@ -87,6 +86,8 @@ export const imagesUsers = {
   lock: "/lock.svg",
   image: "/auth-otp.png",
   logo: "/logo.svg",
+  leftArrow: "/left-arrow.png",
+  RightArrow: "/right-arrow.png",
 };
 
 export const imagesChat = {
