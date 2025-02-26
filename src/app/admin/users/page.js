@@ -61,20 +61,17 @@ const Requests = () => {
 
   const handleSubmitRequest = async (userId, action) => {
     try {
-      const response = await reviewUserApi(userId, action, {
-        reviewStatus: action,
-      });
+      const response = await reviewUserApi(userId, action);
+
       console.log(`${action} request response:`, response);
-      return;
+
       if (response?.success) {
         setAcceptedModal(false);
         setRejectedModal(false);
         toast.success(
           <CustomToast content={`User ${action}ed successfully!`} />
         );
-        // setRequestUser((prevUsers) =>
-        //   prevUsers.filter((user) => user.id !== userId)
-        // );
+        // setRequestUser((prevUsers) => prevUsers.filter((user) => user.id !== userId));
       } else {
         toast.error(`Failed to ${action} request.`);
       }
@@ -234,7 +231,7 @@ const Requests = () => {
                               </span>
                               <button
                                 onClick={() =>
-                                  handleSubmitRequest(item?._id, "reviewing")
+                                  handleSubmitRequest(item?._id, "rejected")
                                 }
                                 className="text-white capitalize mx-2 bg-customRed border border-transparent rounded-[20px] px-3 min-w-[100px] py-1 "
                               >

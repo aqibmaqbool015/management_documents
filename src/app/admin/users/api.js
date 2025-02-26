@@ -18,11 +18,11 @@ export const getAllUsersApi = (params) => {
     });
 };
 
-export const reviewUserApi = async (userId, action) => {
+export const reviewUserApi = async (userId, reviewStatus) => {
   try {
     const response = await fetchApi(
       `${endpoint.reviewUser}/${userId}`,
-      { action },
+      { reviewStatus: reviewStatus },
       method.patch,
       true,
       false

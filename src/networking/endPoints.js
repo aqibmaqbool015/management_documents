@@ -13,10 +13,17 @@ export const endpoint = {
   getAllEventTypes: process.env.ALL_EVENT_TYPES,
   createEventType: process.env.CREATE_EVENT_TYPE,
   getAllEventCategory: process.env.ALL_EVENT_CATEGORY,
+  updatedEventTypes: process.env.UPDATE_EVENT_TYPE,
+  deletedEventType: process.env.DELETE_EVENT_TYPE,
+  createdEventCategory: process.env.CREATE_EVENT_CATEGORY,
+  updatedEventCategory: process.env.UPDATE_EVENT_CATEGORY,
+  deleteEventCategory: process.env.DELETE_EVENT_CATEGORY,
+  getAllEvent: process.env.GET_ALL_EVENTS,
 };
 
 export const method = {
   get: "GET",
   post: "POST",
   patch: "PATCH",
+  delete: "DELETE",
 };

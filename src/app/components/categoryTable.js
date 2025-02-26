@@ -1,9 +1,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "../utils/buttons";
-import { imagesUsers } from "../utils/images";
+import { imageSidebar, imagesUsers } from "../utils/images";
 import { Image_base } from "@/networking/network";
-
+import { useRouter } from "next/navigation";
+import { deleteEventCategoryByIdApi } from "../event-manager/category/api";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CustomToast from "@/app/components/toast";
 const CategoryTable = ({
   tableContentCategory,
   image,
@@ -11,9 +15,46 @@ const CategoryTable = ({
   type,
   status,
 }) => {
+  const router = useRouter();
   const [shareModal, setShareModal] = useState(false);
   const openshareModal = () => setShareModal(true);
   const closeshareModal = () => setShareModal(false);
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const handleModalOpen = (eventId) => {
+    setIsDeleteModalOpen(eventId);
+  };
+
+  const handleModalClose = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const [openDropdownId, setOpenDropdownId] = useState(null);
+
+  const handleDropdownToggle = (eventId) => {
+    setOpenDropdownId(openDropdownId === eventId ? null : eventId);
+  };
+  const handleEdit = (item) => {
+    const encodedData = encodeURIComponent(JSON.stringify(item));
+    router.push(`/event-manager/update/${item._id}?data=${encodedData}`);
+  };
+
+  const deleteEventData = async () => {
+    if (!isDeleteModalOpen) return;
+    try {
+      const response = await deleteEventCategoryByIdApi(isDeleteModalOpen);
+      console.log("---respomse---", response);
+
+      if (response?.success) {
+        setIsDeleteModalOpen(false);
+        toast.success(<CustomToast content={response?.message} />);
+      }
+    } catch (error) {
+      // toast.error(<CustomToast content="Something went wrong!" />);
+    }
+  };
+
   return (
     <>
       <div className="relative overflow-x-auto mt-4 ">
@@ -35,39 +76,126 @@ const CategoryTable = ({
             </tr>
           </thead>
           <tbody>
-            {tableContentCategory?.map((item, index) => (
-              <tr
-                key={index}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
-                <td className="px-6 py-4 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                  <div className="flex items-center">
-                    <span className=" inline-block text-center w-[45px] h-[45px] p-1">
+            {tableContentCategory?.map((item, index) => {
+              console.log('----return',item, );
+              
+              return (
+                <tr
+                  key={index}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td className="px-6 py-4 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                    <div className="flex items-center">
+                      <span className=" inline-block text-center w-[45px] h-[45px] p-1">
+                        <Image
+                          width={15}
+                          height={15}
+                          src={
+                            item?.image
+                              ? `${Image_base}${item?.image}`
+                              : imagesUsers.users
+                          }
+                          alt=""
+                          className="w-full h-full rounded-full object-contain inline-block"
+                        />
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <p className="text-customBlue font-normal text-[15px] capitalize">
+                      {item.title}
+                    </p>
+                  </td>
+                  <td className="px-6 py-4">
+                    <p className="text-customBlue font-normal text-[15px] capitalize">
+                      {item.description}
+                    </p>
+                  </td>
+                  <td className="px-6 py-4">
+                    <span
+                      className="cursor-pointer relative inline-block text-center w-[30px] h-[30px] p-1"
+                      onClick={() => handleDropdownToggle(item._id)}
+                    >
                       <Image
                         width={15}
                         height={15}
-                        src={
-                          item?.image
-                            ? `${Image_base}${item?.image}`
-                            : imagesUsers.users
-                        }
+                        src={"/three-dots.svg"}
                         alt=""
-                        className="w-full h-full rounded-full object-contain inline-block"
+                        className="w-[15px] h-[15px] object-contain inline-block"
                       />
+
+                      {openDropdownId === item._id && (
+                        <div className="absolute left-1 mt-0 w-32 p-1 bg-white border border-customGray rounded shadow-lg z-50">
+                          <p
+                            className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light text-left"
+                            onClick={() => handleEdit(item)}
+                          >
+                            Update
+                          </p>
+                          <p
+                            className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light text-left"
+                            onClick={openshareModal}
+                          >
+                            {/* <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
+                            <Image
+                              src={imagesUsers.upload}
+                              alt=""
+                              width={20}
+                              height={20}
+                              className="w-[15px] h-auto object-contain "
+                            />
+                          </span> */}
+                            Share
+                          </p>
+                          <p
+                            className="text-[14px] text-customBlack1 font-light text-left cursor-pointer"
+                            onClick={() => handleModalOpen(item._id)}
+                          >
+                            Delete
+                          </p>
+                        </div>
+                      )}
+                      {isDeleteModalOpen === item._id && (
+                        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+                          <div className="bg-white rounded-lg shadow-lg w-11/12 sm:w-1/2 md:w-[400px] max-h-[90vh] overflow-y-auto">
+                            <div className="p-4 relative">
+                              <div className="absolute right-3 top-4">
+                                <Image
+                                  src={imageSidebar.cross}
+                                  alt="Close"
+                                  className="w-[20px] h-auto cursor-pointer"
+                                  onClick={handleModalClose}
+                                  width={15}
+                                  height={15}
+                                />
+                              </div>
+                            </div>
+                            <div className="my-4 px-4">
+                              <p className="text-[15px] text-customBlackLight text-center">
+                                Do you really want to delete this event?
+                                {item._id}
+                              </p>
+                              <div className="my-3 text-center">
+                                <span
+                                  onClick={handleModalClose}
+                                  className="text-customBlue inline-block capitalize mx-2 bg-transparent border border-customBlue rounded-[20px] px-3 min-w-[100px] py-1 cursor-pointer"
+                                >
+                                  Cancel
+                                </span>
+                                <button
+                                  onClick={deleteEventData}
+                                  className="text-white capitalize mx-2 bg-customRed border border-transparent rounded-[20px] px-3 min-w-[100px] py-1"
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </span>
-                  </div>
-                </td>
-                <td className="px-6 py-4">
-                  <p className="text-customBlue font-normal text-[15px] capitalize">
-                    {item.title}
-                  </p>
-                </td>
-                <td className="px-6 py-4">
-                  <p className="text-customBlue font-normal text-[15px] capitalize">
-                    {item.description}
-                  </p>
-                </td>
-                <td className="px-6 py-4">
+                  </td>
+                  {/* <td className="px-6 py-4">
                   <span className="cursor-pointer relative inline-block text-center w-[30px] h-[30px] p-1 group">
                     <Image
                       width={15}
@@ -80,33 +208,24 @@ const CategoryTable = ({
                       className="absolute left-1 mt-0 w-32 p-1 bg-white border border-customGray rounded shadow-lg hidden group-hover:block
                 z-50 "
                     >
-                      <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light text-left">
-                        <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
-                          <Image
-                            src={imagesUsers.download}
-                            alt=""
-                            width={20}
-                            height={20}
-                            className="w-[15px] h-auto object-contain "
-                          />
-                        </span>
-                        Downlaod
-                      </p>
                       <p
                         className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light text-left"
-                        onClick={openshareModal}
+                        onClick={() =>
+                          router.push(`/event-manager/update/${item._id}`)
+                        }
                       >
                         <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
                           <Image
-                            src={imagesUsers.upload}
+                            src={imagesUsers.uploadImage}
                             alt=""
                             width={20}
                             height={20}
                             className="w-[15px] h-auto object-contain "
                           />
                         </span>
-                        Share
+                        Update
                       </p>
+
                       <p className="border-b border-b-customBg py-1 text-[14px] text-customBlack1 font-light text-left">
                         <span className="inline-block object-contain w-[20px] h-auto mr-2 ">
                           <Image
@@ -121,9 +240,10 @@ const CategoryTable = ({
                       </p>
                     </div>
                   </span>
-                </td>
-              </tr>
-            ))}
+                </td> */}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         {shareModal && (
@@ -144,8 +264,8 @@ const CategoryTable = ({
                   />
                 </div>
                 <div className="space-y-4">
-                  <div class="relative w-full md:my-0 my-2">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 ">
+                  <div className="relative w-full md:my-0 my-2">
+                    <div className="absolute inset-y-0 start-0 flex items-center ps-3 ">
                       <Image
                         src={imagesUsers.search}
                         alt=""
@@ -157,7 +277,7 @@ const CategoryTable = ({
                     <input
                       type="search"
                       id="default-search"
-                      class="block w-full py-2 px-10 border border-customBorderSearch rounded-[12px] bg-transparent "
+                      className="block w-full py-2 px-10 border border-customBorderSearch rounded-[12px] bg-transparent "
                       placeholder="Add People to the event"
                       required
                     />
@@ -219,6 +339,7 @@ const CategoryTable = ({
             </div>
           </div>
         )}
+        <ToastContainer position="top-right" />
       </div>
     </>
   );

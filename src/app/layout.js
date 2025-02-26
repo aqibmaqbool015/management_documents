@@ -20,7 +20,7 @@ const geistMono = localFont({
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const isAuthPage = pathname === '/login' || pathname === '/signup' || pathname === '/forgot' || pathname === '/otp' ||
-    pathname === '/new-password' || pathname === '/signup';
+    pathname === '/new-password' || pathname === '/signup' || pathname === '/';
 
   return (
     <html lang="en">

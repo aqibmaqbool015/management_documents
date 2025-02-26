@@ -22,3 +22,21 @@ export const createEventTypeApi = (params) => {
       throw error;
     });
 };
+
+export const deleteEventTypeApi = async (userId) => {
+  console.log("----end-ponitss", endpoint.deletedEventType, userId);
+
+  try {
+    const response = await fetchApi(
+      `${endpoint.deletedEventType}/${userId}`,
+      {},
+      method.delete,
+      true,
+      false
+    );
+    return response;
+  } catch (error) {
+    console.error("Delete Event API Error:", error);
+    throw error;
+  }
+};

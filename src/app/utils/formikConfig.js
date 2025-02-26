@@ -114,6 +114,26 @@ export const initialValuesEventTypes = {
   description: "",
 };
 
+export const validationSchemaEventCategory = Yup.object({
+  title: Yup.string().required("Title is required"),
+  eventType: Yup.string().required("Type is required"),
+  description: Yup.string().required("Description is required"),
+  image: Yup.mixed().required("Image is required"),
+});
+
+export const SchemaEventCategoryUpdate = Yup.object({
+  title: Yup.string().required("Title is required"),
+  description: Yup.string().required("Description is required"),
+  image: Yup.mixed().required("Image is required"),
+});
+
+export const initialValuesEventCategory = {
+  title: "",
+  description: "",
+  eventType: "",
+  image: null,
+};
+
 // password: Yup.string()
 // .min(8, "Password must be at least 8 characters")
 // .max(32, "Password cannot exceed 32 characters")

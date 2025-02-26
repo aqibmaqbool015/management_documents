@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { imageSidebar } from "../utils/images";
+import { getAllEventCategoryApi } from "../event-manager/category/api";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -12,6 +13,9 @@ const Sidebar = () => {
   const [isEventCreature, setIsEventCreature] = useState(true);
   const [eventSite, setEventSite] = useState(true);
   const [companyContacts, setCompanyContacts] = useState(true);
+  const [allEventCategory, setAllEventCategory] = useState([]);
+  console.log("---allEventCategory---", allEventCategory);
+
   const [isDeleteModal, setIsDeleteModal] = useState(false);
   const handleModalOpen = () => setIsDeleteModal(true);
   const handleModalClose = () => setIsDeleteModal(false);
@@ -20,6 +24,26 @@ const Sidebar = () => {
     const role = localStorage.getItem("role") || "user";
     setUserRole(role);
   }, []);
+  useEffect(() => {
+    fetchGetAllEventType();
+  }, []);
+
+  const fetchGetAllEventType = async () => {
+    const response = await getAllEventCategoryApi();
+    setAllEventCategory(response?.data);
+  };
+
+  const [openDropdowns, setOpenDropdowns] = useState({});
+
+  const toggleDropdown = (index) => {
+    setOpenDropdowns((prev) => ({
+      ...Object.keys(prev).reduce((acc, key) => {
+        acc[key] = false;
+        return acc;
+      }, {}),
+      [index]: !prev[index],
+    }));
+  };
 
   // users
   const handleClick = () => router.push("/users/dashboard");
@@ -52,6 +76,7 @@ const Sidebar = () => {
   const handleClickCreateEvent = () =>
     router.push("/event-manager/create-event");
   const handleClickCategory = () => router.push("/event-manager/category");
+  const handleClickCategoryEvent = () => router.push("/event-manager/events");
 
   const renderUserSidebar = () => (
     <ul>
@@ -486,76 +511,84 @@ const Sidebar = () => {
         />
         Category
       </li>
-      <li
-        className="mb-3 text-customBlackC1 text-[17px] font-normal cursor-pointer"
-        onClick={() => setIsProjectsOpen(!isProjectsOpen)}
-      >
-        <span
-          className={`mr-2 inline-block transform transition-transform duration-300 ${
-            isProjectsOpen ? "rotate-90" : "rotate-0"
-          }`}
-        >
-          <Image
-            src={imageSidebar.arrow}
-            alt=""
-            className="w-[13px] h-[13px] object-contain inline-block align-baseline"
-            width={13}
-            height={13}
-          />
-        </span>
-        <Image
-          src={imageSidebar.project}
-          alt=""
-          className="w-[20px] h-[20px] object-contain inline-block align-text-bottom mr-2"
-          width={20}
-          height={20}
-        />
-        Birthday Events
-      </li>
-      {isProjectsOpen && (
-        <ul className="pl-4 mb-3">
-          <li
-            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
-              pathname === "/event-manager/all-events"
-                ? "bg-customGraySelect text-customBlackC1"
-                : "text-customBlackLight"
-            }`}
-            onClick={handleClickAllEvent}
-          >
-            All Events
-          </li>
-          <li
-            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
-              pathname === "/event-manager/create-event"
-                ? "bg-customGraySelect text-customBlackC1"
-                : "text-customBlackLight"
-            }`}
-            onClick={handleClickCreateEvent}
-          >
-            Create New Event
-          </li>
-          <li
-            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
-              pathname === "/event-manager/events/contact-to-me"
-                ? "bg-customGraySelect text-customBlackC1"
-                : "text-customBlackLight"
-            }`}
-            onClick={handleClickEventDocuments}
-          >
-            Contact to me
-          </li>
-          <li
-            className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
-              pathname === "/event-manager/events/contact-by-me"
-                ? "bg-customGraySelect text-customBlackC1"
-                : "text-customBlackLight"
-            }`}
-            onClick={handleClickEventBy}
-          >
-            Contact by me
-          </li>
-        </ul>
-      )}
+
+      {allEventCategory?.map((item, index) => {
+        return (
+          <div key={index}>
+            <li
+              className="mb-3 text-customBlackC1 text-[17px] font-normal cursor-pointer capitalize"
+              onClick={() => toggleDropdown(index)}
+            >
+              <span
+                className={`mr-2 inline-block transform transition-transform duration-300 ${
+                  openDropdowns[index] ? "rotate-90" : "rotate-0"
+                }`}
+              >
+                <Image
+                  src={imageSidebar.arrow}
+                  alt=""
+                  className="w-[13px] h-[13px] object-contain inline-block align-baseline"
+                  width={13}
+                  height={13}
+                />
+              </span>
+              <Image
+                src={imageSidebar.project}
+                alt=""
+                className="w-[20px] h-[20px] object-contain inline-block align-text-bottom mr-2"
+                width={20}
+                height={20}
+              />
+              {item.title}
+            </li>
+
+            {openDropdowns[index] && (
+              <ul className="pl-4 mb-3">
+                <li
+                  className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+                    pathname === "/event-manager/all-events"
+                      ? "bg-customGraySelect text-customBlackC1"
+                      : "text-customBlackLight"
+                  }`}
+                  onClick={handleClickAllEvent}
+                >
+                  All Events
+                </li>
+                <li
+                  className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+                    pathname === "/event-manager/create-event"
+                      ? "bg-customGraySelect text-customBlackC1"
+                      : "text-customBlackLight"
+                  }`}
+                  onClick={handleClickCreateEvent}
+                >
+                  Create New Event
+                </li>
+                <li
+                  className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+                    pathname === "/event-manager/events/contact-to-me"
+                      ? "bg-customGraySelect text-customBlackC1"
+                      : "text-customBlackLight"
+                  }`}
+                  onClick={handleClickEventDocuments}
+                >
+                  Contact to me
+                </li>
+                <li
+                  className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${
+                    pathname === "/event-manager/events/contact-by-me"
+                      ? "bg-customGraySelect text-customBlackC1"
+                      : "text-customBlackLight"
+                  }`}
+                  onClick={handleClickEventBy}
+                >
+                  Contact by me
+                </li>
+              </ul>
+            )}
+          </div>
+        );
+      })}
       <li
         onClick={handleClickMessage}
         className={`mb-3 font-normal text-customBlackC1 text-left hover:bg-customGraySelect focus:bg-customGraySelect cursor-pointer px-4 py-2 rounded-[12px] ${

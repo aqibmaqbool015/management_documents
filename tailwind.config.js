@@ -71,6 +71,12 @@ module.exports = {
     ALL_EVENT_TYPES: process.env.ALL_EVENT_TYPES,
     CREATE_EVENT_TYPE: process.env.CREATE_EVENT_TYPE,
     ALL_EVENT_CATEGORY: process.env.ALL_EVENT_CATEGORY,
+    UPDATE_EVENT_TYPE: process.env.UPDATE_EVENT_TYPE,
+    DELETE_EVENT_TYPE: process.env.DELETE_EVENT_TYPE,
+    CREATE_EVENT_CATEGORY: process.env.CREATE_EVENT_CATEGORY,
+    UPDATE_EVENT_CATEGORY: process.env.UPDATE_EVENT_CATEGORY,
+    DELETE_EVENT_CATEGORY: process.env.DELETE_EVENT_CATEGORY,
+    GET_ALL_EVENTS: process.env.GET_ALL_EVENTS,
   },
   plugins: [require("flowbite/plugin")],
 };

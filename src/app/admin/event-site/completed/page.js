@@ -32,7 +32,7 @@ const Requests = () => {
                 /> */}
               </div>
               <div className="md:flex justify-between items-center mt-5 cursor-pointer hover:bg-customBgLight p-1 border-b border-b-customBorderBottom pb-3 ">
-                <div class="relative md:w-[450px] md:my-0 my-2">
+                <div className="relative md:w-[450px] md:my-0 my-2">
                   <div className="flex items-center">
                     <span className=" inline-block w-[40px] h-[40px] mr-2">
                       <Image

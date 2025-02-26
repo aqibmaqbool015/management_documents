@@ -1,5 +1,5 @@
 import { getLocalStorageItem } from "@/utils/localStorage";
-export const Image_base = "https://t2tcorebucket.s3.eu-west-2.amazonaws.com";
+export const Image_base = "https://match4marriage.s3.eu-west-2.amazonaws.com";
 
 require("dotenv").config();
 const base_url = process.env.BASE_URL;

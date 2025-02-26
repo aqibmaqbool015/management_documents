@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["t2tcorebucket.s3.eu-west-2.amazonaws.com"],
+    domains: ["match4marriage.s3.eu-west-2.amazonaws.com"],
   },
   env: {
     BASE_URL: process.env.BASE_URL,
@@ -17,6 +17,12 @@ const nextConfig = {
     ALL_EVENT_TYPES: process.env.ALL_EVENT_TYPES,
     CREATE_EVENT_TYPE: process.env.CREATE_EVENT_TYPE,
     ALL_EVENT_CATEGORY: process.env.ALL_EVENT_CATEGORY,
+    UPDATE_EVENT_TYPE: process.env.UPDATE_EVENT_TYPE,
+    DELETE_EVENT_TYPE: process.env.DELETE_EVENT_TYPE,
+    CREATE_EVENT_CATEGORY: process.env.CREATE_EVENT_CATEGORY,
+    UPDATE_EVENT_CATEGORY: process.env.UPDATE_EVENT_CATEGORY,
+    DELETE_EVENT_CATEGORY: process.env.DELETE_EVENT_CATEGORY,
+    GET_ALL_EVENTS: process.env.GET_ALL_EVENTS,
   },
 };
 

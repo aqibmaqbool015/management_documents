@@ -1,13 +1,26 @@
 "use client";
 import AdminHader from "@/app/components/adminHeader";
 import { cards, recentCards } from "@/app/constant";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { imagesUsers } from "@/app/utils/images";
+import { getAllEventApi } from "./api";
 
 const AllEvents = () => {
   const router = useRouter();
+  const [allEvents, setAllEvents] = useState();
+  console.log("--------allEvents", allEvents);
+
+  useEffect(() => {
+    fetchGetAllEvents();
+  }, []);
+
+  const fetchGetAllEvents = async () => {
+    const response = await getAllEventApi();
+    setAllEvents(response?.data);
+  };
+
   const clickHandleData = (index) => {
     if (index === 0) {
       router.push(`/event-manager/events/birthday`);
@@ -19,6 +32,7 @@ const AllEvents = () => {
       router.push(`/event-manager/events/birthday`);
     }
   };
+
   return (
     <div className="min-h-screen md:flex">
       <div className="md:flex-1 ">

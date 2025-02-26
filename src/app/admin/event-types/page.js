@@ -34,6 +34,21 @@ const EventTypes = () => {
     setAllEventTypes(response?.data);
   };
 
+  // const deleteEventData = async (userId) => {
+  //   try {
+  //     const response = await deleteEventTypeApi(userId);
+  //     console.log("------response---", response);
+
+  //     if (response?.success) {
+  //       toast.success("Event deleted successfully!");
+  //     } else {
+  //       toast.error("Failed to delete event.");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Something went wrong while deleting.");
+  //   }
+  // };
+
   const formik = useFormik({
     initialValues: initialValuesEventTypes,
     validationSchema: validationSchemaEventType,
@@ -78,8 +93,8 @@ const EventTypes = () => {
           <div className="grid grid-cols-1 gap-4 mb-8">
             <div className="bg-white p-4 border border-custom rounded-[12px] ">
               <div className="md:flex justify-between items-center">
-                <div class="relative md:w-[450px] md:my-0 my-2">
-                  <div class="absolute inset-y-0 start-0 flex items-center ps-3 ">
+                <div className="relative md:w-[450px] md:my-0 my-2">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3 ">
                     <Image
                       src={imagesUsers.search}
                       alt=""
@@ -91,7 +106,7 @@ const EventTypes = () => {
                   <input
                     type="search"
                     id="default-search"
-                    class="block w-full py-2 px-10 border border-customBorderSearch rounded-[12px] bg-transparent "
+                    className="block w-full py-2 px-10 border border-customBorderSearch rounded-[12px] bg-transparent "
                     placeholder="Tap to Search"
                     required
                   />
@@ -104,11 +119,13 @@ const EventTypes = () => {
                   onClick={handleModalOpen}
                 />
               </div>
+
               <EventTypeTable
                 title="Title"
                 description="Description"
                 status="Status"
                 tableContentCategory={allEventTypes}
+                // onclickDelete={(userId) => deleteEventData(userId)}
               />
             </div>
           </div>
